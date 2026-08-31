@@ -19,7 +19,7 @@
     nav.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
   }
 
-  const revealItems = document.querySelectorAll('.section-kicker, .intro-main, .service-row, .services-lead, .services-index a, .featured-card, .oversize-card, .process-editorial figure, .home-process-grid li, .home-contact-grid > *, .social-faq-grid > *, .process-list li, .offer-detail-list article, .deliverables-grid > div, .offer-deliverables-list article, .offer-journey-head, .offer-journey-image, .offer-journey-steps li, .offer-final-cta-grid > *, .contact-layout > *, .accordion-item');
+  const revealItems = document.querySelectorAll('.section-kicker, .intro-main, .service-row, .services-lead, .services-index a, .featured-card, .oversize-card, .process-editorial figure, .home-process-grid li, .home-contact-grid > *, .social-faq-grid > *, .process-list li, .offer-detail-list article, .deliverables-grid > div, .offer-scope-heading, .offer-featured-scope > *, .offer-scope-story > *, .offer-entry-points a, .offer-result-copy, .offer-method-intro, .offer-method-notes article, .offer-invite-inner > *, .contact-layout > *, .accordion-item');
   if ('IntersectionObserver' in window) {
     const revealObserver = new IntersectionObserver(entries => {
       entries.forEach(entry => {
