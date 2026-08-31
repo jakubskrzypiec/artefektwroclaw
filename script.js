@@ -19,7 +19,7 @@
     nav.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
   }
 
-  const revealItems = document.querySelectorAll('.section-kicker, .intro-main, .service-row, .featured-card, .numbers-grid > div, .process-list li, .offer-detail-list article, .deliverables-grid > div, .contact-layout > *, .accordion-item');
+  const revealItems = document.querySelectorAll('.section-kicker, .intro-main, .service-row, .service-tile, .featured-card, .oversize-card, .home-process-grid li, .home-contact-grid > *, .social-faq-grid > *, .process-list li, .offer-detail-list article, .deliverables-grid > div, .contact-layout > *, .accordion-item');
   if ('IntersectionObserver' in window) {
     const revealObserver = new IntersectionObserver(entries => {
       entries.forEach(entry => {
