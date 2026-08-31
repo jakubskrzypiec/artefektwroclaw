@@ -644,3 +644,55 @@
     justify-content:flex-start;
   }
 }
+
+/* PROJECTS v4 — larger gallery + clearer ART / EFEKT hover */
+.sub-projects .sub-project-gallery{
+  width:min(1660px,calc(100% - 48px));
+  gap:14px;
+}
+
+.sub-projects .gallery-card>span::before,
+.sub-projects .gallery-card>span::after{
+  top:50%;
+  font-size:clamp(38px,3.1vw,64px);
+  font-weight:500;
+  letter-spacing:.18em;
+  color:#fff;
+  text-shadow:0 2px 18px rgba(0,0,0,.18);
+}
+.sub-projects .gallery-card>span::before{
+  content:"ART";
+  left:3px;
+  transform:translate(-4px,-50%) rotate(180deg);
+}
+.sub-projects .gallery-card>span::after{
+  content:"EFEKT";
+  right:3px;
+  transform:translate(4px,-50%);
+}
+
+@media (hover:hover){
+  .sub-projects .gallery-card:hover img{
+    transform:scale(1.022);
+    filter:brightness(.79) saturate(.94);
+  }
+  .sub-projects .gallery-card:hover::after{
+    opacity:.84;
+  }
+  .sub-projects .gallery-card:hover>span::before,
+  .sub-projects .gallery-card:hover>span::after{
+    opacity:.52;
+  }
+}
+
+@media(max-width:1100px){
+  .sub-projects .sub-project-gallery{
+    width:calc(100% - 28px);
+    gap:12px;
+  }
+}
+@media(max-width:780px){
+  .sub-projects .sub-project-gallery{
+    width:calc(100% - 20px);
+  }
+}
