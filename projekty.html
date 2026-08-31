@@ -1,35 +1,92 @@
 <!doctype html>
 <html lang="pl">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Portfolio Artefekt — wizualizacje salonów, kuchni, łazienek, sypialni i pokojów dziecięcych.">
-  <link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css">
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="subpages.css">
+
+  <meta name="description" content="Portfolio Artefekt Interior Design — wybrane wizualizacje wnętrz mieszkań, domów, kuchni, łazienek, salonów i sypialni.">
   <title>Projekty — Artefekt Interior Design</title>
 </head>
-<body data-page="projekty">
-  <header class="site-header on-hero"><div class="header-inner"><a class="brand" href="index.html" aria-label="Artefekt — strona główna"><img src="logo-white.png" alt="Artefekt Interior Design"></a><nav class="site-nav" aria-label="Główna nawigacja"><a href="index.html">Start</a><a href="oferta.html">Oferta</a><a href="projekty.html" class="is-active">Projekty</a><a href="kontakt.html">Kontakt</a></nav><a class="header-cta" href="kontakt.html">Umów rozmowę <span>↗</span></a><button class="menu-toggle" type="button" aria-expanded="false" aria-label="Otwórz menu"><span></span><span></span></button></div></header>
+<body data-page="projekty" class="sub-page sub-projects">
+  <header class="site-header subpage-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html" aria-label="Artefekt — strona główna"><img src="logo-primary.png" alt="Artefekt Interior Design"></a>
+      <nav class="site-nav" aria-label="Główna nawigacja"><a href="index.html">Start</a><a href="oferta.html">Oferta</a><a href="projekty.html" class="is-active">Projekty</a><a href="kontakt.html">Kontakt</a></nav>
+      <a class="header-cta" href="kontakt.html">Porozmawiajmy <span>↗</span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-label="Otwórz menu"><span></span><span></span></button>
+    </div>
+  </header>
   <main>
-    <section class="portfolio-hero">
-      <img src="project-30.jpg" alt="Strefa dzienna projektu Artefekt">
-      <div class="hero-overlay"></div>
-      <div class="portfolio-hero-copy"><p class="eyebrow light">Portfolio Artefekt</p><h1>Portfolio dopracowanych wnętrz.</h1><p>Wybrane wizualizacje Artefekt — mieszkania, domy i pojedyncze pomieszczenia zaprojektowane z myślą o codziennym komforcie.</p></div>
-      <span class="scroll-hint">Przewiń <i>↓</i></span>
-    </section>
-
-    <section class="section gallery-section">
-      <div class="container">
-        <div class="gallery-top"><div><div class="section-kicker"><span>01</span><p>Wizualizacje</p></div><h2>Całe portfolio w jednym miejscu.</h2></div><p>Wybierz kategorię lub przeglądaj wszystkie kadry. Kliknij wybraną wizualizację, aby zobaczyć ją w większym formacie.</p></div>
-        <div class="filter-bar" data-project-filters><button class="is-active" data-filter="all">Wszystkie</button><button data-filter="salon">Strefy dzienne</button><button data-filter="kuchnia">Kuchnie</button><button data-filter="lazienka">Łazienki</button><button data-filter="sypialnia">Sypialnie</button><button data-filter="dzieci">Dzieci</button></div>
+    <section class="sub-hero">
+      <div class="sub-hero-copy">
+        <div class="sub-kicker"><span>01</span><p>Projekty</p></div>
+        <h1>Wnętrza stworzone<br>do życia.</h1>
+        <p class="sub-hero-lead">Portfolio pokazuje różne kierunki, ale wspólny mianownik pozostaje ten sam: funkcja, proporcje, światło i dopracowany detal.</p>
+        <a class="sub-scroll" href="#dalej">Przewiń <span>↓</span></a>
       </div>
-      <div class="projects-gallery" data-project-gallery></div>
+      <figure class="sub-hero-media"><img src="project-30.jpg" alt="Wnętrze projektu Artefekt"></figure>
     </section>
 
-    <section class="contact-cta"><div class="contact-cta-image"><img src="project-41.jpg" alt="Eleganckie wnętrze projektu Artefekt" loading="lazy"></div><div class="contact-cta-copy"><p class="eyebrow light">Twój projekt może być następny</p><h2>Stwórzmy wnętrze dla Ciebie.</h2><p>Napisz kilka słów o inwestycji. Wrócimy z propozycją najlepszego zakresu współpracy.</p><a class="button button-light" href="kontakt.html">Umów rozmowę <span>↗</span></a></div></section>
+    <section class="sub-section sub-gallery-section" id="dalej">
+      <div class="sub-container">
+        <div class="sub-section-head sub-gallery-head">
+          <div class="sub-kicker"><span>02</span><p>Portfolio</p></div>
+          <h2>Wybrane wizualizacje Artefekt.</h2>
+          <p>Filtruj według rodzaju wnętrza lub przeglądaj całość. Kliknięcie otwiera pełny podgląd.</p>
+        </div>
+        <div class="sub-filter-bar" data-project-filters>
+          <button class="is-active" data-filter="all">Wszystkie</button>
+          <button data-filter="salon">Strefy dzienne</button>
+          <button data-filter="kuchnia">Kuchnie</button>
+          <button data-filter="lazienka">Łazienki</button>
+          <button data-filter="sypialnia">Sypialnie</button>
+          <button data-filter="dzieci">Pokoje dziecięce</button>
+        </div>
+      </div>
+      <div class="projects-gallery sub-project-gallery" data-project-gallery></div>
+    </section>
+
+    <section class="sub-statement">
+      <figure><img src="project-18.jpg" alt="Jadalnia projektu Artefekt" loading="lazy"></figure>
+      <div class="sub-statement-copy">
+        <div class="sub-kicker light"><span>03</span><p>Podejście</p></div>
+        <blockquote>Projekt ma wyglądać dobrze na wizualizacji — i działać jeszcze lepiej, kiedy zaczyna się w nim życie.</blockquote>
+        <p>Dlatego estetyka nigdy nie jest oddzielona od funkcji, przechowywania, światła i codziennych nawyków domowników.</p>
+      </div>
+    </section>
+
+    <section class="sub-section sub-project-note">
+      <div class="sub-container sub-project-note-grid">
+        <div><div class="sub-kicker"><span>04</span><p>Twój projekt</p></div><h2>Każde wnętrze zaczyna się od rozmowy.</h2></div>
+        <div><p>Jeżeli podobają Ci się realizacje Artefekt, napisz kilka słów o swojej inwestycji. Wrócimy z propozycją najlepszego zakresu współpracy.</p><a class="sub-text-link" href="kontakt.html">Przejdź do kontaktu ↗</a></div>
+      </div>
+    </section>
   </main>
 
-  <div class="lightbox" data-lightbox aria-hidden="true"><button class="lightbox-close" type="button" aria-label="Zamknij">×</button><button class="lightbox-nav prev" type="button" data-lightbox-prev aria-label="Poprzednie zdjęcie">←</button><div class="lightbox-inner"><img data-lightbox-image alt=""><div class="lightbox-caption"><div><span data-lightbox-number></span><strong data-lightbox-title></strong></div><span data-lightbox-type></span></div></div><button class="lightbox-nav next" type="button" data-lightbox-next aria-label="Następne zdjęcie">→</button></div>
+  <div class="lightbox" data-lightbox aria-hidden="true">
+    <button class="lightbox-close" type="button" aria-label="Zamknij">×</button>
+    <button class="lightbox-nav prev" type="button" data-lightbox-prev aria-label="Poprzednie zdjęcie">←</button>
+    <div class="lightbox-inner"><img data-lightbox-image alt=""><div class="lightbox-caption"><div><span data-lightbox-number></span><strong data-lightbox-title></strong></div><span data-lightbox-type></span></div></div>
+    <button class="lightbox-nav next" type="button" data-lightbox-next aria-label="Następne zdjęcie">→</button>
+  </div>
 
-  <footer class="site-footer"><div class="container footer-grid"><div class="footer-brand"><img src="logo-white.png" alt="Artefekt Interior Design"><p>Projektowanie wnętrz<br>Wrocław · online</p></div><nav><p class="footer-label">Nawigacja</p><a href="index.html">Start</a><a href="oferta.html">Oferta</a><a href="projekty.html">Projekty</a><a href="kontakt.html">Kontakt</a></nav><div><p class="footer-label">Kontakt</p><a href="mailto:studio@artefekt.pl">studio@artefekt.pl</a><a href="tel:+48693294393">Alicja · 693 294 393</a><a href="tel:+48691222770">Joanna · 691 222 770</a></div><div><p class="footer-label">Studio</p><p>Zwycięska 3/lok. U8<br>53-033 Wrocław<br>Pon–Pt · 09:00–16:00</p></div></div><div class="container footer-bottom"><span>© 2026 Artefekt Interior Design</span><a href="kontakt.html">Zacznijmy projekt <span>↗</span></a></div></footer>
-  <script src="projects-data.js"></script><script src="script.js"></script>
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand"><img src="logo-white.png" alt="Artefekt Interior Design"><p>Projektowanie wnętrz<br>Wrocław · online</p></div>
+      <nav><p class="footer-label">Nawigacja</p><a href="index.html">Start</a><a href="oferta.html">Oferta</a><a href="projekty.html">Projekty</a><a href="kontakt.html">Kontakt</a></nav>
+      <div><p class="footer-label">Kontakt</p><a href="mailto:studio@artefekt.pl">studio@artefekt.pl</a><a href="tel:+48693294393">Alicja · 693 294 393</a><a href="tel:+48691222770">Joanna · 691 222 770</a></div>
+      <div><p class="footer-label">Studio</p><p>Zwycięska 3/lok. U8<br>53-033 Wrocław<br>Pon–Pt · 09:00–16:00</p></div>
+    </div>
+    <div class="container footer-bottom"><span>© 2026 Artefekt Interior Design</span><a href="kontakt.html">Opowiedz o projekcie <span>↗</span></a></div>
+  </footer>
+  <script src="projects-data.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
