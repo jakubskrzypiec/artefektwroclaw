@@ -1,128 +1,35 @@
 <!doctype html>
 <html lang="pl">
 <head>
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Artefekt Interior Design — projektowanie wnętrz we Wrocławiu. Kompleksowe projekty mieszkań, domów i wybranych pomieszczeń.">
-  <meta property="og:title" content="Artefekt Interior Design">
-  <meta property="og:description" content="Wnętrza dopasowane do rytmu codzienności.">
-  <meta property="og:image" content="p01.webp">
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="style.css">
-
-  <title>Artefekt Interior Design — Projekty</title>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Portfolio Artefekt — wizualizacje salonów, kuchni, łazienek, sypialni i pokojów dziecięcych.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css">
+  <title>Projekty — Artefekt Interior Design</title>
 </head>
 <body data-page="projekty">
-  
-    <header class="site-header">
-      <div class="container header-inner">
-        <a class="brand" href="index.html" aria-label="Artefekt Interior Design — strona główna">
-          <img src="logo-primary.png" alt="Artefekt Interior Design">
-        </a>
-        <nav class="site-nav" aria-label="Główna nawigacja">
-          <a href="index.html">Start</a>
-          <a href="oferta.html">Oferta</a>
-          <a href="projekty.html" class="is-active">Projekty</a>
-          <a href="kontakt.html">Kontakt</a>
-        </nav>
-        <a class="button button-dark hide-on-mobile" href="kontakt.html">Porozmawiajmy</a>
-        <button class="menu-toggle" type="button" aria-expanded="false" aria-label="Otwórz menu">
-          <span></span><span></span>
-        </button>
-      </div>
-    </header>
-    
+  <header class="site-header on-hero"><div class="header-inner"><a class="brand" href="index.html" aria-label="Artefekt — strona główna"><img src="assets/logo-white.png" alt="Artefekt Interior Design"></a><nav class="site-nav" aria-label="Główna nawigacja"><a href="index.html">Start</a><a href="oferta.html">Oferta</a><a href="projekty.html" class="is-active">Projekty</a><a href="kontakt.html">Kontakt</a></nav><a class="header-cta" href="kontakt.html">Porozmawiajmy <span>↗</span></a><button class="menu-toggle" type="button" aria-expanded="false" aria-label="Otwórz menu"><span></span><span></span></button></div></header>
   <main>
-    <section class="page-hero">
-      <div class="container page-hero-grid reverse">
-        <div>
-          <p class="eyebrow dark">Wybrane wizualizacje</p>
-          <h1>Projekty i detale, które budują klimat wnętrza.</h1>
-          <p>Poniżej znajdziesz wybrane wizualizacje przygotowane przez Artefekt. Galeria pokazuje różne typy przestrzeni — od stref dziennych po łazienki i pokoje dziecięce.</p>
-        </div>
-        <div class="page-hero-image"><img src="projects-hero.webp" alt="Salon projektu Artefekt"></div>
-      </div>
+    <section class="portfolio-hero">
+      <img src="assets/projects/project-30.jpg" alt="Strefa dzienna projektu Artefekt">
+      <div class="hero-overlay"></div>
+      <div class="portfolio-hero-copy"><p class="eyebrow light">Portfolio Artefekt</p><h1>Projekty, które budują klimat.</h1><p>Wnętrza mieszkalne i komercyjne — funkcjonalne, dopracowane i tworzone dla konkretnych ludzi.</p></div>
+      <span class="scroll-hint">Przewiń <i>↓</i></span>
     </section>
 
-    <section class="section">
-      <div class="container section-head compact projects-toolbar">
-        <div>
-          <p class="section-label">01 · Galeria</p>
-          <h2>Przeglądaj według typu wnętrza.</h2>
-        </div>
-        <div class="filter-chips" data-project-filters>
-          <button class="is-active" data-filter="all">Wszystkie</button>
-          <button data-filter="salon">Salony</button>
-          <button data-filter="kuchnia">Kuchnie</button>
-          <button data-filter="sypialnia">Sypialnie</button>
-          <button data-filter="lazienka">Łazienki</button>
-          <button data-filter="pokoj">Pokoje</button>
-          <button data-filter="hol">Hole</button>
-        </div>
+    <section class="section gallery-section">
+      <div class="container">
+        <div class="gallery-top"><div><div class="section-kicker"><span>01</span><p>Wizualizacje</p></div><h2>Całe portfolio w jednym miejscu.</h2></div><p>Wybierz kategorię lub przeglądaj wszystkie kadry. Kliknij wybraną wizualizację, aby zobaczyć ją w większym formacie.</p></div>
+        <div class="filter-bar" data-project-filters><button class="is-active" data-filter="all">Wszystkie</button><button data-filter="salon">Strefy dzienne</button><button data-filter="kuchnia">Kuchnie</button><button data-filter="lazienka">Łazienki</button><button data-filter="sypialnia">Sypialnie</button><button data-filter="dzieci">Dzieci</button></div>
       </div>
-      <div class="container projects-gallery" data-project-gallery></div>
+      <div class="projects-gallery" data-project-gallery></div>
     </section>
 
-    <section class="section cta-band light-version">
-      <div class="container cta-band-inner">
-        <div>
-          <p class="section-label">02 · Współpraca</p>
-          <h2>Chcesz zobaczyć podobny kierunek dla swojego wnętrza?</h2>
-          <p>Napisz do nas — przygotujemy dopasowaną propozycję współpracy.</p>
-        </div>
-        <a class="button button-dark" href="kontakt.html">Skontaktuj się</a>
-      </div>
-    </section>
+    <section class="contact-cta"><div class="contact-cta-image"><img src="assets/projects/project-41.jpg" alt="Eleganckie wnętrze projektu Artefekt" loading="lazy"></div><div class="contact-cta-copy"><p class="eyebrow light">Twój projekt może być następny</p><h2>Stwórzmy wnętrze dla Ciebie.</h2><p>Napisz kilka słów o inwestycji. Wrócimy z propozycją najlepszego zakresu współpracy.</p><a class="button button-light" href="kontakt.html">Porozmawiajmy <span>↗</span></a></div></section>
   </main>
 
-  <div class="lightbox" data-lightbox aria-hidden="true">
-    <button class="lightbox-close" type="button" aria-label="Zamknij podgląd">×</button>
-    <div class="lightbox-inner">
-      <img src="" alt="" data-lightbox-image>
-      <div class="lightbox-caption">
-        <strong data-lightbox-title></strong>
-        <span data-lightbox-type></span>
-      </div>
-    </div>
-  </div>
+  <div class="lightbox" data-lightbox aria-hidden="true"><button class="lightbox-close" type="button" aria-label="Zamknij">×</button><button class="lightbox-nav prev" type="button" data-lightbox-prev aria-label="Poprzednie zdjęcie">←</button><div class="lightbox-inner"><img data-lightbox-image alt=""><div class="lightbox-caption"><div><span data-lightbox-number></span><strong data-lightbox-title></strong></div><span data-lightbox-type></span></div></div><button class="lightbox-nav next" type="button" data-lightbox-next aria-label="Następne zdjęcie">→</button></div>
 
-  
-    <footer class="site-footer">
-      <div class="container footer-grid">
-        <div>
-          <img class="footer-logo" src="logo-white.png" alt="Artefekt Interior Design">
-          <p class="footer-copy">Projektowanie wnętrz we Wrocławiu i współpraca online. Spokój, funkcja i dopracowany detal.</p>
-        </div>
-        <div>
-          <p class="footer-label">Nawigacja</p>
-          <div class="footer-links">
-            <a href="index.html">Start</a>
-            <a href="oferta.html">Oferta</a>
-            <a href="projekty.html">Projekty</a>
-            <a href="kontakt.html">Kontakt</a>
-          </div>
-        </div>
-        <div>
-          <p class="footer-label">Kontakt</p>
-          <div class="footer-links">
-            <a href="mailto:studio@artefekt.pl">studio@artefekt.pl</a>
-            <a href="tel:+48693294393">Alicja Wątroba · 693 294 393</a>
-            <a href="tel:+48691222770">Joanna Markiewicz · 691 222 770</a>
-            <span>Zwycięska 3 / lok. U8, Wrocław</span>
-          </div>
-        </div>
-      </div>
-      <div class="container footer-bottom">
-        <span>© Artefekt Interior Design</span>
-        <div>
-          <a href="https://www.instagram.com/artefekt_studio/" target="_blank" rel="noopener noreferrer">Instagram ↗</a>
-          <a href="https://www.facebook.com/artefektstudio/?locale=pl_PL" target="_blank" rel="noopener noreferrer">Facebook ↗</a>
-        </div>
-      </div>
-    </footer>
-    
-  <script>window.ARTEFEKT_PROJECTS = [{"img": "p01.webp", "title": "Open space z jadalnią", "category": "salon", "type": "Strefa dzienna", "size": "large"}, {"img": "p02.webp", "title": "Salon w jasnej palecie", "category": "salon", "type": "Salon", "size": "medium"}, {"img": "p03.webp", "title": "Kuchnia z wyspą", "category": "kuchnia", "type": "Kuchnia", "size": "medium"}, {"img": "p04.webp", "title": "Kuchnia w ciepłym drewnie", "category": "kuchnia", "type": "Kuchnia", "size": "medium"}, {"img": "p05.webp", "title": "Minimalistyczna kuchnia", "category": "kuchnia", "type": "Kuchnia", "size": "medium"}, {"img": "p06.webp", "title": "Jadalnia z akcentem bordo", "category": "salon", "type": "Jadalnia", "size": "tall"}, {"img": "p07.webp", "title": "Strefa dzienna z kamieniem", "category": "salon", "type": "Strefa dzienna", "size": "medium"}, {"img": "p08.webp", "title": "Salon z aneksem", "category": "salon", "type": "Salon", "size": "medium"}, {"img": "p09.webp", "title": "Salon z eleganckim detalem", "category": "salon", "type": "Salon", "size": "large"}, {"img": "p10.webp", "title": "Kuchnia z półwyspem", "category": "kuchnia", "type": "Kuchnia", "size": "medium"}, {"img": "p11.webp", "title": "Strefa lounge", "category": "salon", "type": "Salon", "size": "medium"}, {"img": "p12.webp", "title": "Salon z kuchnią i kolorem", "category": "salon", "type": "Open space", "size": "medium"}, {"img": "p13.webp", "title": "Jasny salon", "category": "salon", "type": "Salon", "size": "medium"}, {"img": "p14.webp", "title": "Strefa dzienna z detalem", "category": "salon", "type": "Open space", "size": "medium"}, {"img": "p15.webp", "title": "Sypialnia soft minimal", "category": "sypialnia", "type": "Sypialnia", "size": "medium"}, {"img": "p16.webp", "title": "Sypialnia z panoramicznym oknem", "category": "sypialnia", "type": "Sypialnia", "size": "medium"}, {"img": "p17.webp", "title": "Minimalistyczna sypialnia", "category": "sypialnia", "type": "Sypialnia", "size": "medium"}, {"img": "p18.webp", "title": "Sypialnia hotelowa", "category": "sypialnia", "type": "Sypialnia", "size": "medium"}, {"img": "p19.webp", "title": "Przytulna sypialnia", "category": "sypialnia", "type": "Sypialnia", "size": "tall"}, {"img": "p20.webp", "title": "Łazienka z błękitnym akcentem", "category": "lazienka", "type": "Łazienka", "size": "tall"}, {"img": "p21.webp", "title": "Łazienka naturalna", "category": "lazienka", "type": "Łazienka", "size": "medium"}, {"img": "p22.webp", "title": "Łazienka w ciepłym beżu", "category": "lazienka", "type": "Łazienka", "size": "medium"}, {"img": "p23.webp", "title": "Łazienka z lustrem LED", "category": "lazienka", "type": "Łazienka", "size": "medium"}, {"img": "p24.webp", "title": "Łazienka z wanną", "category": "lazienka", "type": "Łazienka", "size": "medium"}, {"img": "p25.webp", "title": "Łazienka dark spa", "category": "lazienka", "type": "Łazienka", "size": "medium"}, {"img": "p26.webp", "title": "Łazienka spa", "category": "lazienka", "type": "Łazienka", "size": "medium"}, {"img": "p27.webp", "title": "Łazienka z detalem gold", "category": "lazienka", "type": "Łazienka", "size": "medium"}, {"img": "p28.webp", "title": "Kompaktowa łazienka", "category": "lazienka", "type": "Łazienka", "size": "tall"}, {"img": "p29.webp", "title": "Pokój dziecięcy", "category": "pokoj", "type": "Pokój", "size": "medium"}, {"img": "p30.webp", "title": "Pokój dziecięcy z zabawą", "category": "pokoj", "type": "Pokój", "size": "medium"}, {"img": "p31.webp", "title": "Salon soft contemporary", "category": "salon", "type": "Salon", "size": "medium"}, {"img": "p32.webp", "title": "Sypialnia premium", "category": "sypialnia", "type": "Sypialnia", "size": "medium"}, {"img": "p33.webp", "title": "Sypialnia z miękkim zagłówkiem", "category": "sypialnia", "type": "Sypialnia", "size": "medium"}, {"img": "p34.webp", "title": "Łazienka z kamiennym detalem", "category": "lazienka", "type": "Łazienka", "size": "tall"}, {"img": "p35.webp", "title": "Hol wejściowy", "category": "hol", "type": "Hol", "size": "medium"}, {"img": "p36.webp", "title": "Przejście z detalem", "category": "hol", "type": "Hol", "size": "medium"}, {"img": "p37.webp", "title": "Przedsionek z kolorem", "category": "hol", "type": "Hol", "size": "medium"}, {"img": "p38.webp", "title": "Łazienka monochromatyczna", "category": "lazienka", "type": "Łazienka", "size": "medium"}, {"img": "p39.webp", "title": "Sypialnia z granatem", "category": "sypialnia", "type": "Sypialnia", "size": "medium"}, {"img": "p40.webp", "title": "Łazienka z podwójnym lustrem", "category": "lazienka", "type": "Łazienka", "size": "tall"}];</script>
-  <script src="script.js"></script>
+  <footer class="site-footer"><div class="container footer-grid"><div class="footer-brand"><img src="assets/logo-white.png" alt="Artefekt Interior Design"><p>Projektowanie wnętrz<br>Wrocław · online</p></div><nav><p class="footer-label">Nawigacja</p><a href="index.html">Start</a><a href="oferta.html">Oferta</a><a href="projekty.html">Projekty</a><a href="kontakt.html">Kontakt</a></nav><div><p class="footer-label">Kontakt</p><a href="mailto:studio@artefekt.pl">studio@artefekt.pl</a><a href="tel:+48693294393">Alicja · 693 294 393</a><a href="tel:+48691222770">Joanna · 691 222 770</a></div><div><p class="footer-label">Studio</p><p>Zwycięska 3/lok. U8<br>53-033 Wrocław<br>Pon–Pt · 09:00–16:00</p></div></div><div class="container footer-bottom"><span>© 2026 Artefekt Interior Design</span><a href="kontakt.html">Zacznijmy projekt <span>↗</span></a></div></footer>
+  <script src="projects-data.js"></script><script src="script.js"></script>
 </body>
 </html>
