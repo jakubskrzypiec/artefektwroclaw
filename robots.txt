@@ -1,3 +1,2 @@
 User-agent: *
 Allow: /
-Sitemap: https://www.artefekt.pl/sitemap.xml

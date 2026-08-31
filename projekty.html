@@ -11,9 +11,9 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="style.css">
 
-  <title>Artefekt Interior Design — Start</title>
+  <title>Artefekt Interior Design — Projekty</title>
 </head>
-<body data-page="home">
+<body data-page="projekty">
   
     <header class="site-header">
       <div class="container header-inner">
@@ -21,9 +21,9 @@
           <img src="logo-primary.png" alt="Artefekt Interior Design">
         </a>
         <nav class="site-nav" aria-label="Główna nawigacja">
-          <a href="index.html" class="is-active">Start</a>
+          <a href="index.html">Start</a>
           <a href="oferta.html">Oferta</a>
-          <a href="projekty.html">Projekty</a>
+          <a href="projekty.html" class="is-active">Projekty</a>
           <a href="kontakt.html">Kontakt</a>
         </nav>
         <a class="button button-dark hide-on-mobile" href="kontakt.html">Porozmawiajmy</a>
@@ -34,131 +34,59 @@
     </header>
     
   <main>
-    <section class="hero-home" id="start">
-      <div class="hero-slider" data-slider>
-        <div class="hero-slide is-active"><img src="p01.webp" alt="Elegancka strefa dzienna projektu Artefekt"></div>
-        <div class="hero-slide"><img src="p02.webp" alt="Jasny salon projektu Artefekt"></div>
-        <div class="hero-slide"><img src="hero-3.webp" alt="Salon z aneksem kuchennym projektu Artefekt"></div>
-      </div>
-      <div class="hero-overlay"></div>
-      <div class="container hero-content">
-        <p class="eyebrow">Artefekt Interior Design · Wrocław</p>
-        <h1>Wnętrza, które<br>porządkują codzienność.</h1>
-        <p class="hero-text">Projektujemy spokojne, funkcjonalne i dopracowane wnętrza — od pierwszego układu po finalny detal.</p>
-        <div class="hero-actions">
-          <a class="button button-light" href="projekty.html">Zobacz projekty</a>
-          <a class="button button-outline-light" href="oferta.html">Poznaj ofertę</a>
+    <section class="page-hero">
+      <div class="container page-hero-grid reverse">
+        <div>
+          <p class="eyebrow dark">Wybrane wizualizacje</p>
+          <h1>Projekty i detale, które budują klimat wnętrza.</h1>
+          <p>Poniżej znajdziesz wybrane wizualizacje przygotowane przez Artefekt. Galeria pokazuje różne typy przestrzeni — od stref dziennych po łazienki i pokoje dziecięce.</p>
         </div>
-      </div>
-      <div class="hero-dots" data-slider-dots>
-        <button class="is-active" aria-label="Pokaż slajd 1"></button>
-        <button aria-label="Pokaż slajd 2"></button>
-        <button aria-label="Pokaż slajd 3"></button>
+        <div class="page-hero-image"><img src="projects-hero.webp" alt="Salon projektu Artefekt"></div>
       </div>
     </section>
 
     <section class="section">
-      <div class="container intro-grid">
+      <div class="container section-head compact projects-toolbar">
         <div>
-          <p class="section-label">01 · Studio</p>
-          <h2>Projekt ma być piękny nie tylko na wizualizacji, ale przede wszystkim w codziennym życiu.</h2>
+          <p class="section-label">01 · Galeria</p>
+          <h2>Przeglądaj według typu wnętrza.</h2>
         </div>
-        <div class="intro-copy">
-          <p class="lead">Tworzymy wnętrza, które łączą estetykę z funkcją i odpowiadają na realne potrzeby domowników.</p>
-          <p>Pracujemy przy mieszkaniach, domach oraz pojedynczych pomieszczeniach. W zależności od zakresu przygotowujemy układy funkcjonalne, koncepcję, wizualizacje, dobór materiałów i dokumentację dla wykonawców.</p>
-          <a class="text-link" href="kontakt.html">Umów pierwszą rozmowę <span>↗</span></a>
+        <div class="filter-chips" data-project-filters>
+          <button class="is-active" data-filter="all">Wszystkie</button>
+          <button data-filter="salon">Salony</button>
+          <button data-filter="kuchnia">Kuchnie</button>
+          <button data-filter="sypialnia">Sypialnie</button>
+          <button data-filter="lazienka">Łazienki</button>
+          <button data-filter="pokoj">Pokoje</button>
+          <button data-filter="hol">Hole</button>
         </div>
       </div>
+      <div class="container projects-gallery" data-project-gallery></div>
     </section>
 
-    <section class="section pull-up">
-      <div class="container split-card">
-        <div class="split-media">
-          <img src="about-image.webp" alt="Detale wnętrza projektu Artefekt">
-        </div>
-        <div class="split-content dark-card">
-          <p class="section-label light">02 · Dlaczego Artefekt</p>
-          <h2>Spokój, proporcje i materiały, które zostają na lata.</h2>
-          <div class="feature-list">
-            <div><span>01</span><p>Indywidualne podejście do układu i funkcji wnętrza.</p></div>
-            <div><span>02</span><p>Spójna estetyka oparta o światło, kolor i detal.</p></div>
-            <div><span>03</span><p>Jasny proces współpracy i konkretne materiały dla realizacji.</p></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container section-head">
-        <div>
-          <p class="section-label">03 · Wybrane projekty</p>
-          <h2>Wnętrza stworzone do życia.</h2>
-        </div>
-        <a class="text-link" href="projekty.html">Zobacz wszystkie wizualizacje <span>↗</span></a>
-      </div>
-      <div class="container featured-grid" data-featured-projects></div>
-    </section>
-
-    <section class="section muted-section">
-      <div class="container section-head compact">
-        <div>
-          <p class="section-label">04 · Oferta</p>
-          <h2>Zakres dopasowany do inwestycji.</h2>
-        </div>
-      </div>
-      <div class="container offer-preview-grid">
-        <article class="info-card">
-          <span>01</span>
-          <h3>Projekt mieszkania</h3>
-          <p>Kompleksowy projekt wnętrz dla mieszkań — od funkcji po dokumentację.</p>
-        </article>
-        <article class="info-card">
-          <span>02</span>
-          <h3>Projekt domu</h3>
-          <p>Spójna koncepcja dla całej inwestycji, uwzględniająca codzienny rytm życia.</p>
-        </article>
-        <article class="info-card">
-          <span>03</span>
-          <h3>Wybrane pomieszczenie</h3>
-          <p>Kuchnia, łazienka, salon czy sypialnia w precyzyjnie określonym zakresie.</p>
-        </article>
-        <article class="info-card">
-          <span>04</span>
-          <h3>Konsultacja projektowa</h3>
-          <p>Spotkanie, które porządkuje decyzje i wskazuje najlepszy kierunek dalszych działań.</p>
-        </article>
-      </div>
-      <div class="container center-actions">
-        <a class="button button-dark" href="oferta.html">Przejdź do oferty</a>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container process-block">
-        <div>
-          <p class="section-label">05 · Proces</p>
-          <h2>Od rozmowy do wnętrza.</h2>
-        </div>
-        <div class="process-steps">
-          <article><span>01</span><h3>Rozmowa</h3><p>Poznanie potrzeb, stylu życia i zakresu projektu.</p></article>
-          <article><span>02</span><h3>Funkcja</h3><p>Układ przestrzeni, ergonomia oraz zależności między strefami.</p></article>
-          <article><span>03</span><h3>Koncepcja</h3><p>Materiały, kolorystyka, światło i dopracowany kierunek estetyczny.</p></article>
-          <article><span>04</span><h3>Realizacja</h3><p>Dokumentacja, rekomendacje i wsparcie na dalszych etapach.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section cta-band">
+    <section class="section cta-band light-version">
       <div class="container cta-band-inner">
         <div>
-          <p class="section-label light">06 · Kontakt</p>
-          <h2>Opowiedz o swoim wnętrzu.</h2>
-          <p>Krótka wiadomość wystarczy, żebyśmy mogły zaproponować najlepszy zakres współpracy.</p>
+          <p class="section-label">02 · Współpraca</p>
+          <h2>Chcesz zobaczyć podobny kierunek dla swojego wnętrza?</h2>
+          <p>Napisz do nas — przygotujemy dopasowaną propozycję współpracy.</p>
         </div>
-        <a class="button button-light" href="kontakt.html">Napisz do nas</a>
+        <a class="button button-dark" href="kontakt.html">Skontaktuj się</a>
       </div>
     </section>
   </main>
+
+  <div class="lightbox" data-lightbox aria-hidden="true">
+    <button class="lightbox-close" type="button" aria-label="Zamknij podgląd">×</button>
+    <div class="lightbox-inner">
+      <img src="" alt="" data-lightbox-image>
+      <div class="lightbox-caption">
+        <strong data-lightbox-title></strong>
+        <span data-lightbox-type></span>
+      </div>
+    </div>
+  </div>
+
   
     <footer class="site-footer">
       <div class="container footer-grid">

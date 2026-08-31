@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url><loc>https://www.artefekt.pl/</loc></url>
-<url><loc>https://www.artefekt.pl/oferta.html</loc></url>
-<url><loc>https://www.artefekt.pl/realizacje.html</loc></url>
-<url><loc>https://www.artefekt.pl/kontakt.html</loc></url>
+  <url><loc>https://artefekt.pl/</loc></url>
+  <url><loc>https://artefekt.pl/oferta.html</loc></url>
+  <url><loc>https://artefekt.pl/projekty.html</loc></url>
+  <url><loc>https://artefekt.pl/kontakt.html</loc></url>
 </urlset>
