@@ -558,3 +558,89 @@
     display:none;
   }
 }
+
+
+/* PROJECTS v3 — centered intro + softer studio hover */
+.sub-projects .sub-gallery-head{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:0;
+  max-width:980px;
+  margin:0 auto 54px;
+  text-align:center;
+}
+.sub-projects .sub-gallery-head .sub-kicker{
+  justify-content:center;
+  margin-bottom:38px;
+}
+.sub-projects .sub-gallery-head h2{
+  max-width:12ch;
+  margin:0 auto;
+  text-align:center;
+}
+.sub-projects .sub-gallery-head>p{
+  max-width:600px;
+  margin:26px auto 0;
+  text-align:center;
+}
+.sub-projects .sub-filter-bar{
+  justify-content:center;
+}
+
+/* Hover: one studio signature on each edge — intentionally quiet. */
+.sub-projects .gallery-card>span::before,
+.sub-projects .gallery-card>span::after{
+  top:50%;
+  font-size:clamp(23px,2vw,34px);
+  font-weight:400;
+  letter-spacing:.34em;
+  opacity:0;
+  text-transform:uppercase;
+  white-space:nowrap;
+}
+.sub-projects .gallery-card>span::before{
+  content:"ARTEFEKT";
+  left:-7px;
+  writing-mode:vertical-rl;
+  transform:translate(-8px,-50%) rotate(180deg);
+}
+.sub-projects .gallery-card>span::after{
+  content:"WROCŁAW";
+  right:-7px;
+  writing-mode:vertical-rl;
+  transform:translate(8px,-50%);
+}
+@media (hover:hover){
+  .sub-projects .gallery-card:hover img{
+    transform:scale(1.018);
+    filter:brightness(.86) saturate(.94);
+  }
+  .sub-projects .gallery-card:hover::after{
+    opacity:.72;
+  }
+  .sub-projects .gallery-card:hover>span::before,
+  .sub-projects .gallery-card:hover>span::after{
+    opacity:.20;
+  }
+}
+
+@media(max-width:780px){
+  .sub-projects .sub-gallery-head{
+    align-items:center;
+    margin-bottom:38px;
+    text-align:center;
+  }
+  .sub-projects .sub-gallery-head .sub-kicker{
+    justify-content:center;
+    margin-bottom:26px;
+  }
+  .sub-projects .sub-gallery-head h2,
+  .sub-projects .sub-gallery-head>p{
+    text-align:center;
+  }
+  .sub-projects .sub-filter-bar{
+    justify-content:flex-start;
+  }
+}
