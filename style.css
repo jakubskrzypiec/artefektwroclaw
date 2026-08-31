@@ -226,16 +226,16 @@ body[data-page="home"] .hero-slide img{image-rendering:auto}
 .home-contact-form{display:grid;gap:26px;padding-top:8px}.home-contact-form label{display:grid;gap:9px}.home-contact-form label>span{font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--blue)}
 .home-contact-form input,.home-contact-form textarea,.home-contact-form select{width:100%;min-height:44px;padding:10px 0;border:0;border-bottom:1px solid rgba(255,255,255,.38);border-radius:0;background:transparent;color:#fff;outline:none}.home-contact-form select{color-scheme:dark}.home-contact-form input:focus,.home-contact-form textarea:focus,.home-contact-form select:focus{border-color:#fff}.home-contact-form textarea{resize:vertical}.home-contact-form .checkbox{display:flex;flex-direction:row;gap:10px}.home-contact-form .checkbox input{width:15px;height:15px;min-height:15px;margin-top:2px}.home-contact-form .checkbox span{text-transform:none;letter-spacing:0;font-weight:400;color:rgba(255,255,255,.65)}.home-contact-form .button{justify-self:start}
 
-.social-faq{background:#ebe9e4;padding:0}
-.social-faq-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0;align-items:stretch;width:100%}
+.social-faq{background:#ebe9e4;padding:0;overflow:hidden}
+.social-faq-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0;align-items:stretch;width:100vw;max-width:none;margin-left:calc(50% - 50vw)}
 .social-faq-grid--full{width:100%;max-width:none}
-.social-panel,.home-faq{min-height:840px}
-.social-panel{padding:72px clamp(28px,6vw,96px);display:flex;flex-direction:column;align-items:center;justify-content:center}
+.social-panel,.home-faq{min-height:820px}
+.social-panel{position:relative;padding:72px clamp(28px,6vw,96px);display:flex;flex-direction:column;align-items:center;justify-content:center}
 .social-title-wrap{width:min(100%,560px);margin:0 auto;text-align:left}
 .social-panel h2{font-size:clamp(48px,5vw,74px);margin:36px 0 24px;max-width:8ch}
 .social-intro{max-width:520px;margin:0 0 42px;font-size:14px;line-height:1.7}
-.social-devices{width:100%;max-width:760px;min-height:480px;position:relative;display:flex;align-items:center;justify-content:center;padding-top:0}
-.social-watermark{position:absolute;inset:50% auto auto 50%;transform:translate(-50%,-50%);white-space:nowrap;font-size:clamp(72px,8vw,142px);font-weight:500;letter-spacing:-.08em;color:rgba(16,46,63,.08);pointer-events:none;z-index:0}
+.social-devices{width:100%;max-width:760px;min-height:480px;position:relative;display:flex;align-items:center;justify-content:center;padding-top:0;z-index:1}
+.social-watermark{position:absolute;left:68%;top:18%;transform:translate(-50%,-50%);white-space:nowrap;font-size:clamp(58px,5.4vw,110px);font-weight:500;letter-spacing:-.08em;color:rgba(16,46,63,.09);pointer-events:none;z-index:0}
 .device{position:absolute;z-index:1;display:flex;flex-direction:column;background:var(--navy);border:8px solid var(--navy);box-shadow:0 26px 70px rgba(16,46,63,.18);transition:transform .3s;border-radius:22px;overflow:hidden}
 .device:hover{transform:translateY(-6px)}
 .device-screen{background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:34px 28px;color:var(--navy);text-align:center}
@@ -254,8 +254,8 @@ body[data-page="home"] .hero-slide img{image-rendering:auto}
 .device.phone .device-screen{aspect-ratio:9/15;padding:28px 16px}
 .device.phone .device-screen>img{width:80%;max-height:70px;margin-bottom:26px}
 .device.phone .social-icon{width:50px;height:50px}
-.home-faq{position:relative;overflow:hidden;display:flex;align-items:center;padding:72px clamp(28px,6vw,96px);color:#fff;background:#09151e;background-image:linear-gradient(180deg, rgba(6,14,22,.22), rgba(3,9,15,.72)), url('faq-abstract-bg.webp');background-size:cover;background-position:center}
-.home-faq::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg, rgba(5,12,18,.18) 0%, rgba(5,12,18,.38) 35%, rgba(5,12,18,.72) 100%)}
+.home-faq{position:relative;overflow:hidden;display:flex;align-items:center;padding:72px clamp(28px,6vw,96px);color:#fff;background:#09151e;background-image:linear-gradient(180deg, rgba(8,18,28,.10), rgba(5,12,18,.42)), url('faq-abstract-bg-light.webp');background-size:cover;background-position:center}
+.home-faq::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg, rgba(5,12,18,.08) 0%, rgba(5,12,18,.16) 35%, rgba(5,12,18,.42) 100%)}
 .faq-shell{position:relative;z-index:1;width:min(100%,640px);margin:0 auto;display:flex;flex-direction:column;justify-content:center}
 .home-faq .section-kicker p,.home-faq .section-kicker span{color:#8fb4d0}
 .home-faq h2{font-size:clamp(48px,5vw,78px);line-height:.97;margin:34px 0 28px;max-width:8.5ch;color:#fff}
@@ -293,7 +293,7 @@ body[data-page="home"] .hero-slide img{image-rendering:auto}
   .social-intro{margin-left:auto;margin-right:auto}
   .social-panel,.home-faq{padding:42px 22px}
   .social-devices{min-height:420px;padding-top:0}
-  .social-watermark{font-size:clamp(54px,18vw,92px);transform:translate(-50%,-46%)}
+  .social-watermark{left:52%;top:18%;font-size:clamp(46px,14vw,82px);transform:translate(-50%,-50%)}
   .device.desktop{width:min(100%,330px);top:52%;border-width:6px;border-radius:18px}
   .device.desktop .device-screen{padding:20px 16px}
   .device.desktop .device-screen>img{margin-bottom:18px;max-height:52px}
