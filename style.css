@@ -254,7 +254,7 @@ body[data-page="home"] .hero-slide img{image-rendering:auto}
 .device.phone .device-screen{aspect-ratio:9/15;padding:28px 16px}
 .device.phone .device-screen>img{width:80%;max-height:70px;margin-bottom:26px}
 .device.phone .social-icon{width:50px;height:50px}
-.home-faq{position:relative;overflow:hidden;display:flex;align-items:center;padding:72px clamp(28px,6vw,96px);color:#fff;background:#09151e;background-image:linear-gradient(180deg, rgba(8,18,28,.10), rgba(5,12,18,.42)), url('faq-abstract-bg-light.webp');background-size:cover;background-position:center}
+.home-faq{position:relative;overflow:hidden;display:flex;align-items:center;padding:72px clamp(28px,6vw,96px);color:#fff;background:#09151e;background-image:linear-gradient(180deg, rgba(8,18,28,.16), rgba(5,12,18,.46)), url('faq-architectural-v2.png');background-size:cover;background-position:center}
 .home-faq::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg, rgba(5,12,18,.08) 0%, rgba(5,12,18,.16) 35%, rgba(5,12,18,.42) 100%)}
 .faq-shell{position:relative;z-index:1;width:min(100%,640px);margin:0 auto;display:flex;flex-direction:column;justify-content:center}
 .home-faq .section-kicker p,.home-faq .section-kicker span{color:#8fb4d0}
@@ -336,7 +336,9 @@ body[data-page="home"] .hero-slide img{image-rendering:auto}
 
 
 /* Final homepage social + FAQ rework */
-.social-faq-v2{padding:0;background:#ebe9e4}
+body[data-page="home"] .social-faq-v2.home-section{padding:0;margin:0;background:#ebe9e4}
+body[data-page="home"] .home-contact{margin-bottom:0}
+body[data-page="home"] .social-faq-v2 + .site-footer{margin-top:0}
 .social-faq-v2 .social-faq-layout{display:grid;grid-template-columns:1fr 1fr;align-items:stretch;width:100%;margin:0}
 .social-side,.faq-side{min-width:0}
 .social-side{background:#ebe9e4}
@@ -363,7 +365,7 @@ body[data-page="home"] .hero-slide img{image-rendering:auto}
 .phone-card{right:18px;bottom:-18px;width:180px;border-radius:34px}
 .phone-card .device-card-screen{aspect-ratio:9/15;padding:24px 14px}
 .phone-card .device-card-screen>img{width:80%;max-height:62px}
-.faq-side{position:relative;color:#fff;background:#091824;background-image:linear-gradient(180deg, rgba(7,18,28,.08), rgba(5,12,18,.42)), url('faq-abstract-bg-light.webp');background-size:cover;background-position:center}
+.faq-side{position:relative;color:#fff;background:#091824;background-image:linear-gradient(180deg, rgba(7,18,28,.14), rgba(5,12,18,.48)), url('faq-architectural-v2.png');background-size:cover;background-position:center}
 .faq-side::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg, rgba(5,12,18,.06), rgba(5,12,18,.28));pointer-events:none}
 .faq-side-inner{position:relative;z-index:1;width:min(100%,700px);margin:0 auto}
 .faq-side .section-kicker,.faq-side .section-kicker p{color:#8fb4d0}
