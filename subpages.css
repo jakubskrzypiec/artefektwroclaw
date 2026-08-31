@@ -179,7 +179,7 @@
 .offer-wide-intro .offer-wide-head h2{max-width:12ch;margin:40px auto 0;font-size:clamp(54px,5.5vw,88px)}
 .offer-wide-list{padding-top:54px}
 .offer-process-story{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);min-height:720px;padding:0;background:var(--sub-navy)}
-.offer-process-content{width:100%;margin:0;padding:118px 64px 124px 24px;text-align:left;align-self:center;justify-self:start}
+.offer-process-content{width:100%;margin:0;padding:118px 64px 124px 88px;text-align:left;align-self:center;justify-self:start}
 .offer-process-content .sub-kicker,.offer-process-content h2,.offer-process-copy,.offer-process-story a{margin-left:0;text-align:left}
 .offer-process-content h2{max-width:8.2ch;margin-right:0}
 .offer-process-copy{max-width:650px;text-align:left}
