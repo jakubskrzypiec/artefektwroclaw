@@ -333,3 +333,80 @@ body[data-page="home"] .hero-slide img{image-rendering:auto}
   body[data-page="home"] .home-section{padding:88px 0}.hero-home .hero-actions{margin-top:34px}.compact-manifesto{grid-template-columns:1fr;height:auto;min-height:0}.compact-manifesto .manifesto-image img{height:300px}.compact-manifesto .manifesto-copy{padding:62px 22px}.compact-manifesto .manifesto-copy h2{font-size:42px}.home-heading,.home-heading.compact{grid-template-columns:1fr;gap:28px;margin-bottom:48px}.home-heading .section-kicker,.home-heading h2,.home-heading>p{grid-column:1}.services-editorial{grid-template-columns:1fr;gap:32px}.services-lead{min-height:340px;padding:34px 26px}.services-lead>p{margin:42px 0;font-size:16px}.services-index>a{min-height:102px;grid-template-columns:36px 1fr 20px;gap:14px}.services-index>a p{display:none}.services-index h3{font-size:24px}.oversize-projects{padding:88px 0}.oversize-head{padding:0 26px;display:grid}.oversize-grid{width:calc(100% - 50px);display:flex;overflow-x:auto;scroll-snap-type:x mandatory}.oversize-card{flex:0 0 82vw;scroll-snap-align:center}.oversize-card img{height:500px}.projects-side{display:none}.process-editorial{grid-template-columns:1fr;gap:35px}.process-editorial figure{min-height:470px}.home-process-grid li{min-height:125px;padding:24px 0;grid-template-columns:44px 1fr;gap:12px}.home-process-grid h3{font-size:24px}.home-contact{padding:94px 0}.home-contact-grid{grid-template-columns:1fr;gap:72px}.social-faq-grid{grid-template-columns:1fr;gap:92px}.social-devices{min-height:760px}.social-watermark{top:52%;font-size:72px}.device.desktop{top:0;bottom:auto;width:100%}.device.phone{display:flex;width:43%;right:4px;bottom:0}.device-screen>img{margin-bottom:26px}.home-faq{padding:0;border:0}.social-panel h2,.home-faq h2{font-size:45px}.social-intro{margin-bottom:36px}.home-accordion{margin-top:42px}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+
+/* Final homepage social + FAQ rework */
+.social-faq-v2{padding:0;background:#ebe9e4}
+.social-faq-v2 .social-faq-layout{display:grid;grid-template-columns:1fr 1fr;align-items:stretch;width:100%;margin:0}
+.social-side,.faq-side{min-width:0}
+.social-side{background:#ebe9e4}
+.social-side-inner,.faq-side-inner{min-height:780px;padding:88px clamp(28px,5vw,72px);display:flex;flex-direction:column;justify-content:center}
+.social-side-inner{align-items:center}
+.social-title-wrap{width:min(100%,540px);margin:0 auto;text-align:left}
+.social-side h2,.faq-side h2{font-size:clamp(46px,4.8vw,76px);line-height:.97}
+.social-side h2{max-width:8ch;margin:34px 0 24px;color:var(--navy)}
+.social-intro{max-width:520px;margin:0 0 34px;font-size:15px;line-height:1.75}
+.social-card-stack{position:relative;width:min(100%,680px);height:420px;margin-top:20px}
+.social-backtype{position:absolute;left:50%;top:58%;transform:translate(-50%,-50%);font-size:clamp(64px,7vw,132px);line-height:1;font-weight:500;letter-spacing:-.08em;color:rgba(16,46,63,.07);white-space:nowrap;pointer-events:none;z-index:0}
+.device-card{position:absolute;display:flex;flex-direction:column;background:var(--navy);border:8px solid var(--navy);box-shadow:0 26px 70px rgba(16,46,63,.16);overflow:hidden;color:#fff;z-index:1;transition:transform .3s ease}
+.device-card:hover{transform:translateY(-4px)}
+.device-card-screen{background:#fff;color:var(--navy);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:28px 22px}
+.device-card-screen>img{width:min(66%,220px);max-height:86px;object-fit:contain;margin-bottom:24px}
+.social-icon{display:grid;place-items:center;width:54px;height:54px;border:1px solid rgba(16,46,63,.16);border-radius:50%;margin-bottom:16px;color:var(--navy)}
+.social-icon svg{width:22px;height:22px;display:block}
+.device-card-screen>strong{font-size:12px;letter-spacing:.18em;text-transform:uppercase}
+.device-card-screen>small{margin-top:8px;font-size:10px;color:#718894}
+.device-card-link{min-height:60px;padding:0 18px;display:flex;align-items:center;justify-content:space-between;font-size:9px;font-weight:600;letter-spacing:.16em;text-transform:uppercase}
+.device-card-link b{font-size:16px;font-weight:400}
+.desktop-card{left:0;bottom:0;width:min(100%,540px);border-radius:26px}
+.desktop-card .device-card-screen{aspect-ratio:16/10}
+.phone-card{right:18px;bottom:-18px;width:180px;border-radius:34px}
+.phone-card .device-card-screen{aspect-ratio:9/15;padding:24px 14px}
+.phone-card .device-card-screen>img{width:80%;max-height:62px}
+.faq-side{position:relative;color:#fff;background:#091824;background-image:linear-gradient(180deg, rgba(7,18,28,.08), rgba(5,12,18,.42)), url('faq-abstract-bg-light.webp');background-size:cover;background-position:center}
+.faq-side::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg, rgba(5,12,18,.06), rgba(5,12,18,.28));pointer-events:none}
+.faq-side-inner{position:relative;z-index:1;width:min(100%,700px);margin:0 auto}
+.faq-side .section-kicker,.faq-side .section-kicker p{color:#8fb4d0}
+.faq-side h2{max-width:8ch;margin:34px 0 28px;color:#fff}
+.home-accordion{border-top:1px solid rgba(255,255,255,.18)}
+.home-accordion .accordion-item{border-color:rgba(255,255,255,.15)}
+.home-accordion .accordion-item button{color:#fff;padding:26px 0;grid-template-columns:34px 1fr 42px;gap:18px;align-items:center}
+.home-accordion .accordion-item button span{color:#8fb4d0;font-size:10px}
+.home-accordion .accordion-item button strong{font-size:17px;font-weight:400;color:#fff}
+.home-accordion .accordion-item button b{display:grid;place-items:center;width:30px;height:30px;border:1px solid rgba(255,255,255,.32);border-radius:50%;font-size:18px;font-weight:300;transition:transform .25s ease,background .25s ease,border-color .25s ease}
+.home-accordion .accordion-item.is-open button b{transform:rotate(45deg);background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.56)}
+.home-accordion .accordion-panel{padding:0 0 24px 52px}
+.home-accordion .accordion-panel p{font-size:14px;line-height:1.75;color:rgba(255,255,255,.78)}
+.faq-bottom-alt{margin-top:22px;padding-top:24px;display:flex;align-items:center;justify-content:space-between;gap:16px;color:rgba(255,255,255,.72)}
+.faq-inline-link{display:inline-flex;align-items:center;gap:10px;color:#fff;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.48);padding-bottom:6px}
+.faq-inline-link b{font-size:16px;font-weight:400}
+
+@media (max-width: 1100px){
+  .social-faq-v2 .social-faq-layout{grid-template-columns:1fr}
+  .social-side-inner,.faq-side-inner{min-height:auto;padding:72px 28px}
+  .social-card-stack{width:min(100%,640px);height:390px}
+  .faq-side-inner{width:100%}
+}
+@media (max-width: 720px){
+  .social-side h2,.faq-side h2{font-size:clamp(38px,12vw,54px)}
+  .social-title-wrap{text-align:center}
+  .social-intro{margin:0 auto 26px;text-align:center}
+  .social-card-stack{height:320px}
+  .social-backtype{top:54%;font-size:clamp(42px,15vw,80px)}
+  .desktop-card{width:min(100%,330px);border-width:6px;border-radius:18px}
+  .desktop-card .device-card-screen{padding:18px 14px}
+  .desktop-card .device-card-screen>img{max-height:48px;margin-bottom:16px}
+  .phone-card{right:0;bottom:-6px;width:118px;border-width:6px;border-radius:24px}
+  .phone-card .device-card-screen{padding:14px 10px}
+  .phone-card .device-card-screen>img{max-height:34px;margin-bottom:12px}
+  .social-icon{width:40px;height:40px;margin-bottom:10px}
+  .social-icon svg{width:18px;height:18px}
+  .device-card-screen>strong{font-size:10px}
+  .device-card-screen>small{font-size:8px}
+  .device-card-link{min-height:44px;padding:0 12px;font-size:7px}
+  .home-accordion .accordion-item button{grid-template-columns:26px 1fr 34px;gap:14px;padding:22px 0}
+  .home-accordion .accordion-item button strong{font-size:15px}
+  .home-accordion .accordion-item button b{width:24px;height:24px;font-size:15px}
+  .home-accordion .accordion-panel{padding:0 0 18px 40px}
+  .faq-bottom-alt{flex-direction:column;align-items:flex-start}
+}
