@@ -1654,3 +1654,8 @@
   }
   .sub-offer .offer-item-foot a{width:100%;justify-content:space-between}
 }
+
+/* Nowe zdjęcia oferty są kwadratowe — kadr 1:1 nie przycina kompozycji */
+.sub-offer .offer-item-media img{aspect-ratio:1 / 1}
+@media(max-width:1100px){.sub-offer .offer-item-media img{aspect-ratio:1 / 1}}
+@media(max-width:860px){.sub-offer .offer-item-media img{aspect-ratio:4 / 3}}
