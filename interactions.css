@@ -31,12 +31,6 @@
   transform:none;
 }
 
-/* ---------- panoramowanie zdjęcia za kursorem ---------- */
-.fx-pan img{
-  object-position:calc(50% + var(--fx-x,0px)) calc(50% + var(--fx-y,0px));
-  transition:object-position .5s cubic-bezier(.2,.7,.2,1);
-}
-.fx-pan:hover img{transition:object-position .12s linear}
 
 /* ---------- hero: tło płynie wolniej niż treść ---------- */
 .fx-hero .hero-slider{
@@ -170,8 +164,80 @@
 @media(prefers-reduced-motion:reduce){
   .fx-progress{display:none}
   .fx-wipe,.fx-wipe.fx-in{clip-path:none;transform:none;transition:none}
-  .fx-pan img{object-position:50% 50% !important;transition:none}
+
   .fx-hero .hero-slider{top:0;height:100%;transform:none}
   .section-kicker::after,.sub-kicker::after{transform:scaleX(1);transition:none}
   .fx-top{transition:none}
+}
+
+
+/* ===========================================================
+   WEJŚCIA v4 — spokojniejsze pojawianie się treści
+   Krótszy dystans, dłuższe wyhamowanie, mniej stopniowania.
+   =========================================================== */
+.motion-item{
+  opacity:0;
+  transform:translateY(16px);
+  transition:opacity .78s cubic-bezier(.22,.78,.28,1) var(--motion-delay,0ms),
+             transform .78s cubic-bezier(.22,.78,.28,1) var(--motion-delay,0ms) !important;
+}
+.motion-item.is-motion-visible{
+  opacity:1;
+  transform:none;
+}
+/* kadry wjeżdżają odrobinę wolniej niż tekst — daje głębię bez chaosu */
+.motion-item.motion-media{
+  transition-duration:.95s !important;
+}
+.fx-wipe{
+  transition:clip-path 1.15s cubic-bezier(.22,.78,.28,1),transform 1.15s cubic-bezier(.22,.78,.28,1);
+}
+
+
+/* ===========================================================
+   HOVER — jeden język na całej stronie
+   Zdjęcia delikatnie się przybliżają, wiersze list przesuwają
+   się w prawo, strzałki wyjeżdżają. Nic nie „ucieka" za kursorem.
+   =========================================================== */
+.services-index>a h3,
+.services-index>a p,
+.services-index>a span,
+.home-process-grid li h3,
+.home-process-grid li p,
+.home-process-grid li>span,
+.offer-wide-item h3,
+.offer-includes li,
+.contact-channel strong,
+.nb-card h2{
+  transition:transform .42s cubic-bezier(.22,.78,.28,1),color .3s ease;
+}
+
+@media (hover:hover){
+  /* pakiety na stronie głównej */
+  .services-index>a:hover h3,
+  .services-index>a:hover p{transform:translateX(8px)}
+  .services-index>a:hover span{transform:translateX(3px)}
+
+  /* proces */
+  .home-process-grid li:hover h3,
+  .home-process-grid li:hover p{transform:translateX(8px)}
+  .home-process-grid li:hover>span{transform:translateX(3px)}
+  .home-process-grid li{transition:background-color .35s ease}
+  .home-process-grid li:hover{background-color:rgba(13,41,56,.03)}
+
+  /* pozycje oferty */
+  .sub-page .offer-wide-item:hover h3{transform:translateX(8px) !important}
+
+  /* kafelki artykułów */
+  .nb-card:hover h2{transform:translateX(6px)}
+
+  /* zdjęcia: tylko delikatne przybliżenie, bez podążania za kursorem */
+  .offer-item-media img{transition:transform .8s cubic-bezier(.22,.78,.28,1)}
+  .offer-wide-item:hover .offer-item-media img{transform:scale(1.035)}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .motion-item{opacity:1 !important;transform:none !important;transition:none !important}
+  .services-index>a h3,.services-index>a p,.home-process-grid li h3,
+  .home-process-grid li p,.offer-wide-item h3,.nb-card h2{transition:none}
 }

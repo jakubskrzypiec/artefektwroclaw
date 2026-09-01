@@ -67,7 +67,7 @@
     items.forEach((item,index) => {
       if (item.classList.contains('motion-item')) return;
       item.classList.add('motion-item');
-      item.style.setProperty('--motion-delay', `${Math.min(index % 5,4) * 55}ms`);
+      item.style.setProperty('--motion-delay', `${Math.min(index % 4,3) * 45}ms`);
       if (motionObserver) motionObserver.observe(item); else item.classList.add('is-motion-visible');
     });
 

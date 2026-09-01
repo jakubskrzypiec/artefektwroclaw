@@ -1659,3 +1659,63 @@
 .sub-offer .offer-item-media img{aspect-ratio:1 / 1}
 @media(max-width:1100px){.sub-offer .offer-item-media img{aspect-ratio:1 / 1}}
 @media(max-width:860px){.sub-offer .offer-item-media img{aspect-ratio:4 / 3}}
+
+
+/* ===========================================================
+   PROJEKTY — dolna sekcja przebudowana na wzór dołu oferty
+   Cytat miał max-width:11ch przy ~78 px kroju, przez co łamał się
+   po jednym słowie na wers. Teraz podział 50/50, tekst do lewej,
+   rozmiar dobrany do długiego zdania.
+   =========================================================== */
+.sub-projects .sub-statement{
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  min-height:0;
+  align-items:stretch;
+}
+.sub-projects .sub-statement-copy{
+  order:1;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:flex-start;
+  padding:clamp(64px,6.4vw,104px) clamp(38px,4vw,72px) clamp(64px,6.4vw,104px) max(38px,calc((100vw - 1320px)/2));
+  text-align:left;
+}
+.sub-projects .sub-statement blockquote{
+  max-width:19ch;
+  margin:26px 0 24px;
+  font-size:clamp(27px,2.55vw,42px) !important;
+  line-height:1.16 !important;
+  letter-spacing:-.03em !important;
+  quotes:none;
+}
+.sub-projects .sub-statement-copy>p{
+  max-width:46ch;
+  margin:0;
+  color:rgba(255,255,255,.7);
+  font-size:15px;
+  line-height:1.78;
+}
+.sub-projects .sub-statement figure{
+  order:2;
+  min-height:0;
+  align-self:stretch;
+}
+.sub-projects .sub-statement figure img{
+  display:block;
+  width:100%;
+  height:100%;
+  min-height:clamp(380px,42vw,560px);
+  object-fit:cover;
+}
+
+@media(max-width:860px){
+  .sub-projects .sub-statement{grid-template-columns:1fr}
+  .sub-projects .sub-statement-copy{
+    order:1;
+    padding:56px 22px 60px;
+  }
+  .sub-projects .sub-statement figure{order:2}
+  .sub-projects .sub-statement figure img{min-height:320px}
+  .sub-projects .sub-statement blockquote{max-width:100%;font-size:clamp(26px,7.4vw,34px) !important}
+}

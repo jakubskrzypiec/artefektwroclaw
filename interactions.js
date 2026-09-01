@@ -85,15 +85,13 @@
 
   /* ---------- 4. odsłanianie kadrów przy wejściu w kadr ---------- */
   if ('IntersectionObserver' in window) {
+    // tylko tam, gdzie kadr nie ma już własnego wejścia z .motion-item —
+    // dwie animacje na jednym elemencie wyglądały nerwowo
     var wipeSelector = [
       '.manifesto-image',
-      '.oversize-card img',
       '.process-notebook img',
-      '.offer-item-media',
       '.offer-process-media',
-      '.sub-statement figure img',
-      '.gallery-card img',
-      '.nb-card'
+      '.sub-statement figure img'
     ].join(',');
 
     var wipeObserver = new IntersectionObserver(function (entries) {
@@ -133,26 +131,4 @@
     }
   }
 
-  /* ---------- 5. zdjęcie podąża za kursorem ---------- */
-  var canHover = window.matchMedia && window.matchMedia('(hover: hover)').matches;
-  if (canHover) {
-    document.querySelectorAll('.oversize-card, .offer-item-media, .nb-card').forEach(function (card) {
-      var img = card.tagName === 'IMG' ? card : card.querySelector('img');
-      if (!img) return;
-      card.classList.add('fx-pan');
-
-      card.addEventListener('pointermove', function (e) {
-        var r = card.getBoundingClientRect();
-        var nx = (e.clientX - r.left) / r.width - 0.5;
-        var ny = (e.clientY - r.top) / r.height - 0.5;
-        card.style.setProperty('--fx-x', (nx * 14).toFixed(1) + 'px');
-        card.style.setProperty('--fx-y', (ny * 14).toFixed(1) + 'px');
-      });
-
-      card.addEventListener('pointerleave', function () {
-        card.style.setProperty('--fx-x', '0px');
-        card.style.setProperty('--fx-y', '0px');
-      });
-    });
-  }
 })();
