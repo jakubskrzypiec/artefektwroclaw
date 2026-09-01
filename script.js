@@ -6,8 +6,9 @@
   const brandImage = siteHeader?.querySelector('.brand img');
 
   if (siteHeader) {
+    const forceSolid = body.classList.contains('header-solid');
     const updateHeaderState = () => {
-      const scrolled = window.scrollY > 22;
+      const scrolled = forceSolid || window.scrollY > 22;
       siteHeader.classList.toggle('is-scrolled', scrolled);
       if (brandImage) {
         const nextLogo = scrolled ? 'logo-primary.png' : 'logo-white.png';
