@@ -480,3 +480,32 @@ body[data-page="home"] .social-faq-v2 + .site-footer{margin-top:0}
   .site-header .brand img{width:122px;height:52px;transform:scale(1.72)}
   .process-editorial .process-notebook{min-height:430px}
 }
+
+
+/* FINAL MICRO FIXES v2 — global site interactions */
+html{scroll-behavior:smooth;}
+body a,
+body button,
+body input,
+body textarea,
+body select{
+  transition:transform .26s ease, background-color .26s ease, color .26s ease, border-color .26s ease, box-shadow .26s ease, opacity .26s ease, filter .26s ease;
+}
+@media (hover:hover){
+  .button:hover,
+  .header-cta:hover,
+  .services-index>a:hover,
+  .service-row:hover,
+  .featured-card:hover,
+  .oversize-card:hover,
+  .gallery-card:hover,
+  .home-contact-card:hover,
+  .site-nav a:hover{
+    transform:translateY(-2px);
+  }
+  .button:hover,
+  .header-cta:hover{
+    box-shadow:0 16px 34px rgba(7,26,37,.12);
+  }
+}
+.reveal{transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1) !important;}

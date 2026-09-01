@@ -34,7 +34,7 @@
     nav.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
   }
 
-  const revealItems = document.querySelectorAll('.section-kicker, .intro-main, .service-row, .services-lead, .services-index a, .featured-card, .oversize-card, .process-editorial figure, .home-process-grid li, .home-contact-grid > *, .social-faq-grid > *, .process-list li, .offer-detail-list article, .deliverables-grid > div, .offer-wide-intro > *, .offer-wide-item > *, .offer-process-content > *, .offer-process-media, .contact-layout > *, .accordion-item');
+  const revealItems = document.querySelectorAll('.section-kicker, .intro-main, .service-row, .services-lead, .services-index a, .featured-card, .oversize-card, .process-editorial figure, .home-process-grid li, .home-contact-grid > *, .social-faq-grid > *, .process-list li, .offer-detail-list article, .deliverables-grid > div, .offer-wide-intro > *, .offer-wide-item, .offer-wide-item > *, .offer-process-content > *, .offer-process-media, .contact-layout > *, .accordion-item, .sub-title-hero-inner > *, .sub-gallery-head > *, [data-project-filters] button, .gallery-card, .contact-editorial-head > *, .contact-channel, .contact-brief-aside-inner > *, .contact-brief-form-wrap > *, .contact-social-row a, .contact-studio-meta > *, .contact-signoff-inner > *');
   if ('IntersectionObserver' in window) {
     const revealObserver = new IntersectionObserver(entries => {
       entries.forEach(entry => {

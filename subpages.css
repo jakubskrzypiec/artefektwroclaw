@@ -1190,3 +1190,125 @@
   .sub-offer .offer-wide-intro .offer-wide-head .offer-six{font-size:1.18em}
   .sub-offer .offer-wide-intro .offer-wide-head .offer-six-rest{font-size:.9em}
 }
+
+
+/* FINAL MICRO FIXES v2 — project hover, offer heading, consistent subpage interactions */
+.sub-offer .offer-wide-intro .offer-wide-head h2{
+  max-width:16ch !important;
+  gap:0;
+}
+.sub-offer .offer-wide-intro .offer-wide-head .offer-six{
+  font-size:1.22em;
+  line-height:.8;
+}
+.sub-offer .offer-wide-intro .offer-wide-head .offer-six-rest{
+  margin-top:.14em;
+  font-size:.74em;
+  line-height:.96;
+  letter-spacing:-.045em;
+}
+
+.sub-projects .sub-project-gallery{
+  gap:16px;
+}
+.sub-projects .gallery-card{
+  aspect-ratio:11 / 10;
+}
+.sub-projects .gallery-card>span{
+  inset:0 !important;
+  left:auto !important;
+  right:auto !important;
+  bottom:auto !important;
+  width:100%;
+  height:100%;
+  padding:20px 22px;
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:24px;
+  transform:none !important;
+}
+.sub-projects .gallery-card>span::before,
+.sub-projects .gallery-card>span::after{
+  top:50% !important;
+  bottom:auto !important;
+  z-index:2 !important;
+  line-height:1;
+  white-space:nowrap;
+  text-shadow:0 2px 18px rgba(0,0,0,.18);
+}
+.sub-projects .gallery-card>span::before{
+  content:"ART" !important;
+  left:18px !important;
+  right:auto !important;
+  font-size:clamp(24px,1.95vw,38px) !important;
+  letter-spacing:.18em !important;
+  transform:translateY(-50%) rotate(180deg) !important;
+}
+.sub-projects .gallery-card>span::after{
+  content:"EFEKT" !important;
+  right:18px !important;
+  left:auto !important;
+  font-size:clamp(24px,1.85vw,36px) !important;
+  letter-spacing:.16em !important;
+  transform:translateY(-50%) !important;
+}
+@media (hover:hover){
+  .sub-projects .gallery-card:hover img{
+    transform:scale(1.016);
+    filter:brightness(.8) saturate(.94);
+  }
+  .sub-projects .gallery-card:hover::after{
+    opacity:.82 !important;
+  }
+  .sub-projects .gallery-card:hover>span{
+    opacity:1;
+  }
+  .sub-projects .gallery-card:hover>span::before,
+  .sub-projects .gallery-card:hover>span::after{
+    opacity:.28 !important;
+  }
+}
+@media(max-width:1100px){
+  .sub-projects .gallery-card{aspect-ratio:6 / 5;}
+  .sub-projects .gallery-card>span::before{left:14px !important;font-size:clamp(22px,3vw,34px) !important;}
+  .sub-projects .gallery-card>span::after{right:14px !important;font-size:clamp(22px,2.7vw,32px) !important;}
+}
+@media(max-width:780px){
+  .sub-projects .gallery-card{aspect-ratio:5 / 4;}
+}
+
+/* Unified subtle interactions across subpages */
+.sub-page a,
+.sub-page button,
+.sub-page input,
+.sub-page textarea,
+.sub-page select{
+  transition:transform .26s ease, background-color .26s ease, color .26s ease, border-color .26s ease, box-shadow .26s ease, opacity .26s ease, filter .26s ease;
+}
+@media (hover:hover){
+  .sub-page .header-cta:hover,
+  .sub-page .sub-submit:hover,
+  .sub-page .offer-process-story a:hover,
+  .sub-page .contact-signoff-inner>a:hover{
+    transform:translateY(-2px);
+    box-shadow:0 16px 34px rgba(7,26,37,.12);
+  }
+  .sub-page .sub-filter-bar button:hover,
+  .sub-page .offer-wide-body a:hover,
+  .sub-page .sub-contact .contact-social-row a:hover,
+  .sub-page .sub-contact .contact-channel:hover,
+  .sub-page .accordion-item button:hover{
+    transform:translateY(-1px);
+  }
+  .sub-page .sub-contact .contact-channel:hover{
+    background:rgba(7,26,37,.04);
+  }
+  .sub-page .offer-wide-item:hover h3,
+  .sub-page .sub-contact .contact-editorial-head h2:hover,
+  .sub-page .sub-gallery-head h2:hover,
+  .sub-page .sub-title-row h1:hover,
+  .sub-page .offer-process-content h2:hover{
+    transform:translateX(2px);
+  }
+}
