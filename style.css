@@ -591,37 +591,20 @@ body select{
 }
 
 /* ===========================================================
-   HERO v2 — eyebrow, line reveal, meta bar, scroll cue
+   HERO v3 — spokojna wersja: eyebrow, wjazd tytułu, lead
    =========================================================== */
-.hero-home .hero-overlay{
-  background:
-    linear-gradient(90deg,rgba(7,26,37,.78) 0%,rgba(7,26,37,.46) 38%,rgba(7,26,37,.10) 72%,rgba(7,26,37,.22) 100%),
-    linear-gradient(0deg,rgba(7,26,37,.72) 0%,rgba(7,26,37,.18) 34%,transparent 58%);
-}
 body[data-page="home"] .hero-overlay{
   background:
     linear-gradient(90deg,rgba(7,26,37,.74) 0%,rgba(7,26,37,.40) 40%,rgba(7,26,37,.06) 74%,rgba(7,26,37,.20) 100%),
-    linear-gradient(0deg,rgba(7,26,37,.70) 0%,rgba(7,26,37,.16) 36%,transparent 60%);
+    linear-gradient(0deg,rgba(7,26,37,.62) 0%,rgba(7,26,37,.14) 34%,transparent 58%);
 }
-
-/* grain / vignette so flat renders get some depth */
-.hero-home::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  z-index:1;
-  pointer-events:none;
-  background:radial-gradient(120% 90% at 72% 34%,transparent 40%,rgba(7,26,37,.30) 100%);
-}
-
-.hero-home .hero-content{bottom:172px}
 
 .hero-eyebrow{
   display:flex;
   align-items:center;
   gap:16px;
-  margin:0 0 26px;
-  color:rgba(255,255,255,.78);
+  margin:0 0 24px;
+  color:rgba(255,255,255,.72);
   font-size:10px;
   font-weight:600;
   letter-spacing:.2em;
@@ -629,153 +612,248 @@ body[data-page="home"] .hero-overlay{
 }
 .hero-eyebrow i{
   display:block;
-  width:46px;
+  width:44px;
   height:1px;
-  background:rgba(255,255,255,.55);
-  transform-origin:left center;
+  background:rgba(255,255,255,.5);
 }
 
 .hero-content h1{margin:0}
 .hero-line{display:block;overflow:hidden;padding-bottom:.04em}
-.hero-line>span{display:block;will-change:transform}
+.hero-line>span{display:block}
 
 .hero-home .hero-text{
-  max-width:540px;
-  margin:28px 0 0;
-  color:rgba(255,255,255,.78);
+  max-width:530px;
+  margin:26px 0 0;
+  color:rgba(255,255,255,.76);
   font-size:15px;
   line-height:1.75;
 }
-.hero-home .hero-actions{margin-top:38px}
+.hero-home .hero-actions{margin-top:36px}
 
-/* --- entrance animation --- */
-@keyframes heroLineUp{from{transform:translateY(108%)}to{transform:translateY(0)}}
-@keyframes heroFadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
-@keyframes heroRuleIn{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+/* wejście — jeden spokojny ruch */
+@keyframes heroLineUp{from{transform:translateY(106%)}to{transform:translateY(0)}}
+@keyframes heroFadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 
-.hero-eyebrow{opacity:0;animation:heroFadeUp .8s cubic-bezier(.2,.7,.2,1) .15s forwards}
-.hero-eyebrow i{animation:heroRuleIn .9s cubic-bezier(.2,.7,.2,1) .3s backwards}
-.hero-line>span{transform:translateY(108%);animation:heroLineUp .95s cubic-bezier(.16,.84,.32,1) forwards}
-.hero-line:nth-child(1)>span{animation-delay:.26s}
-.hero-line:nth-child(2)>span{animation-delay:.36s}
-.hero-line:nth-child(3)>span{animation-delay:.46s}
-.hero-home .hero-text{opacity:0;animation:heroFadeUp .9s cubic-bezier(.2,.7,.2,1) .66s forwards}
-.hero-home .hero-actions{opacity:0;animation:heroFadeUp .9s cubic-bezier(.2,.7,.2,1) .78s forwards}
-.hero-meta{opacity:0;animation:heroFadeUp .9s cubic-bezier(.2,.7,.2,1) .92s forwards}
+.hero-eyebrow{opacity:0;animation:heroFadeUp .7s cubic-bezier(.2,.7,.2,1) .1s forwards}
+.hero-line>span{transform:translateY(106%);animation:heroLineUp .9s cubic-bezier(.16,.84,.32,1) forwards}
+.hero-line:nth-child(1)>span{animation-delay:.2s}
+.hero-line:nth-child(2)>span{animation-delay:.27s}
+.hero-line:nth-child(3)>span{animation-delay:.34s}
+.hero-home .hero-text{opacity:0;animation:heroFadeUp .8s cubic-bezier(.2,.7,.2,1) .5s forwards}
+.hero-home .hero-actions{opacity:0;animation:heroFadeUp .8s cubic-bezier(.2,.7,.2,1) .6s forwards}
 
-/* --- bottom meta bar --- */
-.hero-meta{
-  position:absolute;
-  z-index:3;
-  left:0;
-  right:0;
-  bottom:0;
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr)) auto;
-  align-items:center;
-  gap:0 4vw;
-  padding:22px 5.7vw 24px;
-  border-top:1px solid rgba(255,255,255,.16);
-  background:linear-gradient(0deg,rgba(7,26,37,.52),rgba(7,26,37,.12));
-  -webkit-backdrop-filter:blur(6px);
-  backdrop-filter:blur(6px);
-}
-.hero-meta-item{display:flex;flex-direction:column;gap:6px;position:relative;padding-left:26px}
-.hero-meta-item::before{
-  content:"";
-  position:absolute;
-  left:0;
-  top:4px;
-  bottom:4px;
-  width:1px;
-  background:rgba(255,255,255,.22);
-}
-.hero-meta-item:first-child{padding-left:0}
-.hero-meta-item:first-child::before{display:none}
-.hero-meta-item strong{
-  color:#fff;
-  font-size:15px;
-  font-weight:500;
-  letter-spacing:-.01em;
-}
-.hero-meta-item span{
-  color:rgba(255,255,255,.60);
-  font-size:10px;
-  font-weight:500;
-  letter-spacing:.13em;
-  text-transform:uppercase;
-}
-.hero-scroll{
-  display:flex;
-  align-items:center;
-  gap:14px;
-  color:rgba(255,255,255,.72);
-  font-size:10px;
-  font-weight:600;
-  letter-spacing:.16em;
-  text-transform:uppercase;
-  white-space:nowrap;
-}
-.hero-scroll i{
-  display:block;
-  position:relative;
-  width:1px;
-  height:34px;
-  background:rgba(255,255,255,.28);
-  overflow:hidden;
-}
-.hero-scroll i::after{
-  content:"";
-  position:absolute;
-  left:0;
-  top:0;
-  width:1px;
-  height:14px;
-  background:#fff;
-  animation:heroScrollLine 2.2s cubic-bezier(.6,.1,.3,1) infinite;
-}
-@keyframes heroScrollLine{
-  0%{transform:translateY(-14px)}
-  55%{transform:translateY(34px)}
-  100%{transform:translateY(34px)}
-}
-@media (hover:hover){
-  .hero-scroll:hover{color:#fff}
-  .hero-scroll:hover i{background:rgba(255,255,255,.5)}
-}
-
-/* counter + dots sit above the meta bar */
-.hero-home .hero-counter{bottom:132px}
-.hero-home .hero-dots{bottom:104px}
-
-@media(max-width:1100px){
-  .hero-home .hero-content{bottom:196px}
-  .hero-meta{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 4vw;padding:20px 24px 22px}
-  .hero-meta-item:nth-child(3){display:none}
-  .hero-scroll{grid-column:2;justify-self:end}
-  .hero-home .hero-counter{bottom:154px}
-  .hero-home .hero-dots{bottom:126px}
-}
 @media(max-width:780px){
-  .hero-home .hero-content{bottom:150px}
   .hero-home .hero-text{display:none}
-  .hero-eyebrow{margin-bottom:18px;font-size:9px;letter-spacing:.16em}
+  .hero-eyebrow{margin-bottom:16px;font-size:9px;letter-spacing:.16em}
   .hero-eyebrow i{width:28px}
   .hero-home .hero-actions{margin-top:26px}
-  .hero-meta{grid-template-columns:1fr auto;gap:0 16px;padding:16px 20px 18px}
-  .hero-meta-item:nth-child(2),
-  .hero-meta-item:nth-child(3){display:none}
-  .hero-meta-item strong{font-size:13px}
-  .hero-meta-item span{font-size:9px}
-  .hero-scroll span{display:none}
-  .hero-scroll i{height:26px}
-  .hero-home .hero-dots{bottom:98px;right:20px}
 }
 
 @media(prefers-reduced-motion:reduce){
-  .hero-eyebrow,.hero-eyebrow i,.hero-line>span,
-  .hero-home .hero-text,.hero-home .hero-actions,.hero-meta{
+  .hero-eyebrow,.hero-line>span,
+  .hero-home .hero-text,.hero-home .hero-actions{
     opacity:1!important;transform:none!important;animation:none!important;
   }
-  .hero-scroll i::after{animation:none}
+}
+
+
+/* ===========================================================
+   PROJEKTY NA GŁÓWNEJ — poprawka hovera
+   Karta nie podskakuje (to rozjeżdżało dolną krawędź), a ciemny
+   gradient siedzi na pseudo-elemencie karty, więc nie znika przy
+   powiększeniu zdjęcia.
+   =========================================================== */
+.oversize-card{
+  isolation:isolate;
+  transform:none !important;
+  backface-visibility:hidden;
+}
+.oversize-card img{
+  transform:scale(1.02);
+  transform-origin:center center;
+  filter:none;
+  backface-visibility:hidden;
+}
+.oversize-card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+  background:linear-gradient(180deg,
+    rgba(7,26,37,0) 34%,
+    rgba(7,26,37,.34) 58%,
+    rgba(7,26,37,.78) 82%,
+    rgba(7,26,37,.95) 100%);
+  transition:opacity .45s ease;
+}
+.oversize-card>div{
+  z-index:2;
+  background:none;
+  padding:110px 24px 30px;
+}
+@media (hover:hover){
+  .oversize-card:hover img{
+    transform:scale(1.07) !important;
+    filter:none;
+  }
+  .oversize-card:hover::after{opacity:.92}
+}
+
+
+/* ===========================================================
+   SOCIAL v2 — podgląd feedu zamiast pustych makiet urządzeń
+   =========================================================== */
+.social-side-inner{
+  align-items:center !important;
+  justify-content:center;
+}
+.social-title-wrap{width:100%;max-width:560px}
+
+.social-showcase{
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;
+  gap:16px;
+  width:100%;
+  max-width:560px;
+  margin-top:42px;
+}
+
+/* --- telefon z feedem --- */
+.ig-phone{
+  align-self:center;
+  width:100%;
+  max-width:322px;
+  margin:0 0 12px;
+  padding:9px;
+  border-radius:36px;
+  background:var(--navy);
+  box-shadow:0 30px 70px rgba(16,46,63,.22);
+}
+.ig-phone-screen{
+  overflow:hidden;
+  border-radius:28px;
+  background:#fff;
+}
+.ig-phone-top{
+  display:grid;
+  grid-template-columns:40px minmax(0,1fr) auto;
+  align-items:center;
+  gap:12px;
+  padding:16px 15px 14px;
+  border-bottom:1px solid #e8e5df;
+}
+.ig-avatar{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:40px;
+  height:40px;
+  border:1px solid #dfdbd3;
+  border-radius:50%;
+  overflow:hidden;
+  background:#fff;
+}
+.ig-avatar img{width:74%;height:auto;object-fit:contain}
+.ig-phone-top strong{
+  display:block;
+  color:var(--navy);
+  font-size:12.5px;
+  font-weight:600;
+  letter-spacing:.02em;
+}
+.ig-phone-top small{
+  display:block;
+  margin-top:3px;
+  color:#7e8f99;
+  font-size:9px;
+  letter-spacing:.11em;
+  text-transform:uppercase;
+}
+.ig-phone-top>svg{width:18px;height:18px;color:var(--navy)}
+.ig-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:2px;
+  background:#e8e5df;
+}
+.ig-grid img{
+  display:block;
+  width:100%;
+  aspect-ratio:1/1;
+  object-fit:cover;
+}
+.ig-phone-foot{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:14px 15px 16px;
+  background:#fff;
+  border-top:1px solid #e8e5df;
+  color:#7e8f99;
+  font-size:9px;
+  font-weight:600;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+}
+.ig-phone-foot b{color:var(--navy);font-weight:600}
+
+/* --- linki pod telefonem --- */
+.social-links{display:flex;flex-direction:column;gap:12px;width:100%}
+.social-link{
+  display:grid;
+  grid-template-columns:48px minmax(0,1fr) auto;
+  align-items:center;
+  gap:18px;
+  padding:20px 24px;
+  background:#fff;
+  border:1px solid #e2ded7;
+  color:var(--navy);
+}
+.social-link-icon{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  background:var(--navy);
+  color:#fff;
+}
+.social-link-icon svg{width:21px;height:21px}
+.social-link strong{display:block;font-size:16px;font-weight:500;letter-spacing:-.01em}
+.social-link small{
+  display:block;
+  margin-top:5px;
+  color:#7e8f99;
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+.social-link>b{font-size:16px;font-weight:400;color:#9aa9b2}
+.social-note{
+  margin:6px 0 0;
+  color:#7e8f99;
+  font-size:12.5px;
+  line-height:1.65;
+}
+@media (hover:hover){
+  .social-link:hover{
+    border-color:var(--navy);
+    transform:translateY(-2px);
+    box-shadow:0 18px 38px rgba(16,46,63,.12);
+  }
+  .social-link:hover>b{color:var(--navy)}
+}
+
+@media(max-width:780px){
+  .social-showcase{margin-top:34px}
+  .ig-phone{max-width:290px}
+  .social-link{grid-template-columns:42px minmax(0,1fr) auto;gap:14px;padding:17px 18px}
+  .social-link-icon{width:42px;height:42px}
+  .social-link-icon svg{width:18px;height:18px}
+  .social-link strong{font-size:15px}
 }
