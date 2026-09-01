@@ -989,3 +989,17 @@ body[data-page="home"] .hero-overlay{
   .dv-monitor{width:min(78%,320px)}
   .dv-phone{width:110px}
 }
+
+
+/* ===========================================================
+   HERO — maska wjazdu ucinała polskie ogonki (ę, ą, ł)
+   Maska musi być wyższa niż linia tekstu; ujemny margines
+   przywraca oryginalny rytm wersów.
+   =========================================================== */
+.hero-content h1{line-height:.94}
+.hero-line{
+  overflow:hidden;
+  padding-bottom:.2em;
+  margin-bottom:-.16em;
+}
+.hero-line:last-child{margin-bottom:-.2em}
