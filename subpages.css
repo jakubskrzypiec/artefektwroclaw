@@ -1101,3 +1101,92 @@
   .sub-contact .contact-signoff h2{font-size:clamp(46px,12vw,66px)}
   .sub-contact .contact-signoff-inner>a{width:100%;min-width:0}
 }
+
+
+/* FINAL FIXES — consistent subpage headings */
+.sub-page{
+  --sub-page-title-size:clamp(68px,7.2vw,116px);
+  --sub-main-heading-size:clamp(58px,6.2vw,98px);
+}
+.sub-page .sub-title-row h1{
+  font-size:var(--sub-page-title-size) !important;
+  line-height:.92;
+}
+.sub-offer .offer-wide-intro .offer-wide-head h2,
+.sub-projects .sub-gallery-head h2,
+.sub-contact .contact-editorial-head h2{
+  font-size:var(--sub-main-heading-size) !important;
+  line-height:.94;
+}
+
+/* OFFER — "Sześć" intentionally stronger than the lines below */
+.sub-offer .offer-wide-intro .offer-wide-head h2{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  max-width:13ch;
+  margin-left:auto;
+  margin-right:auto;
+}
+.sub-offer .offer-wide-intro .offer-wide-head .offer-six{
+  display:block;
+  font-size:1.28em;
+  line-height:.78;
+  letter-spacing:-.06em;
+}
+.sub-offer .offer-wide-intro .offer-wide-head .offer-six-rest{
+  display:block;
+  margin-top:.18em;
+  font-size:.86em;
+  line-height:.95;
+  letter-spacing:-.055em;
+}
+
+/* PROJECTS — full ART / EFEKT visible, vertically centred at the image edges */
+.sub-projects .gallery-card>span::before,
+.sub-projects .gallery-card>span::after{
+  top:50% !important;
+  bottom:auto !important;
+  color:#fff;
+  font-size:clamp(28px,2.35vw,46px) !important;
+  font-weight:500 !important;
+  letter-spacing:.18em !important;
+  line-height:1;
+  writing-mode:vertical-rl;
+  white-space:nowrap;
+  text-shadow:0 2px 18px rgba(0,0,0,.25);
+  opacity:0;
+  z-index:4;
+}
+.sub-projects .gallery-card>span::before{
+  content:"ART" !important;
+  left:12px !important;
+  right:auto !important;
+  transform:translateY(-50%) rotate(180deg) !important;
+}
+.sub-projects .gallery-card>span::after{
+  content:"EFEKT" !important;
+  right:12px !important;
+  left:auto !important;
+  transform:translateY(-50%) !important;
+}
+@media (hover:hover){
+  .sub-projects .gallery-card:hover img{
+    transform:scale(1.018);
+    filter:brightness(.74) saturate(.92);
+  }
+  .sub-projects .gallery-card:hover::after{opacity:.78}
+  .sub-projects .gallery-card:hover>span::before,
+  .sub-projects .gallery-card:hover>span::after{
+    opacity:.82 !important;
+  }
+}
+
+@media(max-width:780px){
+  .sub-page{
+    --sub-page-title-size:clamp(58px,17vw,82px);
+    --sub-main-heading-size:clamp(46px,13vw,66px);
+  }
+  .sub-offer .offer-wide-intro .offer-wide-head .offer-six{font-size:1.18em}
+  .sub-offer .offer-wide-intro .offer-wide-head .offer-six-rest{font-size:.9em}
+}

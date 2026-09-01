@@ -412,3 +412,71 @@ body[data-page="home"] .social-faq-v2 + .site-footer{margin-top:0}
   .home-accordion .accordion-panel{padding:0 0 18px 40px}
   .faq-bottom-alt{flex-direction:column;align-items:flex-start}
 }
+
+
+/* FINAL FIX — compact transparent header that turns light after scroll */
+.site-header,
+.site-header.on-hero,
+.site-header.subpage-header{
+  position:fixed !important;
+  inset:0 0 auto !important;
+  z-index:100;
+  height:72px;
+  background:transparent;
+  border-bottom:1px solid transparent;
+  color:#fff;
+  transition:background .32s ease,border-color .32s ease,color .32s ease,box-shadow .32s ease,backdrop-filter .32s ease;
+}
+.site-header .header-inner{
+  width:calc(100% - 56px);
+  gap:34px;
+}
+.site-header .brand{
+  width:150px;
+  height:58px;
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  overflow:visible;
+}
+.site-header .brand img{
+  width:150px;
+  height:58px;
+  object-fit:contain;
+  transform:scale(1.78);
+  transform-origin:left center;
+  filter:drop-shadow(0 1px 7px rgba(0,0,0,.12));
+  transition:filter .32s ease,opacity .32s ease;
+}
+.site-header.is-scrolled{
+  background:rgba(246,245,241,.96) !important;
+  border-bottom-color:rgba(16,46,63,.14) !important;
+  color:var(--navy) !important;
+  box-shadow:0 8px 28px rgba(16,46,63,.06);
+  backdrop-filter:blur(14px);
+}
+.site-header.is-scrolled .brand img{
+  filter:none;
+}
+
+/* HOME PROCESS — use the existing Artefekt notebook image, cleaner crop */
+.process-editorial .process-notebook{
+  min-height:620px;
+  background:#e7e0d8;
+}
+.process-editorial .process-notebook img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+}
+
+@media(max-width:780px){
+  .site-header,
+  .site-header.on-hero,
+  .site-header.subpage-header{height:66px}
+  .site-header .header-inner{width:calc(100% - 24px)}
+  .site-header .brand{width:122px;height:52px}
+  .site-header .brand img{width:122px;height:52px;transform:scale(1.72)}
+  .process-editorial .process-notebook{min-height:430px}
+}
