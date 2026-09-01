@@ -509,3 +509,83 @@ body select{
   }
 }
 .reveal{transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1) !important;}
+
+
+/* MOTION SYSTEM v3 — consistent scroll + hover interactions across the whole site */
+.motion-section{
+  opacity:0;
+  transform:translateY(34px);
+  transition:opacity .85s cubic-bezier(.2,.7,.2,1),transform .85s cubic-bezier(.2,.7,.2,1);
+  will-change:opacity,transform;
+}
+.motion-section.is-motion-visible{
+  opacity:1;
+  transform:none;
+}
+.motion-item{
+  opacity:0;
+  transform:translateY(22px);
+  transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1);
+  transition-delay:var(--motion-delay,0ms);
+  will-change:opacity,transform;
+}
+.motion-item.is-motion-visible{
+  opacity:1;
+  transform:none;
+}
+.motion-hover{
+  transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s ease,background-color .3s ease,color .3s ease,border-color .3s ease,opacity .3s ease,filter .3s ease !important;
+}
+.motion-media{
+  overflow:hidden;
+}
+.motion-media img{
+  transition:transform .7s cubic-bezier(.2,.7,.2,1),filter .45s ease !important;
+}
+@media (hover:hover){
+  .motion-hover:hover{
+    transform:translateY(-3px);
+  }
+  .motion-media:hover img{
+    transform:scale(1.025);
+  }
+  .site-nav a:hover,
+  .footer-grid a:hover,
+  .footer-bottom a:hover{
+    opacity:.62;
+  }
+  .service-row:hover,
+  .services-index>a:hover,
+  .contact-channel:hover,
+  .offer-wide-item:hover,
+  .accordion-item:hover{
+    background-color:rgba(13,41,56,.025);
+  }
+}
+
+/* Smooth accordion opening everywhere */
+.accordion-panel{
+  display:block !important;
+  max-height:0;
+  overflow:hidden;
+  opacity:0;
+  transform:translateY(-8px);
+  transition:max-height .52s cubic-bezier(.2,.7,.2,1),opacity .36s ease,transform .42s cubic-bezier(.2,.7,.2,1),padding-top .42s ease,padding-bottom .42s ease !important;
+  pointer-events:none;
+}
+.accordion-item.is-open .accordion-panel{
+  opacity:1;
+  transform:none;
+  pointer-events:auto;
+}
+.accordion-item button b{
+  transition:transform .36s cubic-bezier(.2,.7,.2,1),background-color .3s ease,border-color .3s ease !important;
+}
+.accordion-item.is-open button b{
+  transform:rotate(45deg);
+}
+
+@media(prefers-reduced-motion:reduce){
+  .motion-section,.motion-item{opacity:1!important;transform:none!important;transition:none!important}
+  .accordion-panel{transition:none!important}
+}

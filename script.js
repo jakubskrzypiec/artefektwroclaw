@@ -34,21 +34,47 @@
     nav.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
   }
 
-  const revealItems = document.querySelectorAll('.section-kicker, .intro-main, .service-row, .services-lead, .services-index a, .featured-card, .oversize-card, .process-editorial figure, .home-process-grid li, .home-contact-grid > *, .social-faq-grid > *, .process-list li, .offer-detail-list article, .deliverables-grid > div, .offer-wide-intro > *, .offer-wide-item, .offer-wide-item > *, .offer-process-content > *, .offer-process-media, .contact-layout > *, .accordion-item, .sub-title-hero-inner > *, .sub-gallery-head > *, [data-project-filters] button, .gallery-card, .contact-editorial-head > *, .contact-channel, .contact-brief-aside-inner > *, .contact-brief-form-wrap > *, .contact-social-row a, .contact-studio-meta > *, .contact-signoff-inner > *');
-  if ('IntersectionObserver' in window) {
-    const revealObserver = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          revealObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.08 });
-    revealItems.forEach(item => {
-      item.classList.add('reveal');
-      revealObserver.observe(item);
+  /* Unified motion system: every section + important inner blocks */
+  const motionObserver = 'IntersectionObserver' in window ? new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add(entry.target.classList.contains('motion-section') ? 'is-motion-visible' : 'is-motion-visible');
+      motionObserver.unobserve(entry.target);
     });
-  }
+  }, { threshold: 0.08, rootMargin: '0px 0px -6% 0px' }) : null;
+
+  const registerMotion = (root = document) => {
+    const sections = [...root.querySelectorAll?.('main > section, .site-footer') || []];
+    sections.forEach(section => {
+      if (!section.classList.contains('motion-section')) {
+        section.classList.add('motion-section');
+        if (motionObserver) motionObserver.observe(section); else section.classList.add('is-motion-visible');
+      }
+    });
+
+    const itemSelector = [
+      '.section-kicker','.sub-kicker','.intro-main','.service-row','.services-lead','.services-index a',
+      '.featured-card','.oversize-card','.process-editorial figure','.home-process-grid li','.home-contact-grid > *',
+      '.social-faq-grid > *','.process-list li','.offer-detail-list article','.deliverables-grid > div',
+      '.offer-wide-head > *','.offer-wide-item','.offer-wide-item > *','.offer-process-content > *','.offer-process-media',
+      '.contact-layout > *','.accordion-item','.sub-title-hero-inner > *','.sub-gallery-head > *','[data-project-filters] button',
+      '.gallery-card','.contact-editorial-head > *','.contact-channel','.contact-brief-aside-inner > *',
+      '.contact-brief-form-wrap > *','.contact-social-row a','.contact-studio-meta > *','.contact-signoff-inner > *',
+      '.footer-grid > *','.footer-bottom > *'
+    ].join(',');
+    const items = [...root.querySelectorAll?.(itemSelector) || []];
+    items.forEach((item,index) => {
+      if (item.classList.contains('motion-item')) return;
+      item.classList.add('motion-item');
+      item.style.setProperty('--motion-delay', `${Math.min(index % 5,4) * 55}ms`);
+      if (motionObserver) motionObserver.observe(item); else item.classList.add('is-motion-visible');
+    });
+
+    const hoverSelector = 'a,button,.service-row,.featured-card,.oversize-card,.gallery-card,.contact-channel,.offer-wide-item,.accordion-item';
+    root.querySelectorAll?.(hoverSelector).forEach(el => el.classList.add('motion-hover'));
+    root.querySelectorAll?.('figure,.featured-card,.oversize-card,.gallery-card,.offer-process-media').forEach(el => el.classList.add('motion-media'));
+  };
+  registerMotion(document);
 
   const slides = [...document.querySelectorAll('.hero-slide')];
   const dots = [...document.querySelectorAll('[data-slider-dots] button')];
@@ -126,6 +152,7 @@
       card.addEventListener('click', () => openLightbox(index));
       galleryHost.appendChild(card);
     });
+    registerMotion(galleryHost);
   };
 
   if (galleryHost) {
@@ -159,8 +186,20 @@
     document.querySelector('[data-quote-next]')?.addEventListener('click', () => showQuote(quoteIndex + 1));
   }
 
+  const syncAccordionPanel = (item, open) => {
+    const panel = item.querySelector('.accordion-panel');
+    if (!panel) return;
+    if (open) {
+      panel.style.maxHeight = `${panel.scrollHeight + 12}px`;
+    } else {
+      panel.style.maxHeight = '0px';
+    }
+  };
+
   document.querySelectorAll('.accordion-item').forEach(item => {
     const button = item.querySelector('button');
+    const panel = item.querySelector('.accordion-panel');
+    if (panel) panel.style.maxHeight = item.classList.contains('is-open') ? `${panel.scrollHeight + 12}px` : '0px';
     button?.addEventListener('click', () => {
       const willOpen = !item.classList.contains('is-open');
       item.parentElement.querySelectorAll('.accordion-item').forEach(entry => {
@@ -168,15 +207,21 @@
         entry.querySelector('button')?.setAttribute('aria-expanded', 'false');
         const icon = entry.querySelector('b');
         if (icon) icon.textContent = '+';
+        syncAccordionPanel(entry, false);
       });
       if (willOpen) {
         item.classList.add('is-open');
         button.setAttribute('aria-expanded', 'true');
         const icon = item.querySelector('b');
         if (icon) icon.textContent = '−';
+        requestAnimationFrame(() => syncAccordionPanel(item, true));
       }
     });
   });
+
+  window.addEventListener('resize', () => {
+    document.querySelectorAll('.accordion-item.is-open').forEach(item => syncAccordionPanel(item, true));
+  }, { passive:true });
 
   const form = document.getElementById('contact-form');
   form?.addEventListener('submit', event => {
