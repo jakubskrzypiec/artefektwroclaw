@@ -322,7 +322,7 @@
   object-position:center;
 }
 .sub-projects .sub-statement blockquote{
-  max-width:11ch;
+  max-width:none;
   margin:42px 0 30px;
   font-size:clamp(44px,4.5vw,72px);
   line-height:1.02;
@@ -1662,60 +1662,94 @@
 
 
 /* ===========================================================
-   PROJEKTY — dolna sekcja przebudowana na wzór dołu oferty
-   Cytat miał max-width:11ch przy ~78 px kroju, przez co łamał się
-   po jednym słowie na wers. Teraz podział 50/50, tekst do lewej,
-   rozmiar dobrany do długiego zdania.
+   PROJEKTY — dół 1:1 na wzorcu dołu oferty (.offer-process-story)
+   Ten sam podział kolumn, ten sam padding, ta sama skala
+   nagłówka i ten sam biały przycisk.
    =========================================================== */
 .sub-projects .sub-statement{
-  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-  min-height:0;
-  align-items:stretch;
+  display:grid;
+  grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);
+  min-height:720px;
+  padding:0;
+  background:var(--sub-navy);
+  color:#fff;
 }
 .sub-projects .sub-statement-copy{
   order:1;
+  width:100%;
+  margin:0;
+  padding:118px 64px 124px 88px;
   display:flex;
   flex-direction:column;
-  justify-content:center;
   align-items:flex-start;
-  padding:clamp(64px,6.4vw,104px) clamp(38px,4vw,72px) clamp(64px,6.4vw,104px) max(38px,calc((100vw - 1320px)/2));
+  justify-content:center;
   text-align:left;
 }
 .sub-projects .sub-statement blockquote{
-  max-width:19ch;
-  margin:26px 0 24px;
-  font-size:clamp(27px,2.55vw,42px) !important;
-  line-height:1.16 !important;
-  letter-spacing:-.03em !important;
+  max-width:none;
+  margin:42px 0 52px;
+  color:#fff;
+  font-size:var(--sub-main-heading-size) !important;
+  line-height:.95 !important;
+  letter-spacing:-.05em !important;
   quotes:none;
 }
-.sub-projects .sub-statement-copy>p{
-  max-width:46ch;
-  margin:0;
-  color:rgba(255,255,255,.7);
+.sub-projects .sub-statement-copy-text{
+  max-width:650px;
+  text-align:left;
+}
+.sub-projects .sub-statement-copy-text p{
+  margin:0 0 22px;
+  max-width:none;
+  color:rgba(255,255,255,.68);
   font-size:15px;
-  line-height:1.78;
+  line-height:1.8;
+}
+.sub-projects .sub-statement-copy-text p:last-child{margin-bottom:0}
+.sub-projects .sub-statement-copy>a{
+  display:inline-flex;
+  align-items:center;
+  gap:34px;
+  margin-top:46px;
+  padding:17px 20px;
+  background:#fff;
+  color:var(--sub-ink);
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:.13em;
+  text-transform:uppercase;
 }
 .sub-projects .sub-statement figure{
   order:2;
-  min-height:0;
-  align-self:stretch;
+  margin:0;
+  min-height:720px;
+  overflow:hidden;
+  background:#d8d1c8;
 }
 .sub-projects .sub-statement figure img{
   display:block;
   width:100%;
   height:100%;
-  min-height:clamp(380px,42vw,560px);
+  min-height:720px;
   object-fit:cover;
+  object-position:center;
+}
+@media (hover:hover){
+  .sub-projects .sub-statement-copy>a:hover{
+    transform:translateY(-2px);
+    box-shadow:0 16px 34px rgba(7,26,37,.22);
+  }
 }
 
 @media(max-width:860px){
-  .sub-projects .sub-statement{grid-template-columns:1fr}
-  .sub-projects .sub-statement-copy{
-    order:1;
-    padding:56px 22px 60px;
+  .sub-projects .sub-statement{grid-template-columns:1fr;min-height:0}
+  .sub-projects .sub-statement-copy{padding:88px 22px 94px}
+  .sub-projects .sub-statement blockquote{
+    max-width:100%;
+    margin:30px 0 34px;
+    line-height:1.0 !important;
   }
-  .sub-projects .sub-statement figure{order:2}
-  .sub-projects .sub-statement figure img{min-height:320px}
-  .sub-projects .sub-statement blockquote{max-width:100%;font-size:clamp(26px,7.4vw,34px) !important}
+  .sub-projects .sub-statement figure,
+  .sub-projects .sub-statement figure img{min-height:430px}
+  .sub-projects .sub-statement-copy>a{width:100%;justify-content:space-between;margin-top:36px}
 }
