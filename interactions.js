@@ -95,8 +95,8 @@
       el.style.alignItems = 'center';
       el.style.justifyContent = 'center';
       el.style.setProperty('opacity', '1', 'important');
-      el.style.setProperty('background', 'var(--navy)', 'important');
-      styleSocialSvg(el, 18);
+      el.style.setProperty('background', 'rgba(255,255,255,.04)', 'important');
+      styleSocialSvg(el, 16);
     });
   }
 
