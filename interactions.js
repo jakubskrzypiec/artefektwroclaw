@@ -1,7 +1,6 @@
 /* ===========================================================
-   ARTEFEKT — warstwa interakcji
-   Każdy efekt jest opcjonalny: jeśli brakuje elementu albo API,
-   po prostu się nie włącza i strona działa jak wcześniej.
+   ARTEFEKT — lekka warstwa interakcji
+   Uzupełnia script.js bez dublowania animacji i popupów.
    =========================================================== */
 (function () {
   'use strict';
@@ -10,7 +9,7 @@
   var root = document.documentElement;
   var body = document.body;
 
-  /* ---------- 1. pasek postępu czytania ---------- */
+  /* ---------- pasek postępu czytania ---------- */
   var progress = null;
   if (!reduce) {
     progress = document.createElement('div');
@@ -19,11 +18,10 @@
     body.appendChild(progress);
   }
 
-  /* ---------- 2. parallax tła hero ---------- */
+  /* ---------- bardzo lekki parallax hero ---------- */
   var hero = document.querySelector('.hero-home');
   if (hero && !reduce) body.classList.add('fx-hero');
 
-  /* ---------- wspólna pętla scrolla ---------- */
   var scrollTicking = false;
   var pendingWipes = [];
 
@@ -49,8 +47,8 @@
 
     if (hero && !reduce) {
       var h = hero.offsetHeight || 1;
-      var shift = Math.min(y * 0.16, h * 0.065);
-      root.style.setProperty('--fx-hero', (y < h * 1.2 ? shift : h * 0.065).toFixed(1) + 'px');
+      var shift = Math.min(y * 0.075, h * 0.025);
+      root.style.setProperty('--fx-hero', (y < h * 1.15 ? shift : h * 0.025).toFixed(1) + 'px');
     }
   }
 
@@ -62,10 +60,9 @@
   }
 
   window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', onScroll);
   onScrollFrame();
 
-  /* ---------- social popup + ikony stopki ---------- */
+  /* ---------- social media — tylko normalizacja ikon ---------- */
   var socialFloat = document.querySelector('[data-social-float]');
 
   var footerIcons = {
@@ -94,6 +91,7 @@
     el.style.setProperty('opacity', '1', 'important');
     el.style.setProperty('color', '#fff', 'important');
     el.style.setProperty('transform', 'none', 'important');
+
     var svgEl = el.querySelector('svg');
     if (svgEl) {
       svgEl.style.setProperty('display', 'block', 'important');
@@ -117,6 +115,7 @@
     el.style.setProperty('opacity', '1', 'important');
     el.style.setProperty('filter', 'none', 'important');
     el.style.setProperty('color', '#fff', 'important');
+
     var svgEl = el.querySelector('svg');
     if (svgEl) {
       svgEl.style.setProperty('display', 'block', 'important');
@@ -137,12 +136,9 @@
     document.querySelectorAll('.social-float-icons [aria-label*="YouTube"]').forEach(normalizeFloatYoutube);
   }
 
-  rebuildSocialIcons();
-
   function positionSocialFloat() {
     if (!socialFloat) return;
     var isMobile = window.innerWidth <= 640;
-    socialFloat.style.setProperty('display', 'block', 'important');
     socialFloat.style.setProperty('right', isMobile ? '14px' : '22px', 'important');
     socialFloat.style.setProperty('bottom', isMobile ? '14px' : '22px', 'important');
     socialFloat.style.setProperty('z-index', '52', 'important');
@@ -150,30 +146,26 @@
     else socialFloat.style.removeProperty('left');
   }
 
+  rebuildSocialIcons();
   positionSocialFloat();
-  window.addEventListener('resize', function () {
-    positionSocialFloat();
-    rebuildSocialIcons();
-  });
 
-  if (socialFloat) {
-    try { sessionStorage.removeItem('artefekt-social-float-dismissed'); } catch (e) {}
-    window.setTimeout(function () {
-      socialFloat.classList.add('is-visible');
-      socialFloat.setAttribute('aria-hidden', 'false');
+  var resizeTicking = false;
+  window.addEventListener('resize', function () {
+    if (resizeTicking) return;
+    resizeTicking = true;
+    window.requestAnimationFrame(function () {
+      resizeTicking = false;
       positionSocialFloat();
-      rebuildSocialIcons();
-    }, 1800);
-  }
+    });
+  }, { passive: true });
 
   if (reduce) return;
 
-  /* ---------- 3. odsłanianie kadrów przy wejściu w kadr ---------- */
+  /* ---------- kadry nieobsługiwane przez główny motion system ---------- */
   if ('IntersectionObserver' in window) {
     var wipeSelector = [
       '.manifesto-image',
       '.process-notebook img',
-      '.offer-process-media',
       '.sub-statement figure img'
     ].join(',');
 
@@ -183,13 +175,16 @@
         entry.target.classList.add('fx-in');
         wipeObserver.unobserve(entry.target);
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -4% 0px' });
+    }, { threshold: 0.08, rootMargin: '0px 0px -5% 0px' });
 
     var registerWipes = function (scope) {
       (scope || document).querySelectorAll(wipeSelector).forEach(function (el) {
-        if (el.classList.contains('fx-wipe')) return;
+        if (el.classList.contains('fx-wipe') || el.classList.contains('motion-item')) return;
         var r = el.getBoundingClientRect();
-        if (r.top < window.innerHeight * 0.9 && r.bottom > 0) return;
+        if (r.top < window.innerHeight * 0.92 && r.bottom > 0) {
+          el.classList.add('fx-in');
+          return;
+        }
         el.classList.add('fx-wipe');
         pendingWipes.push(el);
         wipeObserver.observe(el);
@@ -200,15 +195,8 @@
 
     window.setTimeout(function () {
       document.querySelectorAll('.fx-wipe:not(.fx-in)').forEach(function (el) {
-        if (el.getBoundingClientRect().top < window.innerHeight * 1.5) el.classList.add('fx-in');
+        if (el.getBoundingClientRect().top < window.innerHeight * 1.35) el.classList.add('fx-in');
       });
-    }, 6000);
-
-    var gallery = document.querySelector('[data-project-gallery]');
-    if (gallery && 'MutationObserver' in window) {
-      new MutationObserver(function () { registerWipes(gallery); })
-        .observe(gallery, { childList: true });
-    }
+    }, 3500);
   }
-
 })();
