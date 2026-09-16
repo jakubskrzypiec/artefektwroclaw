@@ -1,16 +1,157 @@
 <!DOCTYPE html>
-
 <html lang="pl">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <meta content="Poznaj Alicję i Joannę oraz zespół Artefekt Interior Design — butikowego studia projektowania wnętrz we Wrocławiu działającego od 2006 roku." name="description"/>
 <link href="https://artefekt.pl/o-nas.html" rel="canonical"/>
-<meta content="website" property="og:type"/><meta content="O nas — Artefekt Interior Design" property="og:title"/><meta content="Alicja, Joanna i zespół Artefekt. Projektujemy razem od 2006 roku." property="og:description"/><meta content="https://artefekt.pl/og.jpg" property="og:image"/><meta content="https://artefekt.pl/o-nas.html" property="og:url"/>
+<meta content="website" property="og:type"/>
+<meta content="O nas — Artefekt Interior Design" property="og:title"/>
+<meta content="Alicja, Joanna i zespół Artefekt. Projektujemy razem od 2006 roku." property="og:description"/>
+<meta content="https://artefekt.pl/og.jpg" property="og:image"/>
+<meta content="https://artefekt.pl/o-nas.html" property="og:url"/>
 <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
-<link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
-<link href="style.css" rel="stylesheet"/><link href="subpages.css" rel="stylesheet"/><link href="interactions.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="style.css" rel="stylesheet"/>
+<link href="subpages.css" rel="stylesheet"/>
+<link href="interactions.css" rel="stylesheet"/>
 <title>O nas — Artefekt Interior Design</title>
+<style>
+  /* =========================================================
+     O NAS — editorial rework v2
+     Całość scope'owana do .about-v2, żeby nie ruszać innych stron.
+     ========================================================= */
+  .about-v2{background:#f4f2ee;color:#0c3341;overflow:hidden;}
+  .about-v2 *{box-sizing:border-box;}
+  .about-v2 .av2-wrap{width:min(1500px,calc(100% - 72px));margin:0 auto;}
+  .about-v2 .av2-kicker{display:flex;align-items:center;gap:14px;font-size:9px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#70858d;}
+  .about-v2 .av2-kicker:before{content:"";width:34px;height:1px;background:currentColor;opacity:.55;}
+
+  .av2-hero{padding:92px 0 68px;border-bottom:1px solid rgba(12,51,65,.16);}
+  .av2-hero-grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(260px,.55fr);gap:70px;align-items:end;}
+  .av2-hero h1{margin:36px 0 0;max-width:900px;font-size:clamp(58px,7.5vw,122px);line-height:.86;letter-spacing:-.065em;font-weight:300;color:#0b3040;}
+  .av2-hero h1 em{display:block;font-style:normal;color:#879ca4;}
+  .av2-hero-meta{padding:0 0 8px 30px;border-left:1px solid rgba(12,51,65,.2);}
+  .av2-hero-meta span{display:block;margin-bottom:14px;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:#7b8c91;}
+  .av2-hero-meta strong{display:block;font-size:15px;font-weight:500;line-height:1.5;color:#183f4d;}
+
+  .av2-duo{padding:42px 0 112px;}
+  .av2-photo-stage{position:relative;min-height:clamp(520px,66vw,920px);border-radius:28px;overflow:hidden;background:#d9d5cd;box-shadow:0 26px 80px rgba(11,48,64,.08);}
+  .av2-photo-placeholder{position:absolute;inset:0;display:grid;place-items:center;background:
+      linear-gradient(rgba(12,51,65,.07) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(12,51,65,.07) 1px,transparent 1px),
+      linear-gradient(135deg,#e7e3dc 0%,#d7d4cc 100%);background-size:54px 54px,54px 54px,100% 100%;}
+  .av2-photo-placeholder:before,.av2-photo-placeholder:after{content:"";position:absolute;background:rgba(12,51,65,.14);}
+  .av2-photo-placeholder:before{width:1px;height:76%;left:50%;top:12%;}
+  .av2-photo-placeholder:after{height:1px;width:78%;top:50%;left:11%;}
+  .av2-photo-placeholder div{position:relative;z-index:2;text-align:center;padding:22px 28px;border:1px solid rgba(12,51,65,.22);background:rgba(244,242,238,.78);backdrop-filter:blur(6px);}
+  .av2-photo-placeholder span{display:block;font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#0c3341;}
+  .av2-photo-placeholder small{display:block;margin-top:8px;font-size:10px;letter-spacing:.08em;color:#718086;}
+  .av2-photo-year{position:absolute;z-index:3;left:28px;bottom:-5px;font-size:clamp(100px,18vw,270px);line-height:.7;letter-spacing:-.075em;font-weight:300;color:rgba(255,255,255,.74);pointer-events:none;}
+  .av2-photo-name{position:absolute;z-index:4;top:28px;padding:10px 14px;border-radius:999px;background:#f4f2ee;color:#0c3341;font-size:9px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;}
+  .av2-photo-name.left{left:28px;}.av2-photo-name.right{right:28px;}
+  .av2-photo-note{position:absolute;z-index:4;right:30px;bottom:30px;max-width:240px;padding:14px 16px;background:#0b3342;color:#fff;font-size:10px;line-height:1.55;letter-spacing:.08em;text-transform:uppercase;}
+
+  .av2-origin{padding:20px 0 130px;}
+  .av2-origin-grid{display:grid;grid-template-columns:.52fr 1.48fr;gap:80px;align-items:start;}
+  .av2-origin-year{position:sticky;top:125px;font-size:clamp(90px,12vw,180px);line-height:.8;letter-spacing:-.07em;font-weight:300;color:#b7c3c6;}
+  .av2-origin-copy{display:grid;grid-template-columns:1.1fr .9fr;gap:58px;border-top:1px solid rgba(12,51,65,.16);padding-top:32px;}
+  .av2-origin-copy h2{grid-column:1/-1;margin:0;max-width:900px;font-size:clamp(42px,5.1vw,76px);line-height:.96;letter-spacing:-.055em;font-weight:300;color:#0b3342;}
+  .av2-origin-copy p{margin:0;font-size:13px;line-height:1.8;color:#5d6d71;}
+  .av2-origin-copy p.lead{font-size:17px;line-height:1.65;color:#173e4c;}
+
+  .av2-manifest{padding:120px 0 110px;background:#0b3342;color:#fff;}
+  .av2-manifest .av2-kicker{color:#9eb7c0;}
+  .av2-manifest blockquote{margin:55px 0 0;max-width:1350px;font-size:clamp(54px,7vw,110px);line-height:.93;letter-spacing:-.06em;font-weight:300;color:#fff;}
+  .av2-manifest blockquote span{color:#9eb7c0;}
+  .av2-manifest-foot{margin-top:68px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border-top:1px solid rgba(255,255,255,.18);}
+  .av2-principle{padding:26px 28px 0 0;border-right:1px solid rgba(255,255,255,.14);min-height:126px;}
+  .av2-principle+ .av2-principle{padding-left:28px;}
+  .av2-principle:last-child{border-right:0;}
+  .av2-principle small{display:block;margin-bottom:12px;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:#9eb7c0;}
+  .av2-principle strong{display:block;font-size:20px;line-height:1.25;font-weight:400;color:#fff;}
+  .av2-principle p{margin:10px 0 0;max-width:360px;color:rgba(255,255,255,.62);font-size:11px;line-height:1.65;}
+
+  .av2-phrase{padding:34px 0;border-top:1px solid rgba(12,51,65,.12);border-bottom:1px solid rgba(12,51,65,.12);background:#ebe8e2;overflow:hidden;}
+  .av2-phrase-track{white-space:nowrap;font-size:clamp(34px,4.4vw,68px);letter-spacing:-.04em;font-weight:300;color:#9aa8ac;transform:translateX(-2vw);}
+  .av2-phrase-track b{font-weight:400;color:#0b3342;}
+
+  .av2-team{padding:125px 0;}
+  .av2-team-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:90px;align-items:start;}
+  .av2-team-intro h2{margin:30px 0 24px;font-size:clamp(44px,5vw,72px);line-height:.96;letter-spacing:-.055em;font-weight:300;color:#0b3342;}
+  .av2-team-intro p{max-width:470px;margin:0;color:#607075;font-size:13px;line-height:1.8;}
+  .av2-team-cards{border-top:1px solid rgba(12,51,65,.18);}
+  .av2-team-card{display:grid;grid-template-columns:90px 1fr auto;gap:24px;align-items:center;min-height:150px;border-bottom:1px solid rgba(12,51,65,.16);}
+  .av2-team-card>span{font-size:10px;letter-spacing:.16em;color:#819298;}
+  .av2-team-card h3{margin:0 0 7px;font-size:clamp(24px,2.5vw,38px);letter-spacing:-.035em;font-weight:400;color:#0b3342;}
+  .av2-team-card p{margin:0;max-width:580px;font-size:12px;line-height:1.65;color:#657479;}
+  .av2-team-card b{font-size:28px;font-weight:300;color:#9ba9ad;}
+
+  .av2-showroom{padding:0 0 120px;}
+  .av2-showroom-shell{display:grid;grid-template-columns:1.2fr .8fr;min-height:700px;background:#dcd8d0;border-radius:28px;overflow:hidden;}
+  .av2-showroom-media{position:relative;min-height:620px;overflow:hidden;}
+  .av2-showroom-media img{width:100%;height:100%;object-fit:cover;}
+  .av2-showroom-tag{position:absolute;left:24px;bottom:24px;padding:12px 15px;background:#f4f2ee;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#0c3341;}
+  .av2-showroom-copy{padding:70px 64px;display:flex;flex-direction:column;justify-content:space-between;background:#d7d1c8;}
+  .av2-showroom-copy h2{margin:28px 0 28px;font-size:clamp(42px,4.8vw,70px);line-height:.95;letter-spacing:-.055em;font-weight:300;color:#0b3342;}
+  .av2-showroom-copy p{margin:0;max-width:480px;font-size:13px;line-height:1.82;color:#5a696e;}
+  .av2-showroom-address{margin-top:48px;padding-top:22px;border-top:1px solid rgba(12,51,65,.18);display:flex;justify-content:space-between;gap:20px;align-items:end;}
+  .av2-showroom-address strong{font-size:14px;font-weight:500;line-height:1.55;color:#0b3342;}
+  .av2-showroom-address a{font-size:9px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:5px;}
+
+  .av2-finale{padding:120px 0 125px;border-top:1px solid rgba(12,51,65,.15);}
+  .av2-finale-grid{display:grid;grid-template-columns:1.35fr .65fr;gap:80px;align-items:end;}
+  .av2-finale h2{margin:0;max-width:980px;font-size:clamp(52px,7vw,104px);line-height:.91;letter-spacing:-.06em;font-weight:300;color:#0b3342;}
+  .av2-finale h2 span{color:#9aa9ad;}
+  .av2-finale-side p{margin:0 0 28px;font-size:13px;line-height:1.75;color:#66767b;}
+  .av2-finale-side a{display:inline-flex;align-items:center;gap:18px;padding-bottom:7px;border-bottom:1px solid currentColor;font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:#0b3342;}
+
+  @media(max-width:980px){
+    .about-v2 .av2-wrap{width:min(100% - 40px,1500px);}
+    .av2-hero-grid,.av2-origin-grid,.av2-team-grid,.av2-showroom-shell,.av2-finale-grid{grid-template-columns:1fr;}
+    .av2-hero-meta{border-left:0;border-top:1px solid rgba(12,51,65,.18);padding:24px 0 0;}
+    .av2-photo-stage{min-height:72vw;border-radius:22px;}
+    .av2-origin-year{position:static;font-size:90px;}
+    .av2-origin-copy{grid-template-columns:1fr;gap:24px;}
+    .av2-origin-copy h2{grid-column:auto;}
+    .av2-manifest-foot{grid-template-columns:1fr;}
+    .av2-principle,.av2-principle+ .av2-principle{padding:24px 0;border-right:0;border-bottom:1px solid rgba(255,255,255,.14);min-height:0;}
+    .av2-principle:last-child{border-bottom:0;}
+    .av2-showroom-shell{min-height:0;}
+    .av2-showroom-copy{padding:54px 40px;}
+  }
+  @media(max-width:640px){
+    .about-v2 .av2-wrap{width:calc(100% - 28px);}
+    .av2-hero{padding:58px 0 42px;}
+    .av2-hero-grid{gap:36px;}
+    .av2-hero h1{font-size:52px;line-height:.9;}
+    .av2-duo{padding:20px 0 76px;}
+    .av2-photo-stage{min-height:116vw;border-radius:18px;}
+    .av2-photo-year{left:12px;bottom:4px;font-size:95px;}
+    .av2-photo-name{top:14px;padding:8px 10px;font-size:8px;}.av2-photo-name.left{left:14px}.av2-photo-name.right{right:14px}
+    .av2-photo-note{right:14px;bottom:14px;max-width:190px;font-size:8px;}
+    .av2-origin{padding-bottom:84px;}
+    .av2-origin-grid{gap:30px;}
+    .av2-origin-year{font-size:76px;}
+    .av2-origin-copy h2{font-size:40px;}
+    .av2-origin-copy p.lead{font-size:15px;}
+    .av2-manifest{padding:78px 0 68px;}
+    .av2-manifest blockquote{margin-top:36px;font-size:48px;}
+    .av2-team{padding:82px 0;}
+    .av2-team-grid{gap:46px;}
+    .av2-team-card{grid-template-columns:42px 1fr;gap:16px;padding:22px 0;}
+    .av2-team-card b{display:none;}
+    .av2-showroom{padding-bottom:82px;}
+    .av2-showroom-media{min-height:360px;}
+    .av2-showroom-copy{padding:38px 24px;}
+    .av2-showroom-address{align-items:flex-start;flex-direction:column;}
+    .av2-finale{padding:78px 0 86px;}
+    .av2-finale-grid{gap:38px;}
+    .av2-finale h2{font-size:48px;}
+  }
+</style>
 </head>
 <body class="sub-page sub-about" data-page="onas">
 <header class="site-header subpage-header"><div class="header-inner">
@@ -18,25 +159,122 @@
 <nav aria-label="Główna nawigacja" class="site-nav"><a href="index.html">Start</a><a href="oferta.html">Oferta</a><a href="projekty.html">Projekty</a><a class="is-active" href="o-nas.html">O nas</a><a href="artykuly.html">Blog</a><a href="kontakt.html">Kontakt</a></nav>
 <button aria-expanded="false" aria-label="Otwórz menu" class="menu-toggle" type="button"><span></span><span></span></button>
 </div></header>
-<main>
-<section class="sub-hero sub-title-hero" data-title="O NAS"><div class="sub-container sub-title-hero-inner"><div class="sub-kicker light"><span>01</span><p>Artefekt Interior Design</p></div><div class="sub-title-row"><h1>O nas.</h1><p>Butikowe studio wnętrz tworzone we Wrocławiu od 2006 roku.</p></div></div></section>
-<section class="about-intro"><div class="sub-container about-intro-grid"><div aria-label="Miejsce na zdjęcie Alicji i Joanny" class="about-photo-placeholder" role="img"><span>Zdjęcie Alicji i Joanny</span><small>do podmiany po otrzymaniu fotografii</small></div><div><div class="sub-kicker"><span>02</span><p>Jak to się zaczęło</p></div><h2>Od studiów do własnej pracowni.</h2><p>Jesteśmy Alicja i Joanna. Poznałyśmy się na Akademii Sztuk Pięknych we Wrocławiu — i już wtedy, jeszcze na studiach, marzyłyśmy o własnej pracowni. Nie czekałyśmy długo: zaraz po dyplomie założyłyśmy Artefekt. Pracownia działa od 2006 roku, a my nadal projektujemy razem — i nadal naprawdę to lubimy.</p></div></div></section>
-<section class="about-story"><div class="sub-container about-story-grid">
-<article><span>03</span><h2>Jak projektujemy</h2><p>Artefekt to butikowe studio wnętrz, w którym nie ma dwóch takich samych projektów. Każdy klient ma inne potrzeby, styl życia i gust, dlatego nie pracujemy według gotowego schematu. Zaczynamy od funkcji i ergonomii, a dopiero później ubieramy wnętrze w materiały, kolory i detale.</p></article>
-<article><span>04</span><h2>Kto tworzy Artefekt</h2><p>Za każdym projektem stoi nasz zespół. Inż. Martyna Sielużycka odpowiada przede wszystkim za dokumentację techniczną i nadzory, a wizualizacje przygotowuje współpracująca z nami pracownia graficzna. Każdy zajmuje się tym, w czym jest najlepszy i co po prostu lubi robić.</p></article>
-<article><span>05</span><h2>Nasz showroom</h2><p>Od kilku lat pracujemy w showroomie przy Zwycięskiej — miejscu, które stworzyłyśmy razem z naszymi wieloletnimi partnerami. Meble na wymiar powstają we współpracy z Tomaszem Otrzonkiem z Meble Otrzonsek — w showroomie można zobaczyć w pełni działającą ekspozycję kuchni i wiele rozwiązań meblowych. Oprawą okien i tekstyliami zajmujemy się razem z Moniką Otrzonsek z Firany Adamski. Na miejscu mamy też dużą bibliotekę próbek, dzięki której wiele decyzji możemy podejmować z klientami od razu.</p></article>
-<article><span>06</span><h2>Dlaczego to robimy</h2><p>Prywatnie jesteśmy przyjaciółkami, zawodowo — wspólniczkami od pierwszego dnia pracowni Artefekt. To miejsce nigdy nie było dla nas tylko pracą. Budujemy je od lat z doświadczeniem, zaangażowaniem i ogromną frajdą z projektowania.</p></article>
-</div></section>
-<section class="sub-section sub-project-note"><div class="sub-container sub-project-note-grid"><div><div class="sub-kicker"><span>07</span><p>Showroom</p></div><h2>Spotkajmy się przy Zwycięskiej.</h2></div><div><p>Zwycięska 3/lok. U8, 53-033 Wrocław. Na miejscu możemy od razu pracować na próbkach materiałów, kolorach i konkretnych rozwiązaniach.</p><a class="sub-text-link" href="kontakt.html">Przejdź do kontaktu ↗</a></div></div></section>
+
+<main class="about-v2">
+  <section class="av2-hero">
+    <div class="av2-wrap av2-hero-grid">
+      <div>
+        <div class="av2-kicker">Artefekt Interior Design</div>
+        <h1>Dwie osoby.<br>Jedna pracownia.<em>Od 2006.</em></h1>
+      </div>
+      <div class="av2-hero-meta">
+        <span>Studio / Wrocław</span>
+        <strong>Alicja i Joanna.<br>Projektantki, wspólniczki,<br>przyjaciółki.</strong>
+      </div>
+    </div>
+  </section>
+
+  <section class="av2-duo">
+    <div class="av2-wrap">
+      <div class="av2-photo-stage">
+        <div class="av2-photo-placeholder" role="img" aria-label="Miejsce na główne zdjęcie Alicji i Joanny">
+          <div><span>Główne zdjęcie Alicji i Joanny</span><small>tu podmienimy finalną fotografię</small></div>
+        </div>
+        <div class="av2-photo-name left">Alicja</div>
+        <div class="av2-photo-name right">Joanna</div>
+        <div class="av2-photo-year">2006</div>
+        <div class="av2-photo-note">To zdjęcie będzie głównym kadrem całej podstrony.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="av2-origin">
+    <div class="av2-wrap av2-origin-grid">
+      <div class="av2-origin-year">2006</div>
+      <div class="av2-origin-copy">
+        <h2>Zaczęło się jeszcze na studiach.</h2>
+        <p class="lead">Poznałyśmy się na Akademii Sztuk Pięknych we Wrocławiu. Już wtedy wiedziałyśmy, że chcemy stworzyć własną pracownię. Po dyplomie nie czekałyśmy długo — powstał Artefekt.</p>
+        <p>Od początku projektujemy razem. Przez lata zmieniły się narzędzia, materiały i skala realizacji, ale nie zmieniła się jedna rzecz: każdy projekt zaczynamy od człowieka, a nie od stylu z katalogu.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="av2-manifest">
+    <div class="av2-wrap">
+      <div class="av2-kicker">Jak myślimy o wnętrzach</div>
+      <blockquote>Najpierw <span>słuchamy.</span><br>Potem projektujemy.</blockquote>
+      <div class="av2-manifest-foot">
+        <article class="av2-principle"><small>01 / Funkcja</small><strong>Najpierw musi działać.</strong><p>Układ i ergonomia są punktem wyjścia. Dopiero potem budujemy charakter wnętrza.</p></article>
+        <article class="av2-principle"><small>02 / Materiał</small><strong>Decyzje, które da się dotknąć.</strong><p>Kolor, faktura, światło i proporcja mają pracować razem, nie osobno.</p></article>
+        <article class="av2-principle"><small>03 / Realizacja</small><strong>Projekt ma zejść z ekranu.</strong><p>Dokumentacja i nadzór pomagają przełożyć koncepcję na prawdziwą przestrzeń.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="av2-phrase" aria-hidden="true">
+    <div class="av2-phrase-track">FUNKCJA — <b>PROPORCJA</b> — ŚWIATŁO — <b>DETAL</b> — FUNKCJA — <b>PROPORCJA</b> — ŚWIATŁO — <b>DETAL</b></div>
+  </section>
+
+  <section class="av2-team">
+    <div class="av2-wrap av2-team-grid">
+      <div class="av2-team-intro">
+        <div class="av2-kicker">Nie tylko we dwie</div>
+        <h2>Za projektem stoi zespół.</h2>
+        <p>Każdy etap ma swoją osobę i swoje kompetencje. Dzięki temu koncepcja, dokumentacja i realizacja nie są przypadkowym zbiorem decyzji.</p>
+      </div>
+      <div class="av2-team-cards">
+        <article class="av2-team-card"><span>01</span><div><h3>Alicja + Joanna</h3><p>Koncepcja, funkcja, materiały i prowadzenie całego procesu projektowego.</p></div><b>↗</b></article>
+        <article class="av2-team-card"><span>02</span><div><h3>Martyna Sielużycka</h3><p>Dokumentacja techniczna i nadzory — tam, gdzie pomysł musi zostać przełożony na konkret.</p></div><b>↗</b></article>
+        <article class="av2-team-card"><span>03</span><div><h3>Pracownia graficzna</h3><p>Wizualizacje przygotowywane we współpracy z zespołem, który przekłada projekt na czytelny obraz.</p></div><b>↗</b></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="av2-showroom">
+    <div class="av2-wrap">
+      <div class="av2-showroom-shell">
+        <figure class="av2-showroom-media"><img src="offer-worktable-artefekt.webp" alt="Stół roboczy i materiały projektowe Artefekt" loading="lazy"><figcaption class="av2-showroom-tag">Showroom / Zwycięska 3</figcaption></figure>
+        <div class="av2-showroom-copy">
+          <div>
+            <div class="av2-kicker">Miejsce pracy</div>
+            <h2>Tu projekt zaczyna być realny.</h2>
+            <p>Showroom przy Zwycięskiej to nie tylko biuro. Na miejscu pracujemy z próbkami materiałów, kolorami, tekstyliami i rozwiązaniami meblowymi, dzięki czemu wiele decyzji można podjąć od razu przy stole.</p>
+          </div>
+          <div class="av2-showroom-address">
+            <strong>Zwycięska 3 / lok. U8<br>53-033 Wrocław</strong>
+            <a href="kontakt.html">Umów spotkanie ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="av2-finale">
+    <div class="av2-wrap av2-finale-grid">
+      <h2>Prywatnie przyjaciółki.<br><span>Zawodowo wspólniczki od pierwszego dnia.</span></h2>
+      <div class="av2-finale-side">
+        <p>Artefekt nigdy nie był dla nas wyłącznie pracą. To pracownia budowana przez lata z doświadczenia, relacji i zwykłej frajdy z projektowania.</p>
+        <a href="kontakt.html">Porozmawiajmy o Twoim wnętrzu <span>↗</span></a>
+      </div>
+    </div>
+  </section>
 </main>
-<footer class="site-footer"><div class="container footer-grid"><div class="footer-brand"><img alt="Artefekt Interior Design" src="logo-white.png"/><p>Projektowanie wnętrz<br/>Wrocław · online</p></div><nav><p class="footer-label">Nawigacja</p><a href="index.html">Start</a><a href="oferta.html">Oferta</a><a href="projekty.html">Projekty</a><a href="o-nas.html">O nas</a><a href="artykuly.html">Blog</a><a href="kontakt.html">Kontakt</a></nav><div><p class="footer-label">Kontakt</p><a href="mailto:studio@artefekt.pl">studio@artefekt.pl</a><a href="tel:+48693294393">Alicja · 693 294 393</a><a href="tel:+48691222770">Joanna · 691 222 770</a></div><div><p class="footer-label">Studio</p><p>Zwycięska 3/lok. U8<br/>53-033 Wrocław<br/>Pon–Pt · 09:00–16:00</p></div></div><div class="container footer-social-strip">
-<span>Obserwuj Artefekt</span>
-<div class="footer-social-icons">
-<a aria-label="Instagram" href="https://www.instagram.com/artefekt_studio/" rel="noopener" target="_blank"><img alt="" src="icon-instagram.png"/></a>
-<a aria-label="Facebook" href="https://www.facebook.com/artefektstudio/" rel="noopener" target="_blank"><img alt="" src="icon-facebook.png"/></a>
-<a aria-label="TikTok" href="https://www.tiktok.com/@artefekt_studio" rel="noopener" target="_blank"><img alt="" src="icon-tiktok.png"/></a>
-<span aria-label="YouTube — link wkrótce" title="YouTube — link wkrótce"><img alt="" src="icon-youtube.png"/></span>
-</div>
-</div><div class="container footer-bottom"><span>© 2026 Artefekt Interior Design</span><a href="kontakt.html">Zacznijmy projekt <span>↗</span></a></div></footer>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand"><img alt="Artefekt Interior Design" src="logo-white.png"/><p>Projektowanie wnętrz<br/>Wrocław · online</p></div>
+    <nav><p class="footer-label">Nawigacja</p><a href="index.html">Start</a><a href="oferta.html">Oferta</a><a href="projekty.html">Projekty</a><a href="o-nas.html">O nas</a><a href="artykuly.html">Blog</a><a href="kontakt.html">Kontakt</a></nav>
+    <div><p class="footer-label">Kontakt</p><a href="mailto:studio@artefekt.pl">studio@artefekt.pl</a><a href="tel:+48693294393">Alicja · 693 294 393</a><a href="tel:+48691222770">Joanna · 691 222 770</a></div>
+    <div><p class="footer-label">Studio</p><p>Zwycięska 3/lok. U8<br/>53-033 Wrocław<br/>Pon–Pt · 09:00–16:00</p></div>
+  </div>
+  <div class="container footer-social-strip"><span>Obserwuj Artefekt</span><div class="footer-social-icons">
+    <a aria-label="Instagram" href="https://www.instagram.com/artefekt_studio/" rel="noopener" target="_blank"><img alt="" src="icon-instagram.png"/></a>
+    <a aria-label="Facebook" href="https://www.facebook.com/artefektstudio/" rel="noopener" target="_blank"><img alt="" src="icon-facebook.png"/></a>
+    <a aria-label="TikTok" href="https://www.tiktok.com/@artefekt_studio" rel="noopener" target="_blank"><img alt="" src="icon-tiktok.png"/></a>
+    <span aria-label="YouTube — link wkrótce" title="YouTube — link wkrótce"><img alt="" src="icon-youtube.png"/></span>
+  </div></div>
+  <div class="container footer-bottom"><span>© 2026 Artefekt Interior Design</span><a href="kontakt.html">Zacznijmy projekt <span>↗</span></a></div>
+</footer>
 <script src="script.js"></script><script src="interactions.js"></script>
-</body></html>
+</body>
+</html>
