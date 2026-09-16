@@ -9,7 +9,6 @@
   var root = document.documentElement;
   var body = document.body;
 
-  /* ---------- pasek postępu czytania ---------- */
   var progress = null;
   if (!reduce) {
     progress = document.createElement('div');
@@ -18,7 +17,6 @@
     body.appendChild(progress);
   }
 
-  /* ---------- bardzo lekki parallax hero ---------- */
   var hero = document.querySelector('.hero-home');
   if (hero && !reduce) body.classList.add('fx-hero');
 
@@ -62,7 +60,6 @@
   window.addEventListener('scroll', onScroll, { passive: true });
   onScrollFrame();
 
-  /* ---------- social media — tylko normalizacja ikon ---------- */
   var socialFloat = document.querySelector('[data-social-float]');
 
   var footerIcons = {
@@ -139,6 +136,7 @@
   function positionSocialFloat() {
     if (!socialFloat) return;
     var isMobile = window.innerWidth <= 640;
+    socialFloat.style.setProperty('display', 'block', 'important');
     socialFloat.style.setProperty('right', isMobile ? '14px' : '22px', 'important');
     socialFloat.style.setProperty('bottom', isMobile ? '14px' : '22px', 'important');
     socialFloat.style.setProperty('z-index', '52', 'important');
@@ -161,7 +159,6 @@
 
   if (reduce) return;
 
-  /* ---------- kadry nieobsługiwane przez główny motion system ---------- */
   if ('IntersectionObserver' in window) {
     var wipeSelector = [
       '.manifesto-image',
