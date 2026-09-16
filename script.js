@@ -233,6 +233,25 @@
     document.querySelectorAll('.accordion-item.is-open').forEach(item => syncAccordionPanel(item, true));
   }, { passive:true });
 
+
+  const socialFloat = document.querySelector('[data-social-float]');
+  const socialFloatClose = document.querySelector('[data-social-float-close]');
+  if (socialFloat) {
+    const dismissed = sessionStorage.getItem('artefekt-social-float-dismissed') === '1';
+    if (!dismissed) {
+      const showSocialFloat = () => {
+        socialFloat.classList.add('is-visible');
+        socialFloat.setAttribute('aria-hidden', 'false');
+      };
+      window.setTimeout(showSocialFloat, 1800);
+    }
+    socialFloatClose?.addEventListener('click', () => {
+      socialFloat.classList.remove('is-visible');
+      socialFloat.setAttribute('aria-hidden', 'true');
+      sessionStorage.setItem('artefekt-social-float-dismissed', '1');
+    });
+  }
+
   const form = document.getElementById('contact-form');
   form?.addEventListener('submit', event => {
     event.preventDefault();
