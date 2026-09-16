@@ -19,18 +19,7 @@
     body.appendChild(progress);
   }
 
-  /* ---------- 2. powrót na górę ---------- */
-  var toTop = document.createElement('button');
-  toTop.type = 'button';
-  toTop.className = 'fx-top';
-  toTop.setAttribute('aria-label', 'Wróć na górę strony');
-  toTop.innerHTML = '<span aria-hidden="true">↑</span>';
-  toTop.addEventListener('click', function () {
-    window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
-  });
-  body.appendChild(toTop);
-
-  /* ---------- 3. parallax tła hero ---------- */
+  /* ---------- 2. parallax tła hero ---------- */
   var hero = document.querySelector('.hero-home');
   if (hero && !reduce) body.classList.add('fx-hero');
 
@@ -60,8 +49,6 @@
       progress.style.setProperty('--fx-progress', max > 0 ? Math.min(1, y / max).toFixed(4) : '0');
     }
 
-    toTop.classList.toggle('is-visible', y > 700);
-
     if (hero && !reduce) {
       var h = hero.offsetHeight || 1;
       // tło przesuwa się wolniej niż strona, z zapasem 7% wysokości
@@ -81,47 +68,52 @@
   window.addEventListener('resize', onScroll);
   onScrollFrame();
 
-  /* ---------- social popup + korekty ikon ---------- */
+  /* ---------- social popup + spójne ikony ---------- */
   var socialFloat = document.querySelector('[data-social-float]');
+  var facebookSvg = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M13.5 22v-8h2.7l.4-3h-3.1V9.2c0-.9.3-1.5 1.6-1.5h1.7V5.1c-.3 0-1.3-.1-2.5-.1-2.4 0-4 1.4-4 4.2V11H7.5v3h2.8v8h3.2Z"/></svg>';
   var youtubeSvg = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21.6 7.2c-.2-1-.9-1.8-1.8-2-1.6-.4-7.8-.4-7.8-.4s-6.2 0-7.8.4c-1 .2-1.6 1-1.8 2C2 8.9 2 12 2 12s0 3.1.4 4.8c.2 1 .9 1.8 1.8 2 1.6.4 7.8.4 7.8.4s6.2 0 7.8-.4c1-.2 1.6-1 1.8-2 .4-1.7.4-4.8.4-4.8s0-3.1-.4-4.8ZM10 15.5v-7l6 3.5-6 3.5Z"/></svg>';
 
-  function fixYoutubeIcons() {
+  function styleSocialSvg(el, size) {
+    el.style.color = '#fff';
+    var svg = el.querySelector('svg');
+    if (!svg) return;
+    svg.style.width = size + 'px';
+    svg.style.height = size + 'px';
+    svg.style.display = 'block';
+    svg.style.fill = 'currentColor';
+  }
+
+  function fixSocialIcons() {
+    document.querySelectorAll('.footer-social-icons a[aria-label*="Facebook"], .social-float-icons a[aria-label*="Facebook"]').forEach(function (el) {
+      el.innerHTML = facebookSvg;
+      styleSocialSvg(el, 16);
+    });
+
     document.querySelectorAll('.footer-social-icons span[aria-label*="YouTube"], .social-float-icons span[aria-label*="YouTube"]').forEach(function (el) {
       el.innerHTML = youtubeSvg;
       el.style.display = 'inline-flex';
       el.style.alignItems = 'center';
       el.style.justifyContent = 'center';
-      el.style.color = '#fff';
-      var svg = el.querySelector('svg');
-      if (svg) {
-        svg.style.width = '18px';
-        svg.style.height = '18px';
-        svg.style.display = 'block';
-        svg.style.fill = 'currentColor';
-      }
+      styleSocialSvg(el, 18);
     });
   }
 
-  function positionFloatingUi() {
-    var isMobile = window.innerWidth <= 640;
-    toTop.style.setProperty('right', isMobile ? '14px' : '22px', 'important');
-    toTop.style.setProperty('bottom', isMobile ? '14px' : '22px', 'important');
-    toTop.style.setProperty('z-index', '60', 'important');
-
+  function positionSocialFloat() {
     if (!socialFloat) return;
+    var isMobile = window.innerWidth <= 640;
     socialFloat.style.setProperty('display', 'block', 'important');
     socialFloat.style.setProperty('right', isMobile ? '14px' : '22px', 'important');
-    socialFloat.style.setProperty('bottom', isMobile ? '90px' : '98px', 'important');
+    socialFloat.style.setProperty('bottom', isMobile ? '14px' : '22px', 'important');
     socialFloat.style.setProperty('z-index', '52', 'important');
     if (isMobile) socialFloat.style.setProperty('left', '14px', 'important');
     else socialFloat.style.removeProperty('left');
   }
 
-  fixYoutubeIcons();
-  positionFloatingUi();
+  fixSocialIcons();
+  positionSocialFloat();
   window.addEventListener('resize', function () {
-    positionFloatingUi();
-    fixYoutubeIcons();
+    positionSocialFloat();
+    fixSocialIcons();
   });
 
   if (socialFloat) {
@@ -130,14 +122,14 @@
     window.setTimeout(function () {
       socialFloat.classList.add('is-visible');
       socialFloat.setAttribute('aria-hidden', 'false');
-      fixYoutubeIcons();
-      positionFloatingUi();
+      fixSocialIcons();
+      positionSocialFloat();
     }, 1800);
   }
 
   if (reduce) return;
 
-  /* ---------- 4. odsłanianie kadrów przy wejściu w kadr ---------- */
+  /* ---------- 3. odsłanianie kadrów przy wejściu w kadr ---------- */
   if ('IntersectionObserver' in window) {
     // tylko tam, gdzie kadr nie ma już własnego wejścia z .motion-item —
     // dwie animacje na jednym elemencie wyglądały nerwowo
