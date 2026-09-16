@@ -1,8 +1,14 @@
 /* ===========================================================
-   ARTEFEKT — warstwa interakcji
-   Wszystko dokłada się do istniejącego układu i wyłącza się
-   przy prefers-reduced-motion. Bez JS strona wygląda normalnie.
+   ARTEFEKT — wspólny system ruchu
+   Jedna krzywa, podobne czasy i małe dystanse na całej stronie.
    =========================================================== */
+:root{
+  --motion-ease:cubic-bezier(.22,.78,.28,1);
+  --motion-fast:.32s;
+  --motion-base:.68s;
+  --motion-media:.82s;
+  --motion-hero:1.05s;
+}
 
 /* ---------- pasek postępu czytania ---------- */
 .fx-progress{
@@ -10,8 +16,8 @@
   top:0;
   left:0;
   z-index:120;
-  height:2px;
   width:100%;
+  height:2px;
   transform:scaleX(var(--fx-progress,0));
   transform-origin:left center;
   background:linear-gradient(90deg,#1d4f6b,#3c7ea3);
@@ -19,27 +25,85 @@
   will-change:transform;
 }
 
-/* ---------- wjazd kadrów: zasłona odsłaniająca zdjęcie ---------- */
-.fx-wipe{
-  clip-path:inset(0 0 100% 0);
-  transform:translateY(14px);
-  transition:clip-path 1.05s cubic-bezier(.22,.78,.28,1),transform 1.05s cubic-bezier(.22,.78,.28,1);
-  will-change:clip-path,transform;
+/* ===========================================================
+   HERO — czyste przesuwanie bez migania
+   Slajdy są cały czas kryjące i poruszają się wyłącznie po X.
+   =========================================================== */
+.hero-home .hero-slider{
+  overflow:hidden;
 }
-.fx-wipe.fx-in{
-  clip-path:inset(0 0 0 0);
-  transform:none;
+.hero-home .hero-slide{
+  opacity:1 !important;
+  transform:translate3d(100%,0,0) !important;
+  transition:transform var(--motion-hero) var(--motion-ease) !important;
+  will-change:transform;
+  backface-visibility:hidden;
+  z-index:1;
+}
+.hero-home .hero-slide.is-active{
+  opacity:1 !important;
+  transform:translate3d(0,0,0) !important;
+  z-index:3;
+}
+.hero-home .hero-slide.is-prev{
+  transform:translate3d(-100%,0,0) !important;
+  z-index:2;
+}
+.hero-home .hero-slide.is-next{
+  transform:translate3d(100%,0,0) !important;
+  z-index:2;
+}
+.hero-home .hero-slide img,
+.hero-home .hero-slide.is-active img{
+  transform:scale(1.018) !important;
+  transition:none !important;
+  backface-visibility:hidden;
 }
 
-/* ---------- hero: tło płynie wolniej niż treść ---------- */
+/* bardzo lekki parallax — bez ciężkiego pływania */
 .fx-hero .hero-slider{
-  top:-7%;
-  height:114%;
+  top:-2%;
+  height:104%;
   transform:translate3d(0,var(--fx-hero,0px),0);
   will-change:transform;
 }
 
-/* ---------- podkreślenie linków tekstowych ---------- */
+/* ===========================================================
+   WEJŚCIA — jeden styl na wszystkich podstronach
+   =========================================================== */
+.motion-item{
+  opacity:0;
+  transform:translate3d(0,12px,0);
+  transition:
+    opacity var(--motion-base) var(--motion-ease) var(--motion-delay,0ms),
+    transform var(--motion-base) var(--motion-ease) var(--motion-delay,0ms) !important;
+  will-change:opacity,transform;
+}
+.motion-item.is-motion-visible{
+  opacity:1;
+  transform:translate3d(0,0,0);
+  will-change:auto;
+}
+.motion-item.motion-media{
+  transition-duration:var(--motion-media) !important;
+}
+
+/* pojedyncze kadry, które nie są motion-item — ten sam język ruchu */
+.fx-wipe{
+  opacity:0;
+  transform:translate3d(0,12px,0);
+  transition:
+    opacity var(--motion-media) var(--motion-ease),
+    transform var(--motion-media) var(--motion-ease);
+  will-change:opacity,transform;
+}
+.fx-wipe.fx-in{
+  opacity:1;
+  transform:translate3d(0,0,0);
+  will-change:auto;
+}
+
+/* ---------- linki tekstowe ---------- */
 .text-link,
 .sub-text-link,
 .faq-inline-link{
@@ -58,7 +122,7 @@
   background:currentColor;
   transform:scaleX(0);
   transform-origin:right center;
-  transition:transform .45s cubic-bezier(.22,.78,.28,1);
+  transition:transform .38s var(--motion-ease);
 }
 @media (hover:hover){
   .text-link:hover::after,
@@ -69,28 +133,27 @@
   }
 }
 
-/* ---------- strzałki w przyciskach ---------- */
+/* ---------- strzałki ---------- */
 .button span,
 .header-cta span,
 .nb-cta span,
 .offer-item-foot a b,
 .services-index>a b,
-.oversize-card,
 .contact-channel-arrow{
-  transition:transform .38s cubic-bezier(.22,.78,.28,1);
+  transition:transform var(--motion-fast) var(--motion-ease);
 }
 @media (hover:hover){
   .button:hover span,
   .header-cta:hover span,
   .nb-cta:hover span,
-  .offer-item-foot a:hover b{
-    transform:translate(3px,-3px);
+  .offer-item-foot a:hover b,
+  .services-index>a:hover b,
+  .contact-channel:hover .contact-channel-arrow{
+    transform:translate3d(3px,-3px,0);
   }
-  .services-index>a:hover b{transform:translate(4px,-4px)}
-  .contact-channel:hover .contact-channel-arrow{transform:translate(4px,-4px)}
 }
 
-/* ---------- kreska przy numerze sekcji ---------- */
+/* ---------- kreska przy kickerze ---------- */
 .section-kicker,
 .sub-kicker{position:relative}
 .section-kicker::after,
@@ -104,14 +167,27 @@
   opacity:.34;
   transform:scaleX(0);
   transform-origin:left center;
-  transition:transform .9s cubic-bezier(.22,.78,.28,1) .1s;
+  transition:transform .65s var(--motion-ease) .08s;
 }
 .is-motion-visible.section-kicker::after,
 .is-motion-visible.sub-kicker::after,
 .is-motion-visible .section-kicker::after,
-.is-motion-visible .sub-kicker::after{transform:scaleX(1)}
+.is-motion-visible .sub-kicker::after{
+  transform:scaleX(1);
+}
 
-/* ---------- spójne ikony social media ---------- */
+/* ---------- akordeony ---------- */
+.accordion-panel{
+  overflow:hidden;
+  transition:max-height .48s var(--motion-ease),opacity .34s ease !important;
+}
+.accordion-item:not(.is-open) .accordion-panel{opacity:0}
+.accordion-item.is-open .accordion-panel{opacity:1}
+.accordion-item button b{
+  transition:transform var(--motion-fast) var(--motion-ease),border-color var(--motion-fast) ease;
+}
+
+/* ---------- spójne ikony social ---------- */
 .footer-social-icons a[aria-label*="Facebook"],
 .social-float-icons a[aria-label*="Facebook"],
 .footer-social-icons span[aria-label*="YouTube"],
@@ -125,56 +201,11 @@
   fill:currentColor!important;
 }
 @media (hover:hover){
-  .footer-social-icons a[aria-label*="Facebook"]:hover{
-    color:#0c3341!important;
-  }
-}
-
-/* ---------- delikatne uniesienie kart oferty i artykułów ---------- */
-@media (hover:hover){
-  .offer-wide-item .offer-item-media{
-    transition:box-shadow .45s ease;
-  }
-  .offer-wide-item:hover .offer-item-media{
-    box-shadow:0 26px 54px rgba(16,46,63,.16);
-  }
-}
-
-/* ---------- wszystko wyłączone przy ograniczonym ruchu ---------- */
-@media(prefers-reduced-motion:reduce){
-  .fx-progress{display:none}
-  .fx-wipe,.fx-wipe.fx-in{clip-path:none;transform:none;transition:none}
-
-  .fx-hero .hero-slider{top:0;height:100%;transform:none}
-  .section-kicker::after,.sub-kicker::after{transform:scaleX(1);transition:none}
+  .footer-social-icons a[aria-label*="Facebook"]:hover{color:#0c3341!important}
 }
 
 /* ===========================================================
-   WEJŚCIA v4 — spokojniejsze pojawianie się treści
-   Krótszy dystans, dłuższe wyhamowanie, mniej stopniowania.
-   =========================================================== */
-.motion-item{
-  opacity:0;
-  transform:translateY(16px);
-  transition:opacity .78s cubic-bezier(.22,.78,.28,1) var(--motion-delay,0ms),
-             transform .78s cubic-bezier(.22,.78,.28,1) var(--motion-delay,0ms) !important;
-}
-.motion-item.is-motion-visible{
-  opacity:1;
-  transform:none;
-}
-/* kadry wjeżdżają odrobinę wolniej niż tekst — daje głębię bez chaosu */
-.motion-item.motion-media{
-  transition-duration:.95s !important;
-}
-.fx-wipe{
-  transition:clip-path 1.15s cubic-bezier(.22,.78,.28,1),transform 1.15s cubic-bezier(.22,.78,.28,1);
-}
-
-/* ===========================================================
-   HOVER — jeden język na całej stronie
-   Zdjęcia delikatnie się przybliżają, wiersze list przesuwają
-   się w prawo, strzałki wyjeżdżają. Nic nie „ucieka" za kursorem.
+   HOVER — mały ruch, bez skakania layoutu
    =========================================================== */
 .services-index>a h3,
 .services-index>a p,
@@ -186,35 +217,83 @@
 .offer-includes li,
 .contact-channel strong,
 .nb-card h2{
-  transition:transform .42s cubic-bezier(.22,.78,.28,1),color .3s ease;
+  transition:transform var(--motion-fast) var(--motion-ease),color .25s ease;
+}
+.offer-item-media img,
+.featured-card img,
+.oversize-card img,
+.gallery-card img,
+.sub-statement figure img{
+  transition:transform .65s var(--motion-ease) !important;
+  backface-visibility:hidden;
+}
+.offer-wide-item .offer-item-media{
+  transition:box-shadow .38s ease;
 }
 
 @media (hover:hover){
-  /* pakiety na stronie głównej */
   .services-index>a:hover h3,
-  .services-index>a:hover p{transform:translateX(8px)}
-  .services-index>a:hover span{transform:translateX(3px)}
-
-  /* proces */
+  .services-index>a:hover p,
   .home-process-grid li:hover h3,
-  .home-process-grid li:hover p{transform:translateX(8px)}
-  .home-process-grid li:hover>span{transform:translateX(3px)}
-  .home-process-grid li{transition:background-color .35s ease}
-  .home-process-grid li:hover{background-color:rgba(13,41,56,.03)}
-
-  /* pozycje oferty */
-  .sub-page .offer-wide-item:hover h3{transform:translateX(8px) !important}
-
-  /* kafelki artykułów */
-  .nb-card:hover h2{transform:translateX(6px)}
-
-  /* zdjęcia: tylko delikatne przybliżenie, bez podążania za kursorem */
-  .offer-item-media img{transition:transform .8s cubic-bezier(.22,.78,.28,1)}
-  .offer-wide-item:hover .offer-item-media img{transform:scale(1.035)}
+  .home-process-grid li:hover p,
+  .sub-page .offer-wide-item:hover h3,
+  .nb-card:hover h2{
+    transform:translate3d(4px,0,0) !important;
+  }
+  .services-index>a:hover span,
+  .home-process-grid li:hover>span{
+    transform:translate3d(2px,0,0);
+  }
+  .home-process-grid li{
+    transition:background-color var(--motion-fast) ease;
+  }
+  .home-process-grid li:hover{
+    background-color:rgba(13,41,56,.025);
+  }
+  .offer-wide-item:hover .offer-item-media img,
+  .featured-card:hover img,
+  .oversize-card:hover img,
+  .gallery-card:hover img,
+  .sub-statement figure:hover img{
+    transform:scale(1.018) !important;
+  }
+  .offer-wide-item:hover .offer-item-media{
+    box-shadow:0 20px 42px rgba(16,46,63,.12);
+  }
 }
 
+/* ---------- popup social ---------- */
+.social-float{
+  transition:
+    opacity .34s var(--motion-ease),
+    transform .34s var(--motion-ease),
+    visibility .34s !important;
+}
+
+/* ---------- ograniczony ruch ---------- */
 @media(prefers-reduced-motion:reduce){
-  .motion-item{opacity:1 !important;transform:none !important;transition:none !important}
-  .services-index>a h3,.services-index>a p,.home-process-grid li h3,
-  .home-process-grid li p,.offer-wide-item h3,.nb-card h2{transition:none}
+  .fx-progress{display:none}
+  .fx-hero .hero-slider{top:0;height:100%;transform:none}
+  .hero-home .hero-slide,
+  .hero-home .hero-slide.is-active,
+  .hero-home .hero-slide.is-prev,
+  .hero-home .hero-slide.is-next{
+    transition:none !important;
+  }
+  .motion-item,
+  .motion-item.is-motion-visible,
+  .fx-wipe,
+  .fx-wipe.fx-in{
+    opacity:1 !important;
+    transform:none !important;
+    transition:none !important;
+  }
+  .section-kicker::after,
+  .sub-kicker::after{
+    transform:scaleX(1);
+    transition:none;
+  }
+  *,*::before,*::after{
+    scroll-behavior:auto !important;
+  }
 }
