@@ -81,6 +81,18 @@
   window.addEventListener('resize', onScroll);
   onScrollFrame();
 
+  /* ---------- social popup na stronie głównej ---------- */
+  var socialFloat = document.querySelector('[data-social-float]');
+  if (socialFloat) {
+    // Pokazuj przy każdym wejściu na stronę główną, nawet jeśli wcześniej został zamknięty.
+    try { sessionStorage.removeItem('artefekt-social-float-dismissed'); } catch (e) {}
+    socialFloat.style.setProperty('display', 'block', 'important');
+    window.setTimeout(function () {
+      socialFloat.classList.add('is-visible');
+      socialFloat.setAttribute('aria-hidden', 'false');
+    }, 1800);
+  }
+
   if (reduce) return;
 
   /* ---------- 4. odsłanianie kadrów przy wejściu w kadr ---------- */
