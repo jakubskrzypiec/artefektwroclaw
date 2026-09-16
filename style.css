@@ -1206,7 +1206,7 @@ body[data-page="home"] .home-social-card{
   background:rgba(255,255,255,.04);
 }
 .footer-social-icons img{width:16px;height:16px;object-fit:contain;}
-.footer-social-icons>span{opacity:.45;cursor:default;}
+.footer-social-icons>span{opacity:1;cursor:default;}
 @media (hover:hover){
   .footer-social-icons a:hover{background:#fff;border-color:#fff;transform:translateY(-2px);}
   .footer-social-icons a:hover img{filter:brightness(0) saturate(100%) invert(16%) sepia(19%) saturate(1818%) hue-rotate(156deg) brightness(91%) contrast(93%);}
