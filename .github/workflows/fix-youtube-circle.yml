@@ -1,0 +1,49 @@
+name: Fix YouTube footer circle
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/fix-youtube-circle.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Force YouTube footer circle to match other social icons
+        run: |
+          cat >> style.css <<'CSS'
+
+/* Final footer YouTube normalization */
+.footer-social-icons > span[aria-label*="YouTube"]{
+  display:grid!important;
+  place-items:center!important;
+  width:38px!important;
+  height:38px!important;
+  border:1px solid rgba(255,255,255,.22)!important;
+  border-radius:50%!important;
+  background:rgba(255,255,255,.04)!important;
+  opacity:1!important;
+  box-shadow:none!important;
+  filter:none!important;
+  color:inherit!important;
+}
+.footer-social-icons > span[aria-label*="YouTube"] img{
+  width:16px!important;
+  height:16px!important;
+  object-fit:contain!important;
+  opacity:1!important;
+  filter:none!important;
+  mix-blend-mode:normal!important;
+}
+CSS
+          rm .github/workflows/fix-youtube-circle.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add style.css .github/workflows/fix-youtube-circle.yml
+          git commit -m "Wymuś identyczny styl ikony YouTube w stopce"
+          git push
