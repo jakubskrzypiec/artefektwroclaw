@@ -83,11 +83,20 @@
   if (slides.length) {
     let activeSlide = 0;
     const showSlide = index => {
-      activeSlide = (index + slides.length) % slides.length;
-      slides.forEach((slide, slideIndex) => slide.classList.toggle('is-active', slideIndex === activeSlide));
+      const nextSlide = (index + slides.length) % slides.length;
+      const direction = nextSlide === activeSlide ? 0 : (index > activeSlide || (activeSlide === slides.length - 1 && nextSlide === 0) ? 1 : -1);
+      slides.forEach((slide, slideIndex) => {
+        slide.classList.remove('is-active','is-prev','is-next');
+        if (slideIndex === nextSlide) slide.classList.add('is-active');
+        else if (slideIndex === activeSlide && direction >= 0) slide.classList.add('is-prev');
+        else if (slideIndex === activeSlide) slide.classList.add('is-next');
+        else slide.classList.add(slideIndex < nextSlide ? 'is-prev' : 'is-next');
+      });
+      activeSlide = nextSlide;
       dots.forEach((dot, dotIndex) => dot.classList.toggle('is-active', dotIndex === activeSlide));
       if (currentSlide) currentSlide.textContent = String(activeSlide + 1).padStart(2, '0');
     };
+    slides.forEach((slide, index) => slide.classList.add(index === 0 ? 'is-active' : 'is-next'));
     dots.forEach((dot, index) => dot.addEventListener('click', () => showSlide(index)));
     window.setInterval(() => showSlide(activeSlide + 1), 5600);
   }

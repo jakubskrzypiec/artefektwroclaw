@@ -1753,3 +1753,30 @@
   .sub-projects .sub-statement figure img{min-height:430px}
   .sub-projects .sub-statement-copy>a{width:100%;justify-content:space-between;margin-top:36px}
 }
+
+
+/* === Client revisions 2026-09-16 === */
+/* fixed header must not crop the first kicker on subpages */
+.sub-title-hero-inner{padding-top:124px;}
+.contact-channels{grid-template-columns:repeat(4,minmax(0,1fr));}
+.contact-channel-address{cursor:default;}
+.contact-photo-placeholder{min-height:250px;margin-top:36px;margin-bottom:0;}
+.contact-social-row{flex-wrap:wrap;}
+.contact-social-disabled{display:inline-flex;align-items:center;gap:8px;padding-bottom:6px;border-bottom:1px solid var(--sub-line);font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#7a8a92;}
+.contact-social-disabled small{font-size:8px;font-weight:500;letter-spacing:.06em;text-transform:none;}
+
+.about-intro{padding:120px 0;background:var(--sub-paper);}
+.about-intro-grid{display:grid;grid-template-columns:minmax(360px,.9fr) minmax(0,1.1fr);gap:8vw;align-items:center;}
+.about-photo-placeholder{min-height:590px;}
+.about-intro h2{max-width:10ch;margin:38px 0 34px;font-size:clamp(46px,5.2vw,80px);}
+.about-intro p{max-width:680px;font-size:16px;line-height:1.85;}
+.about-story{padding:0 0 120px;background:var(--sub-paper);}
+.about-story-grid{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--sub-line);}
+.about-story article{padding:72px 6vw 78px 0;border-bottom:1px solid var(--sub-line);}
+.about-story article:nth-child(even){padding-left:6vw;border-left:1px solid var(--sub-line);}
+.about-story article>span{font-size:10px;font-weight:600;letter-spacing:.16em;color:#718894;}
+.about-story h2{margin:28px 0 28px;font-size:clamp(38px,4vw,62px);}
+.about-story p{max-width:610px;font-size:15px;line-height:1.85;}
+
+@media(max-width:1100px){.contact-channels{grid-template-columns:1fr 1fr}.about-intro-grid{grid-template-columns:1fr 1fr;gap:50px}.about-photo-placeholder{min-height:480px}}
+@media(max-width:760px){.sub-title-hero-inner{padding-top:106px}.contact-channels{grid-template-columns:1fr}.contact-photo-placeholder{min-height:190px}.about-intro{padding:84px 0}.about-intro-grid{grid-template-columns:1fr;gap:44px}.about-photo-placeholder{min-height:380px}.about-story-grid{grid-template-columns:1fr}.about-story article,.about-story article:nth-child(even){padding:52px 0;border-left:0}.about-story h2{font-size:40px}}

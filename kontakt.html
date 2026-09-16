@@ -25,8 +25,13 @@
   <header class="site-header subpage-header">
     <div class="header-inner">
       <a class="brand" href="index.html" aria-label="Artefekt — strona główna"><img src="logo-primary.png" alt="Artefekt Interior Design"></a>
-      <nav class="site-nav" aria-label="Główna nawigacja"><a href="index.html">Start</a><a href="oferta.html">Oferta</a><a href="projekty.html">Projekty</a><a href="artykuly.html">Artykuły</a><a href="kontakt.html" class="is-active">Kontakt</a></nav>
-      <a class="header-cta" href="kontakt.html">Porozmawiajmy <span>↗</span></a>
+      <nav class="site-nav" aria-label="Główna nawigacja"><a href="index.html">Start</a><a href="oferta.html">Oferta</a><a href="projekty.html">Projekty</a><a href="o-nas.html">O nas</a><a href="artykuly.html">Blog</a><a href="kontakt.html" class="is-active">Kontakt</a></nav>
+      <div class="header-socials" aria-label="Social media">
+        <a href="https://www.instagram.com/artefekt_studio/" target="_blank" rel="noopener" aria-label="Instagram Artefekt">IG</a>
+        <a href="https://www.facebook.com/artefektstudio/" target="_blank" rel="noopener" aria-label="Facebook Artefekt">FB</a>
+        <a href="https://www.tiktok.com/@artefekt_studio" target="_blank" rel="noopener" aria-label="TikTok Artefekt">TT</a>
+        <span aria-label="YouTube Artefekt — link wkrótce" title="YouTube — link wkrótce">YT</span>
+      </div>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-label="Otwórz menu"><span></span><span></span></button>
     </div>
   </header>
@@ -47,23 +52,20 @@
 
       <div class="sub-container contact-channels">
         <a class="contact-channel contact-channel-email" href="mailto:studio@artefekt.pl">
-          <span class="contact-channel-no">01</span>
-          <span class="contact-channel-label">Napisz</span>
-          <strong>studio@artefekt.pl</strong>
-          <span class="contact-channel-arrow">↗</span>
+          <span class="contact-channel-no">01</span><span class="contact-channel-label">Napisz</span><strong>studio@artefekt.pl</strong><span class="contact-channel-arrow">↗</span>
         </a>
         <a class="contact-channel" href="tel:+48693294393">
-          <span class="contact-channel-no">02</span>
-          <span class="contact-channel-label">Alicja Wątroba</span>
-          <strong>+48 693 294 393</strong>
-          <span class="contact-channel-arrow">↗</span>
+          <span class="contact-channel-no">02</span><span class="contact-channel-label">Alicja Wątroba</span><strong>+48 693 294 393</strong><span class="contact-channel-arrow">↗</span>
         </a>
         <a class="contact-channel" href="tel:+48691222770">
-          <span class="contact-channel-no">03</span>
-          <span class="contact-channel-label">Joanna Markiewicz</span>
-          <strong>+48 691 222 770</strong>
-          <span class="contact-channel-arrow">↗</span>
+          <span class="contact-channel-no">03</span><span class="contact-channel-label">Joanna Markiewicz</span><strong>+48 691 222 770</strong><span class="contact-channel-arrow">↗</span>
         </a>
+        <div class="contact-channel contact-channel-address">
+          <span class="contact-channel-no">04</span><span class="contact-channel-label">Showroom</span><strong>Zwycięska 3/lok. U8<br>53-033 Wrocław</strong><span class="contact-channel-arrow">⌖</span>
+        </div>
+      </div>
+      <div class="sub-container contact-photo-placeholder" role="img" aria-label="Miejsce na zdjęcie Alicji i Joanny">
+        <span>Zdjęcie Alicji i Joanny</span><small>docelowo subtelnie wykorzystane w sekcji kontaktowej</small>
       </div>
     </section>
 
@@ -82,6 +84,8 @@
           <div class="contact-social-row">
             <a href="https://www.instagram.com/artefekt_studio/" target="_blank" rel="noopener">Instagram <span>↗</span></a>
             <a href="https://www.facebook.com/artefektstudio/" target="_blank" rel="noopener">Facebook <span>↗</span></a>
+            <a href="https://www.tiktok.com/@artefekt_studio" target="_blank" rel="noopener">TikTok <span>↗</span></a>
+            <span class="contact-social-disabled">YouTube <small>link wkrótce</small></span>
           </div>
         </div>
       </div>
@@ -93,7 +97,7 @@
             <p>Odpowiemy możliwie szybko.</p>
           </div>
           <div class="sub-form-row"><label><span>Imię i nazwisko *</span><input name="name" autocomplete="name" placeholder="Jak możemy się do Ciebie zwracać?" required></label><label><span>E-mail *</span><input type="email" name="email" autocomplete="email" placeholder="adres@email.pl" required></label></div>
-          <div class="sub-form-row"><label><span>Telefon</span><input type="tel" name="phone" autocomplete="tel" placeholder="+48 000 000 000"></label><label><span>Rodzaj inwestycji *</span><select name="type" required><option value="">Wybierz</option><option>Mieszkanie</option><option>Dom</option><option>Pojedyncze pomieszczenie</option><option>Lokal komercyjny</option><option>Konsultacja</option></select></label></div>
+          <div class="sub-form-row"><label><span>Telefon</span><input type="tel" name="phone" autocomplete="tel" placeholder="+48 000 000 000"></label><label><span>Rodzaj inwestycji *</span><select name="type" required><option value="">Wybierz</option><option>Mieszkanie</option><option>Dom</option><option>Zmiany lokatorskie</option><option>Nadzór</option><option>Lokal komercyjny</option><option>Konsultacja</option></select></label></div>
           <div class="sub-form-row"><label><span>Lokalizacja</span><input name="location" placeholder="Miasto / okolica"></label><label><span>Metraż</span><input name="size" placeholder="np. 75 m²"></label></div>
           <label><span>Kilka słów o projekcie *</span><textarea name="message" rows="6" placeholder="Napisz, czego dotyczy inwestycja i na jakim etapie jesteś." required></textarea></label>
           <label class="sub-checkbox"><input type="checkbox" name="consent" required><span>Wyrażam zgodę na kontakt w sprawie przesłanego zapytania.</span></label>
@@ -113,7 +117,7 @@
           <p>Najczęstsze pytania, które pomagają szybko ustalić zakres współpracy.</p>
         </div>
         <div class="accordion-list sub-light-accordion contact-faq-list">
-          <article class="accordion-item is-open"><button type="button" aria-expanded="true"><span>01</span><strong>Czy można zamówić projekt jednego pomieszczenia?</strong><b>−</b></button><div class="accordion-panel"><p>Tak. Projekt może obejmować wybraną kuchnię, łazienkę, salon, sypialnię albo inne pojedyncze wnętrze.</p></div></article>
+          <article class="accordion-item is-open"><button type="button" aria-expanded="true"><span>01</span><strong>Czy mogę przyjść z jednym konkretnym problemem?</strong><b>−</b></button><div class="accordion-panel"><p>Tak. Podczas konsultacji w showroomie możemy skupić się na jednym pomieszczeniu, układzie funkcjonalnym, materiałach albo kolorystyce.</p></div></article>
           <article class="accordion-item"><button type="button" aria-expanded="false"><span>02</span><strong>Czy współpraca może odbywać się online?</strong><b>+</b></button><div class="accordion-panel"><p>Tak. Zakres pracy zdalnej dobieramy do rodzaju projektu i materiałów, które są dostępne na starcie.</p></div></article>
           <article class="accordion-item"><button type="button" aria-expanded="false"><span>03</span><strong>Czy projekt zawiera dobór materiałów?</strong><b>+</b></button><div class="accordion-panel"><p>Tak — dobór materiałów, wyposażenia i oświetlenia może być elementem ustalonego zakresu projektu.</p></div></article>
           <article class="accordion-item"><button type="button" aria-expanded="false"><span>04</span><strong>Czy możliwe jest wsparcie podczas realizacji?</strong><b>+</b></button><div class="accordion-panel"><p>Tak. Forma wsparcia na etapie wykonawczym jest ustalana indywidualnie wraz z zakresem projektu.</p></div></article>
@@ -135,7 +139,7 @@
   <footer class="site-footer">
     <div class="container footer-grid">
       <div class="footer-brand"><img src="logo-white.png" alt="Artefekt Interior Design"><p>Projektowanie wnętrz<br>Wrocław · online</p></div>
-      <nav><p class="footer-label">Nawigacja</p><a href="index.html">Start</a><a href="oferta.html">Oferta</a><a href="projekty.html">Projekty</a><a href="artykuly.html">Artykuły</a><a href="kontakt.html">Kontakt</a></nav>
+      <nav><p class="footer-label">Nawigacja</p><a href="index.html">Start</a><a href="oferta.html">Oferta</a><a href="projekty.html">Projekty</a><a href="o-nas.html">O nas</a><a href="artykuly.html">Blog</a><a href="kontakt.html">Kontakt</a></nav>
       <div><p class="footer-label">Kontakt</p><a href="mailto:studio@artefekt.pl">studio@artefekt.pl</a><a href="tel:+48693294393">Alicja · 693 294 393</a><a href="tel:+48691222770">Joanna · 691 222 770</a></div>
       <div><p class="footer-label">Studio</p><p>Zwycięska 3/lok. U8<br>53-033 Wrocław<br>Pon–Pt · 09:00–16:00</p></div>
     </div>
