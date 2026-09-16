@@ -5,15 +5,6 @@
 (function () {
   'use strict';
 
-  /* Ostatnia warstwa typografii — ładowana po lokalnych stylach stron. */
-  if (!document.getElementById('artefekt-typography')) {
-    var typographyLink = document.createElement('link');
-    typographyLink.id = 'artefekt-typography';
-    typographyLink.rel = 'stylesheet';
-    typographyLink.href = 'typography.css';
-    document.head.appendChild(typographyLink);
-  }
-
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var root = document.documentElement;
   var body = document.body;
