@@ -81,15 +81,57 @@
   window.addEventListener('resize', onScroll);
   onScrollFrame();
 
-  /* ---------- social popup na stronie głównej ---------- */
+  /* ---------- social popup + korekty ikon ---------- */
   var socialFloat = document.querySelector('[data-social-float]');
+  var youtubeSvg = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21.6 7.2c-.2-1-.9-1.8-1.8-2-1.6-.4-7.8-.4-7.8-.4s-6.2 0-7.8.4c-1 .2-1.6 1-1.8 2C2 8.9 2 12 2 12s0 3.1.4 4.8c.2 1 .9 1.8 1.8 2 1.6.4 7.8.4 7.8.4s6.2 0 7.8-.4c1-.2 1.6-1 1.8-2 .4-1.7.4-4.8.4-4.8s0-3.1-.4-4.8ZM10 15.5v-7l6 3.5-6 3.5Z"/></svg>';
+
+  function fixYoutubeIcons() {
+    document.querySelectorAll('.footer-social-icons span[aria-label*="YouTube"], .social-float-icons span[aria-label*="YouTube"]').forEach(function (el) {
+      el.innerHTML = youtubeSvg;
+      el.style.display = 'inline-flex';
+      el.style.alignItems = 'center';
+      el.style.justifyContent = 'center';
+      el.style.color = '#fff';
+      var svg = el.querySelector('svg');
+      if (svg) {
+        svg.style.width = '18px';
+        svg.style.height = '18px';
+        svg.style.display = 'block';
+        svg.style.fill = 'currentColor';
+      }
+    });
+  }
+
+  function positionFloatingUi() {
+    var isMobile = window.innerWidth <= 640;
+    toTop.style.setProperty('right', isMobile ? '14px' : '22px', 'important');
+    toTop.style.setProperty('bottom', isMobile ? '14px' : '22px', 'important');
+    toTop.style.setProperty('z-index', '60', 'important');
+
+    if (!socialFloat) return;
+    socialFloat.style.setProperty('display', 'block', 'important');
+    socialFloat.style.setProperty('right', isMobile ? '14px' : '22px', 'important');
+    socialFloat.style.setProperty('bottom', isMobile ? '90px' : '98px', 'important');
+    socialFloat.style.setProperty('z-index', '52', 'important');
+    if (isMobile) socialFloat.style.setProperty('left', '14px', 'important');
+    else socialFloat.style.removeProperty('left');
+  }
+
+  fixYoutubeIcons();
+  positionFloatingUi();
+  window.addEventListener('resize', function () {
+    positionFloatingUi();
+    fixYoutubeIcons();
+  });
+
   if (socialFloat) {
     // Pokazuj przy każdym wejściu na stronę główną, nawet jeśli wcześniej został zamknięty.
     try { sessionStorage.removeItem('artefekt-social-float-dismissed'); } catch (e) {}
-    socialFloat.style.setProperty('display', 'block', 'important');
     window.setTimeout(function () {
       socialFloat.classList.add('is-visible');
       socialFloat.setAttribute('aria-hidden', 'false');
+      fixYoutubeIcons();
+      positionFloatingUi();
     }, 1800);
   }
 
