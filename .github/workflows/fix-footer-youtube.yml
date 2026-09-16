@@ -1,0 +1,34 @@
+name: Fix footer YouTube icon
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/fix-footer-youtube.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fix shared footer social style
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('style.css')
+          s = p.read_text(encoding='utf-8')
+          old = '.footer-social-icons>span{opacity:.45;cursor:default;}'
+          new = '.footer-social-icons>span{opacity:1;cursor:default;}'
+          if old not in s:
+              raise SystemExit('Expected footer rule not found')
+          p.write_text(s.replace(old, new), encoding='utf-8')
+          PY
+          rm .github/workflows/fix-footer-youtube.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add style.css .github/workflows/fix-footer-youtube.yml
+          git commit -m "Ujednolicenie ikony YouTube w stopce globalnie"
+          git push
