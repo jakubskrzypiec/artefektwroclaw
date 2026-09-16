@@ -31,8 +31,6 @@
     scrollTicking = false;
     var y = window.pageYOffset || root.scrollTop || 0;
 
-    // siatka bezpieczeństwa: gdyby IntersectionObserver nie zadziałał,
-    // kadr i tak odsłoni się po wejściu w widok — nic nie zostaje ukryte
     if (pendingWipes.length) {
       pendingWipes = pendingWipes.filter(function (el) {
         if (el.classList.contains('fx-in')) return false;
@@ -51,7 +49,6 @@
 
     if (hero && !reduce) {
       var h = hero.offsetHeight || 1;
-      // tło przesuwa się wolniej niż strona, z zapasem 7% wysokości
       var shift = Math.min(y * 0.16, h * 0.065);
       root.style.setProperty('--fx-hero', (y < h * 1.2 ? shift : h * 0.065).toFixed(1) + 'px');
     }
@@ -68,37 +65,56 @@
   window.addEventListener('resize', onScroll);
   onScrollFrame();
 
-  /* ---------- social popup + spójne ikony ---------- */
+  /* ---------- social popup + NOWE ikony stopki ---------- */
   var socialFloat = document.querySelector('[data-social-float]');
-  var facebookSvg = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M13.5 22v-8h2.7l.4-3h-3.1V9.2c0-.9.3-1.5 1.6-1.5h1.7V5.1c-.3 0-1.3-.1-2.5-.1-2.4 0-4 1.4-4 4.2V11H7.5v3h2.8v8h3.2Z"/></svg>';
-  var youtubeSvg = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21.6 7.2c-.2-1-.9-1.8-1.8-2-1.6-.4-7.8-.4-7.8-.4s-6.2 0-7.8.4c-1 .2-1.6 1-1.8 2C2 8.9 2 12 2 12s0 3.1.4 4.8c.2 1 .9 1.8 1.8 2 1.6.4 7.8.4 7.8.4s6.2 0 7.8-.4c1-.2 1.6-1 1.8-2 .4-1.7.4-4.8.4-4.8s0-3.1-.4-4.8ZM10 15.5v-7l6 3.5-6 3.5Z"/></svg>';
 
-  function styleSocialSvg(el, size) {
-    el.style.color = '#fff';
-    var svg = el.querySelector('svg');
-    if (!svg) return;
-    svg.style.width = size + 'px';
-    svg.style.height = size + 'px';
-    svg.style.display = 'block';
-    svg.style.fill = 'currentColor';
+  var footerIcons = {
+    instagram: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4.5" y="4.5" width="15" height="15" rx="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="3.35" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.35" cy="6.85" r="1.05" fill="currentColor"/></svg>',
+    facebook: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M13.7 20v-7h2.35l.35-2.75h-2.7V8.5c0-.8.22-1.35 1.38-1.35H16.6V4.7c-.26-.04-1.16-.1-2.2-.1-2.17 0-3.65 1.32-3.65 3.76v1.89H8.3V13h2.45v7h2.95Z"/></svg>',
+    tiktok: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M14.1 4.2h2.15c.2 1.45 1.02 2.5 2.55 3.1v2.15a6.8 6.8 0 0 1-2.55-.85v5.65a5.1 5.1 0 1 1-5.1-5.1c.3 0 .58.02.85.07v2.3a2.8 2.8 0 1 0 1.95 2.67V4.2h.15Z"/></svg>',
+    youtube: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3.5" y="6.5" width="17" height="11" rx="3.7" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M10.4 9.55 15.1 12l-4.7 2.45v-4.9Z" fill="currentColor"/></svg>'
+  };
+
+  function normalizeFooterIcon(el, svg) {
+    if (!el) return;
+    el.innerHTML = svg;
+    el.style.setProperty('display', 'grid', 'important');
+    el.style.setProperty('place-items', 'center', 'important');
+    el.style.setProperty('width', '38px', 'important');
+    el.style.setProperty('height', '38px', 'important');
+    el.style.setProperty('min-width', '38px', 'important');
+    el.style.setProperty('min-height', '38px', 'important');
+    el.style.setProperty('padding', '0', 'important');
+    el.style.setProperty('margin', '0', 'important');
+    el.style.setProperty('border', '1px solid rgba(255,255,255,.22)', 'important');
+    el.style.setProperty('border-radius', '50%', 'important');
+    el.style.setProperty('background', 'rgba(255,255,255,.04)', 'important');
+    el.style.setProperty('box-shadow', 'none', 'important');
+    el.style.setProperty('filter', 'none', 'important');
+    el.style.setProperty('opacity', '1', 'important');
+    el.style.setProperty('color', '#fff', 'important');
+    el.style.setProperty('transform', 'none', 'important');
+    var svgEl = el.querySelector('svg');
+    if (svgEl) {
+      svgEl.style.setProperty('display', 'block', 'important');
+      svgEl.style.setProperty('width', '16px', 'important');
+      svgEl.style.setProperty('height', '16px', 'important');
+      svgEl.style.setProperty('overflow', 'visible', 'important');
+      svgEl.style.setProperty('filter', 'none', 'important');
+      svgEl.style.setProperty('opacity', '1', 'important');
+    }
   }
 
-  function fixSocialIcons() {
-    document.querySelectorAll('.footer-social-icons a[aria-label*="Facebook"], .social-float-icons a[aria-label*="Facebook"]').forEach(function (el) {
-      el.innerHTML = facebookSvg;
-      styleSocialSvg(el, 16);
-    });
-
-    document.querySelectorAll('.footer-social-icons span[aria-label*="YouTube"], .social-float-icons span[aria-label*="YouTube"]').forEach(function (el) {
-      el.innerHTML = youtubeSvg;
-      el.style.display = 'inline-flex';
-      el.style.alignItems = 'center';
-      el.style.justifyContent = 'center';
-      el.style.setProperty('opacity', '1', 'important');
-      el.style.setProperty('background', 'rgba(255,255,255,.04)', 'important');
-      styleSocialSvg(el, 16);
+  function rebuildFooterIcons() {
+    document.querySelectorAll('.footer-social-icons').forEach(function (group) {
+      normalizeFooterIcon(group.querySelector('[aria-label="Instagram"]'), footerIcons.instagram);
+      normalizeFooterIcon(group.querySelector('[aria-label="Facebook"]'), footerIcons.facebook);
+      normalizeFooterIcon(group.querySelector('[aria-label="TikTok"]'), footerIcons.tiktok);
+      normalizeFooterIcon(group.querySelector('[aria-label*="YouTube"]'), footerIcons.youtube);
     });
   }
+
+  rebuildFooterIcons();
 
   function positionSocialFloat() {
     if (!socialFloat) return;
@@ -111,21 +127,19 @@
     else socialFloat.style.removeProperty('left');
   }
 
-  fixSocialIcons();
   positionSocialFloat();
   window.addEventListener('resize', function () {
     positionSocialFloat();
-    fixSocialIcons();
+    rebuildFooterIcons();
   });
 
   if (socialFloat) {
-    // Pokazuj przy każdym wejściu na stronę główną, nawet jeśli wcześniej został zamknięty.
     try { sessionStorage.removeItem('artefekt-social-float-dismissed'); } catch (e) {}
     window.setTimeout(function () {
       socialFloat.classList.add('is-visible');
       socialFloat.setAttribute('aria-hidden', 'false');
-      fixSocialIcons();
       positionSocialFloat();
+      rebuildFooterIcons();
     }, 1800);
   }
 
@@ -133,8 +147,6 @@
 
   /* ---------- 3. odsłanianie kadrów przy wejściu w kadr ---------- */
   if ('IntersectionObserver' in window) {
-    // tylko tam, gdzie kadr nie ma już własnego wejścia z .motion-item —
-    // dwie animacje na jednym elemencie wyglądały nerwowo
     var wipeSelector = [
       '.manifesto-image',
       '.process-notebook img',
@@ -153,7 +165,6 @@
     var registerWipes = function (scope) {
       (scope || document).querySelectorAll(wipeSelector).forEach(function (el) {
         if (el.classList.contains('fx-wipe')) return;
-        // element już w kadrze przy wejściu na stronę — pokazujemy bez animacji
         var r = el.getBoundingClientRect();
         if (r.top < window.innerHeight * 0.9 && r.bottom > 0) return;
         el.classList.add('fx-wipe');
@@ -164,14 +175,12 @@
 
     registerWipes(document);
 
-    // ostateczny bezpiecznik — po 6 s nic nie ma prawa zostać zasłonięte
     window.setTimeout(function () {
       document.querySelectorAll('.fx-wipe:not(.fx-in)').forEach(function (el) {
         if (el.getBoundingClientRect().top < window.innerHeight * 1.5) el.classList.add('fx-in');
       });
     }, 6000);
 
-    // galeria projektów powstaje z JS — dorejestrowujemy nowe kadry
     var gallery = document.querySelector('[data-project-gallery]');
     if (gallery && 'MutationObserver' in window) {
       new MutationObserver(function () { registerWipes(gallery); })
