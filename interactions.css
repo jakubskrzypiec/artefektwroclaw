@@ -31,7 +31,6 @@
   transform:none;
 }
 
-
 /* ---------- hero: tło płynie wolniej niż treść ---------- */
 .fx-hero .hero-slider{
   top:-7%;
@@ -112,42 +111,23 @@
 .is-motion-visible .section-kicker::after,
 .is-motion-visible .sub-kicker::after{transform:scaleX(1)}
 
-/* ---------- powrót na górę ---------- */
-.fx-top{
-  position:fixed;
-  right:26px;
-  bottom:26px;
-  z-index:110;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  width:48px;
-  height:48px;
-  padding:0;
-  border:1px solid rgba(255,255,255,.22);
-  border-radius:50%;
-  background:rgba(16,46,63,.92);
-  color:#fff;
-  font-size:15px;
-  line-height:1;
-  cursor:pointer;
-  opacity:0;
-  visibility:hidden;
-  transform:translateY(12px);
-  transition:opacity .35s ease,transform .35s cubic-bezier(.22,.78,.28,1),visibility .35s,background .3s ease;
-  -webkit-backdrop-filter:blur(8px);
-  backdrop-filter:blur(8px);
+/* ---------- spójne ikony social media ---------- */
+.footer-social-icons a[aria-label*="Facebook"],
+.social-float-icons a[aria-label*="Facebook"],
+.footer-social-icons span[aria-label*="YouTube"],
+.social-float-icons span[aria-label*="YouTube"]{
+  color:#fff!important;
 }
-.fx-top.is-visible{
-  opacity:1;
-  visibility:visible;
-  transform:none;
+.footer-social-icons a[aria-label*="Facebook"] svg,
+.social-float-icons a[aria-label*="Facebook"] svg,
+.footer-social-icons span[aria-label*="YouTube"] svg,
+.social-float-icons span[aria-label*="YouTube"] svg{
+  fill:currentColor!important;
 }
 @media (hover:hover){
-  .fx-top:hover{background:#0b2434;transform:translateY(-3px)}
-}
-@media(max-width:780px){
-  .fx-top{right:16px;bottom:16px;width:44px;height:44px}
+  .footer-social-icons a[aria-label*="Facebook"]:hover{
+    color:#0c3341!important;
+  }
 }
 
 /* ---------- delikatne uniesienie kart oferty i artykułów ---------- */
@@ -167,9 +147,7 @@
 
   .fx-hero .hero-slider{top:0;height:100%;transform:none}
   .section-kicker::after,.sub-kicker::after{transform:scaleX(1);transition:none}
-  .fx-top{transition:none}
 }
-
 
 /* ===========================================================
    WEJŚCIA v4 — spokojniejsze pojawianie się treści
@@ -192,7 +170,6 @@
 .fx-wipe{
   transition:clip-path 1.15s cubic-bezier(.22,.78,.28,1),transform 1.15s cubic-bezier(.22,.78,.28,1);
 }
-
 
 /* ===========================================================
    HOVER — jeden język na całej stronie
