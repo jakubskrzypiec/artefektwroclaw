@@ -17,36 +17,15 @@
     body.appendChild(progress);
   }
 
-  var hero = document.querySelector('.hero-home');
-  if (hero && !reduce) body.classList.add('fx-hero');
-
   var scrollTicking = false;
-  var pendingWipes = [];
 
   function onScrollFrame() {
     scrollTicking = false;
     var y = window.pageYOffset || root.scrollTop || 0;
 
-    if (pendingWipes.length) {
-      pendingWipes = pendingWipes.filter(function (el) {
-        if (el.classList.contains('fx-in')) return false;
-        if (el.getBoundingClientRect().top < window.innerHeight * 0.94) {
-          el.classList.add('fx-in');
-          return false;
-        }
-        return true;
-      });
-    }
-
     if (progress) {
       var max = root.scrollHeight - window.innerHeight;
       progress.style.setProperty('--fx-progress', max > 0 ? Math.min(1, y / max).toFixed(4) : '0');
-    }
-
-    if (hero && !reduce) {
-      var h = hero.offsetHeight || 1;
-      var shift = Math.min(y * 0.075, h * 0.025);
-      root.style.setProperty('--fx-hero', (y < h * 1.15 ? shift : h * 0.025).toFixed(1) + 'px');
     }
   }
 
@@ -57,10 +36,10 @@
     else onScrollFrame();
   }
 
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScrollFrame();
-
-  var socialFloat = document.querySelector('[data-social-float]');
+  if (progress) {
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScrollFrame();
+  }
 
   var footerIcons = {
     instagram: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4.5" y="4.5" width="15" height="15" rx="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="3.35" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.35" cy="6.85" r="1.05" fill="currentColor"/></svg>',
@@ -133,67 +112,5 @@
     document.querySelectorAll('.social-float-icons [aria-label*="YouTube"]').forEach(normalizeFloatYoutube);
   }
 
-  function positionSocialFloat() {
-    if (!socialFloat) return;
-    var isMobile = window.innerWidth <= 640;
-    socialFloat.style.setProperty('display', 'block', 'important');
-    socialFloat.style.setProperty('right', isMobile ? '14px' : '22px', 'important');
-    socialFloat.style.setProperty('bottom', isMobile ? '14px' : '22px', 'important');
-    socialFloat.style.setProperty('z-index', '52', 'important');
-    if (isMobile) socialFloat.style.setProperty('left', '14px', 'important');
-    else socialFloat.style.removeProperty('left');
-  }
-
   rebuildSocialIcons();
-  positionSocialFloat();
-
-  var resizeTicking = false;
-  window.addEventListener('resize', function () {
-    if (resizeTicking) return;
-    resizeTicking = true;
-    window.requestAnimationFrame(function () {
-      resizeTicking = false;
-      positionSocialFloat();
-    });
-  }, { passive: true });
-
-  if (reduce) return;
-
-  if ('IntersectionObserver' in window) {
-    var wipeSelector = [
-      '.manifesto-image',
-      '.process-notebook img',
-      '.sub-statement figure img'
-    ].join(',');
-
-    var wipeObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('fx-in');
-        wipeObserver.unobserve(entry.target);
-      });
-    }, { threshold: 0.08, rootMargin: '0px 0px -5% 0px' });
-
-    var registerWipes = function (scope) {
-      (scope || document).querySelectorAll(wipeSelector).forEach(function (el) {
-        if (el.classList.contains('fx-wipe') || el.classList.contains('motion-item')) return;
-        var r = el.getBoundingClientRect();
-        if (r.top < window.innerHeight * 0.92 && r.bottom > 0) {
-          el.classList.add('fx-in');
-          return;
-        }
-        el.classList.add('fx-wipe');
-        pendingWipes.push(el);
-        wipeObserver.observe(el);
-      });
-    };
-
-    registerWipes(document);
-
-    window.setTimeout(function () {
-      document.querySelectorAll('.fx-wipe:not(.fx-in)').forEach(function (el) {
-        if (el.getBoundingClientRect().top < window.innerHeight * 1.35) el.classList.add('fx-in');
-      });
-    }, 3500);
-  }
 })();

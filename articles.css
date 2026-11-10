@@ -18,7 +18,7 @@
 
 .nb-open{
   position:relative;
-  height:250vh;
+  height:165vh;
   background:#e9e6df;
 }
 .nb-open-stage{
@@ -115,7 +115,7 @@
     linear-gradient(160deg,#164058 0%,var(--nb-cover) 52%,#0b2434 100%);
   box-shadow:0 40px 90px rgba(11,36,52,.34);
   transform-origin:left center;
-  transform:rotateY(calc(var(--nb-progress,0) * -168deg));
+  transform:rotateY(calc(var(--nb-progress,0) * -96deg));
   backface-visibility:hidden;
   will-change:transform;
 }
@@ -138,6 +138,7 @@
 }
 .nb-cover img{
   width:min(62%,230px);
+  aspect-ratio:2833 / 2238;
   height:auto;
   object-fit:contain;
   opacity:.94;
@@ -520,8 +521,6 @@
   .nb-index-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media(max-width:860px){
-  .nb-open{height:210vh}
-  .nb-book{width:min(84vw,430px);max-height:70vh}
   .nb-sheet{
     width:calc(100% - 20px);
     padding:38px 22px 42px 46px;
@@ -538,15 +537,20 @@
   .nb-table td:first-child{white-space:normal}
 }
 
-/* bez animacji: notatnik od razu otwarty */
-@media(prefers-reduced-motion:reduce){
+/* Static cover on narrow or short screens and with reduced motion. */
+@media (max-width:860px), (max-height:650px), (prefers-reduced-motion:reduce){
   .nb-open{height:auto}
-  .nb-open-stage{position:static;height:auto;padding:80px 20px;perspective:none}
-  .nb-cover{position:relative;inset:auto;transform:none;margin-bottom:24px}
-  .nb-book{aspect-ratio:auto;max-height:none;width:min(92vw,560px)}
-  .nb-book-page{position:relative;inset:auto}
+  .nb-open-stage{position:static;height:auto;padding:104px 20px 64px;perspective:none}
+  .nb-cover{position:relative;inset:auto;transform:none}
+  .nb-book{display:flex;flex-direction:column-reverse;gap:20px;aspect-ratio:auto;max-height:none;width:min(100%,560px)}
+  .nb-book-page{position:relative;inset:auto;padding:32px 24px}
+  .nb-rings{display:none}
   .nb-scroll-hint{display:none}
   .nb-scroll-hint i::after{animation:none}
+}
+
+@media (max-width: 380px) {
+  .nb-book-page { min-height: 320px; }
 }
 
 /* ---------- fix: sticky wymaga, żeby przodkowie nie tworzyli

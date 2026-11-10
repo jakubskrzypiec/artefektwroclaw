@@ -61,27 +61,22 @@
     : null;
 
   const registerMotion = (root = document) => {
-    const sections = [...(root.querySelectorAll?.('main > section, .site-footer') || [])];
-    sections.forEach(section => {
-      if (section.classList.contains('motion-section')) return;
-      section.classList.add('motion-section');
-    });
-
     const itemSelector = [
       '.section-kicker','.sub-kicker','.intro-main','.service-row','.services-lead','.services-index a',
       '.featured-card','.oversize-card','.process-editorial figure','.home-process-grid li','.home-contact-grid > *',
       '.social-faq-grid > *','.process-list li','.offer-detail-list article','.deliverables-grid > div',
-      '.offer-wide-head > *','.offer-wide-item','.offer-wide-item > *','.offer-process-content > *','.offer-process-media',
+      '.offer-wide-head > *','.offer-wide-item','.offer-process-content > *','.offer-process-media',
       '.contact-layout > *','.accordion-item','.sub-title-hero-inner > *','.sub-gallery-head > *','[data-project-filters] button',
       '.gallery-card','.contact-editorial-head > *','.contact-channel','.contact-brief-aside-inner > *',
       '.contact-brief-form-wrap > *','.contact-social-row a','.contact-studio-meta > *','.contact-signoff-inner > *',
-      '.footer-grid > *','.footer-bottom > *','.about-v3 .kicker','.about-origin-copy > *','.about-process-grid > *',
-      '.about-team-grid > *','.about-showroom-shell > *','.about-why-grid > *','.nb-card'
+      '.footer-grid > *','.footer-bottom > *','.about-origin-grid > *','.about-process-grid > *',
+      '.about-team-grid > *','.about-showroom-shell > *','.about-why-grid > *','.nb-card',
+      '.manifesto-image','.manifesto-copy','.sub-statement figure','.contact-portrait'
     ].join(',');
 
-    const items = [...(root.querySelectorAll?.(itemSelector) || [])];
+    const items = [...root.querySelectorAll(itemSelector)];
     items.forEach((item, index) => {
-      if (item.classList.contains('motion-item')) return;
+      if (item.classList.contains('motion-item') || item.parentElement.closest('.motion-item')) return;
       item.classList.add('motion-item');
       item.style.setProperty('--motion-delay', `${Math.min(index % 3, 2) * 36}ms`);
       if (motionObserver) motionObserver.observe(item);
@@ -223,6 +218,7 @@
         button.classList.toggle('is-active', active);
         button.setAttribute('aria-pressed', String(active));
       }
+      galleryHost.querySelectorAll('.motion-item').forEach(card => motionObserver?.unobserve(card));
       galleryHost.replaceChildren(...visibleFrames.map((frame, position) => {
         const card = document.createElement('button');
         card.type = 'button';
@@ -290,47 +286,23 @@
     document.querySelector('[data-quote-next]')?.addEventListener('click', () => showQuote(quoteIndex + 1));
   }
 
-  const syncAccordionPanel = (item, open) => {
-    const panel = item.querySelector('.accordion-panel');
-    if (!panel) return;
-    panel.style.maxHeight = open ? `${panel.scrollHeight + 12}px` : '0px';
-  };
-
   document.querySelectorAll('.accordion-item').forEach(item => {
     const button = item.querySelector('button');
     const panel = item.querySelector('.accordion-panel');
-    if (panel) syncAccordionPanel(item, item.classList.contains('is-open'));
+    if (!button || !panel) return;
+    panel.inert = !item.classList.contains('is-open');
 
-    button?.addEventListener('click', () => {
+    button.addEventListener('click', () => {
       const willOpen = !item.classList.contains('is-open');
-
       item.parentElement.querySelectorAll('.accordion-item').forEach(entry => {
-        entry.classList.remove('is-open');
-        entry.querySelector('button')?.setAttribute('aria-expanded', 'false');
-        const icon = entry.querySelector('b');
-        if (icon) icon.textContent = '+';
-        syncAccordionPanel(entry, false);
+        const active = entry === item && willOpen;
+        entry.classList.toggle('is-open', active);
+        entry.querySelector('button').setAttribute('aria-expanded', String(active));
+        entry.querySelector('.accordion-panel').inert = !active;
+        entry.querySelector('button b').textContent = active ? '−' : '+';
       });
-
-      if (willOpen) {
-        item.classList.add('is-open');
-        button.setAttribute('aria-expanded', 'true');
-        const icon = item.querySelector('b');
-        if (icon) icon.textContent = '−';
-        requestAnimationFrame(() => syncAccordionPanel(item, true));
-      }
     });
   });
-
-  let resizeTicking = false;
-  window.addEventListener('resize', () => {
-    if (resizeTicking) return;
-    resizeTicking = true;
-    requestAnimationFrame(() => {
-      resizeTicking = false;
-      document.querySelectorAll('.accordion-item.is-open').forEach(item => syncAccordionPanel(item, true));
-    });
-  }, { passive: true });
 
   const socialFloat = document.querySelector('[data-social-float]');
   const socialFloatClose = document.querySelector('[data-social-float-close]');
@@ -340,6 +312,7 @@
 
     if (!dismissed) {
       window.setTimeout(() => {
+        if (window.matchMedia('(max-width: 640px)').matches) return;
         socialFloat.classList.add('is-visible');
         socialFloat.setAttribute('aria-hidden', 'false');
       }, 1800);

@@ -791,7 +791,7 @@
   border-bottom:1px solid var(--sub-line);
   color:var(--sub-ink);
   overflow:hidden;
-  transition:color .35s ease,padding .35s ease,background .35s ease;
+  transition:color var(--motion-fast) var(--motion-ease),background-color var(--motion-fast) var(--motion-ease);
 }
 .sub-contact .contact-channel::before{
   content:"";
@@ -826,7 +826,7 @@
   transition:transform .35s ease;
 }
 @media (hover:hover){
-  .sub-contact .contact-channel:hover{color:#fff;padding-left:20px}
+  .sub-contact .contact-channel:hover{color:#fff}
   .sub-contact .contact-channel:hover::before{transform:translateY(0)}
   .sub-contact .contact-channel:hover .contact-channel-no{color:rgba(255,255,255,.55)}
   .sub-contact .contact-channel:hover .contact-channel-arrow{transform:translate(4px,-4px)}
@@ -1304,13 +1304,6 @@
   .sub-page .sub-contact .contact-channel:hover{
     background:rgba(7,26,37,.04);
   }
-  .sub-page .offer-wide-item:hover h3,
-  .sub-page .sub-contact .contact-editorial-head h2:hover,
-  .sub-page .sub-gallery-head h2:hover,
-  .sub-page .sub-title-row h1:hover,
-  .sub-page .offer-process-content h2:hover{
-    transform:translateX(2px);
-  }
 }
 
 
@@ -1377,10 +1370,6 @@
   .sub-page .sub-filter-bar button:hover{
     transform:translateY(-2px);
   }
-  .sub-page .offer-wide-body a:hover,
-  .sub-page .contact-social-row a:hover{
-    letter-spacing:.16em;
-  }
 }
 
 
@@ -1389,15 +1378,15 @@
    Jeden rozmiar dla H1 podstrony i jeden dla każdego H2 sekcji.
    =========================================================== */
 .sub-page{
-  --sub-page-title-size:clamp(62px,6.6vw,104px);
-  --sub-main-heading-size:clamp(46px,5.1vw,80px);
-  --sub-heading-leading:.95;
-  --sub-heading-tracking:-.05em;
+  --sub-page-title-size:clamp(48px,6.6vw,104px);
+  --sub-main-heading-size:var(--section-heading-size);
+  --sub-heading-leading:var(--section-heading-leading);
+  --sub-heading-tracking:var(--section-heading-tracking);
 }
 
 .sub-page .sub-title-row h1{
   font-size:var(--sub-page-title-size) !important;
-  line-height:.92 !important;
+  line-height:1.02 !important;
   letter-spacing:var(--sub-heading-tracking) !important;
 }
 
@@ -1434,17 +1423,7 @@
   letter-spacing:inherit !important;
 }
 
-@media(max-width:1100px){
-  .sub-page{
-    --sub-page-title-size:clamp(54px,6.4vw,84px);
-    --sub-main-heading-size:clamp(42px,5.4vw,66px);
-  }
-}
 @media(max-width:780px){
-  .sub-page{
-    --sub-page-title-size:clamp(48px,13vw,68px);
-    --sub-main-heading-size:clamp(38px,10.5vw,56px);
-  }
   .sub-offer .offer-wide-intro .offer-wide-head h2{max-width:100% !important}
 }
 
@@ -1690,8 +1669,8 @@
   margin:42px 0 52px;
   color:#fff;
   font-size:var(--sub-main-heading-size) !important;
-  line-height:.95 !important;
-  letter-spacing:-.05em !important;
+  line-height:var(--section-heading-leading) !important;
+  letter-spacing:var(--section-heading-tracking) !important;
   quotes:none;
 }
 .sub-projects .sub-statement-copy-text{

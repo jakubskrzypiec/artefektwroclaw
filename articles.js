@@ -3,14 +3,14 @@
   var stage = document.querySelector('[data-notebook]');
   if (!stage) return;
 
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    stage.style.setProperty('--nb-progress', '1');
-    return;
-  }
+  var staticCover = window.matchMedia('(max-width: 860px), (max-height: 650px), (prefers-reduced-motion: reduce)');
+  var frame = 0;
 
   var last = -1;
 
   function update() {
+    frame = 0;
+    if (staticCover.matches) return;
     var rect = stage.getBoundingClientRect();
     var travel = rect.height - window.innerHeight;
     var progress;
@@ -32,8 +32,11 @@
     stage.style.setProperty('--nb-progress', String(rounded));
   }
 
-  window.addEventListener('scroll', update, { passive: true });
-  window.addEventListener('resize', update);
-  window.addEventListener('orientationchange', update);
+  function scheduleUpdate() {
+    if (!frame) frame = requestAnimationFrame(update);
+  }
+
+  window.addEventListener('scroll', scheduleUpdate, { passive: true });
+  window.addEventListener('resize', scheduleUpdate, { passive: true });
   update();
 })();

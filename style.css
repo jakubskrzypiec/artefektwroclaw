@@ -8,6 +8,10 @@
   --line:rgba(16,46,63,.18);
   --container:min(1280px,calc(100% - 80px));
   --header:92px;
+  --section-heading-size:clamp(36px,5.1vw,80px);
+  --card-heading-size:clamp(22px,2vw,34px);
+  --section-heading-leading:1.06;
+  --section-heading-tracking:-.045em;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -22,7 +26,7 @@ button{cursor:pointer}
 h1,h2,h3,p{margin:0}
 h1,h2,h3{font-weight:400;letter-spacing:-.055em;line-height:.98}
 h1{font-size:clamp(58px,7.8vw,128px)}
-h2{font-size:clamp(42px,5vw,76px)}
+h2{font-size:var(--section-heading-size)}
 h3{font-size:clamp(24px,2.1vw,34px)}
 p{font-size:15px;line-height:1.75;color:var(--muted)}
 .eyebrow,.section-kicker{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase}
@@ -192,8 +196,8 @@ body[data-page="home"] .hero-slide img{image-rendering:auto}
 .services-lead>p{max-width:330px;margin:54px 0;color:rgba(255,255,255,.75);font-size:18px;line-height:1.65}
 .services-lead .text-link{margin-top:auto}
 .services-index{border-top:1px solid var(--line)}
-.services-index>a{display:grid;grid-template-columns:52px minmax(220px,1fr) minmax(210px,.85fr);gap:24px;align-items:center;min-height:98px;border-bottom:1px solid var(--line);transition:padding .3s,background .3s}
-.services-index>a:hover{padding-inline:20px;background:rgba(172,190,212,.26)}
+.services-index>a{display:grid;grid-template-columns:52px minmax(220px,1fr) minmax(210px,.85fr);gap:24px;align-items:center;min-height:98px;border-bottom:1px solid var(--line);transition:background-color var(--motion-fast) var(--motion-ease)}
+.services-index>a:hover{background:rgba(172,190,212,.26)}
 .services-index span{font-size:9px;letter-spacing:.15em;color:#728895}
 .services-index h3{font-size:clamp(24px,2vw,32px)}
 .services-index p{font-size:12px;line-height:1.55}
@@ -508,28 +512,6 @@ body select{
 .reveal{transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1) !important;}
 
 
-/* MOTION SYSTEM v3 — consistent scroll + hover interactions across the whole site */
-.motion-section{
-  opacity:0;
-  transform:translateY(34px);
-  transition:opacity .85s cubic-bezier(.2,.7,.2,1),transform .85s cubic-bezier(.2,.7,.2,1);
-  will-change:opacity,transform;
-}
-.motion-section.is-motion-visible{
-  opacity:1;
-  transform:none;
-}
-.motion-item{
-  opacity:0;
-  transform:translateY(22px);
-  transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1);
-  transition-delay:var(--motion-delay,0ms);
-  will-change:opacity,transform;
-}
-.motion-item.is-motion-visible{
-  opacity:1;
-  transform:none;
-}
 .motion-hover{
   transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s ease,background-color .3s ease,color .3s ease,border-color .3s ease,opacity .3s ease,filter .3s ease !important;
 }
@@ -560,30 +542,8 @@ body select{
   }
 }
 
-/* Smooth accordion opening everywhere */
-.accordion-panel{
-  display:block !important;
-  max-height:0;
-  overflow:hidden;
-  opacity:0;
-  transform:translateY(-8px);
-  transition:max-height .52s cubic-bezier(.2,.7,.2,1),opacity .36s ease,transform .42s cubic-bezier(.2,.7,.2,1),padding-top .42s ease,padding-bottom .42s ease !important;
-  pointer-events:none;
-}
-.accordion-item.is-open .accordion-panel{
-  opacity:1;
-  transform:none;
-  pointer-events:auto;
-}
-.accordion-item button b{
-  transition:transform .36s cubic-bezier(.2,.7,.2,1),background-color .3s ease,border-color .3s ease !important;
-}
-.accordion-item.is-open button b{
-  transform:rotate(45deg);
-}
-
 @media(prefers-reduced-motion:reduce){
-  .motion-section,.motion-item{opacity:1!important;transform:none!important;transition:none!important}
+  .motion-item{opacity:1!important;transform:none!important;transition:none!important}
   .accordion-panel{transition:none!important}
 }
 
@@ -920,12 +880,6 @@ body[data-page="home"] .hero-overlay{
    Animowanie całej sekcji (opacity + translateY) odsłaniało jasne
    tło body między sekcjami. Rusza się teraz tylko zawartość.
    =========================================================== */
-.motion-section{
-  opacity:1 !important;
-  transform:none !important;
-  transition:none !important;
-  will-change:auto;
-}
 
 
 /* ===========================================================
@@ -996,10 +950,10 @@ body[data-page="home"] .hero-overlay{
 .hero-content h1{line-height:.94}
 .hero-line{
   overflow:hidden;
-  padding-bottom:.2em;
-  margin-bottom:-.16em;
+  padding-bottom:.14em;
+  margin-bottom:-.08em;
 }
-.hero-line:last-child{margin-bottom:-.2em}
+.hero-line:last-child{margin-bottom:0}
 
 
 /* === Client revisions 2026-09-16 === */
@@ -1301,4 +1255,15 @@ body[data-page="home"] .home-social-card{
 .faq-clean-list,.faq-clean-bottom{margin-left:auto;margin-right:auto;}
 @media(max-width:900px){
   .faq-clean-head{margin-bottom:36px;}
+}
+
+/* Shared heading scale */
+body[data-page="home"] main h2 {
+  font-size: var(--section-heading-size) !important;
+  line-height: var(--section-heading-leading);
+  letter-spacing: var(--section-heading-tracking);
+}
+body[data-page="home"] main h3 {
+  font-size: var(--card-heading-size);
+  line-height: 1.14;
 }

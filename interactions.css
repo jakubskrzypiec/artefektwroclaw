@@ -4,9 +4,9 @@
    =========================================================== */
 :root{
   --motion-ease:cubic-bezier(.22,.78,.28,1);
-  --motion-fast:.32s;
-  --motion-base:.68s;
-  --motion-media:.82s;
+  --motion-fast:.26s;
+  --motion-base:.48s;
+  --motion-media:.56s;
   --motion-hero:1.05s;
 }
 
@@ -61,20 +61,12 @@
   backface-visibility:hidden;
 }
 
-/* bardzo lekki parallax — bez ciężkiego pływania */
-.fx-hero .hero-slider{
-  top:-2%;
-  height:104%;
-  transform:translate3d(0,var(--fx-hero,0px),0);
-  will-change:transform;
-}
-
 /* ===========================================================
    WEJŚCIA — jeden styl na wszystkich podstronach
    =========================================================== */
 .motion-item{
   opacity:0;
-  transform:translate3d(0,12px,0);
+  transform:translate3d(0,8px,0);
   transition:
     opacity var(--motion-base) var(--motion-ease) var(--motion-delay,0ms),
     transform var(--motion-base) var(--motion-ease) var(--motion-delay,0ms) !important;
@@ -87,21 +79,6 @@
 }
 .motion-item.motion-media{
   transition-duration:var(--motion-media) !important;
-}
-
-/* pojedyncze kadry, które nie są motion-item — ten sam język ruchu */
-.fx-wipe{
-  opacity:0;
-  transform:translate3d(0,12px,0);
-  transition:
-    opacity var(--motion-media) var(--motion-ease),
-    transform var(--motion-media) var(--motion-ease);
-  will-change:opacity,transform;
-}
-.fx-wipe.fx-in{
-  opacity:1;
-  transform:translate3d(0,0,0);
-  will-change:auto;
 }
 
 /* ---------- linki tekstowe ---------- */
@@ -178,14 +155,27 @@
 }
 
 /* ---------- akordeony ---------- */
-.accordion-panel{
-  overflow:hidden;
-  transition:max-height .48s var(--motion-ease),opacity .34s ease !important;
+.accordion-item .accordion-panel {
+  display: grid !important;
+  grid-template-rows: 0fr;
+  max-height: none;
+  padding-block: 0 !important;
+  transform: none;
+  transition: grid-template-rows var(--motion-base) var(--motion-ease),
+    opacity var(--motion-fast) var(--motion-ease) !important;
 }
-.accordion-item:not(.is-open) .accordion-panel{opacity:0}
-.accordion-item.is-open .accordion-panel{opacity:1}
-.accordion-item button b{
-  transition:transform var(--motion-fast) var(--motion-ease),border-color var(--motion-fast) ease;
+.accordion-item.is-open .accordion-panel {
+  grid-template-rows: 1fr;
+}
+.accordion-answer {
+  min-height: 0;
+  overflow: hidden;
+}
+.accordion-answer p {
+  padding-bottom: 24px;
+}
+.accordion-item.is-open button b {
+  transform: none;
 }
 
 /* ---------- spójne ikony social ---------- */
@@ -274,17 +264,15 @@
 /* ---------- ograniczony ruch ---------- */
 @media(prefers-reduced-motion:reduce){
   .fx-progress{display:none}
-  .fx-hero .hero-slider{top:0;height:100%;transform:none}
   .hero-home .hero-slide,
   .hero-home .hero-slide.is-active,
   .hero-home .hero-slide.is-prev,
   .hero-home .hero-slide.is-next{
     transition:none !important;
   }
+  .accordion-item .accordion-panel,
   .motion-item,
-  .motion-item.is-motion-visible,
-  .fx-wipe,
-  .fx-wipe.fx-in{
+  .motion-item.is-motion-visible{
     opacity:1 !important;
     transform:none !important;
     transition:none !important;
@@ -297,4 +285,8 @@
   *,*::before,*::after{
     scroll-behavior:auto !important;
   }
+}
+
+@media (max-width: 640px) {
+  .social-float { display: none; }
 }
