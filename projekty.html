@@ -41,11 +41,22 @@
       <div class="sub-container">
         <div class="sub-section-head sub-gallery-head">
           <div class="sub-kicker"><span>02</span><p>Portfolio</p></div>
-          <h2>Wnętrza Artefekt.</h2>
-          <p>Wybierz rodzaj wnętrza, aby zobaczyć galerię wizualizacji.</p>
+          <h2>Wybrane wizualizacje Artefekt.</h2>
+          <p>Filtruj według rodzaju wnętrza lub przeglądaj całość. Kliknij zdjęcie, aby je powiększyć.</p>
         </div>
-        <div class="portfolio-grid" data-project-gallery></div>
+        <div class="sub-filter-bar" id="filtry-portfolio" data-project-filters aria-label="Filtruj wizualizacje">
+          <button type="button" class="is-active" data-filter="all" aria-pressed="true">Wszystkie</button>
+          <button type="button" data-filter="strefy-dzienne" aria-pressed="false">Strefa dzienna</button>
+          <button type="button" data-filter="kuchnie" aria-pressed="false">Kuchnia</button>
+          <button type="button" data-filter="lazienki" aria-pressed="false">Łazienka</button>
+          <button type="button" data-filter="sypialnie" aria-pressed="false">Sypialnia</button>
+          <button type="button" data-filter="pokoje-dzieciece" aria-pressed="false">Pokój dziecięcy</button>
+          <button type="button" data-filter="biuro" aria-pressed="false">Biuro</button>
+          <button type="button" data-filter="strefy-wejscia" aria-pressed="false">Strefa wejścia</button>
+          <button type="button" data-filter="pozostale-wnetrza" aria-pressed="false">Inne</button>
+        </div>
       </div>
+      <div class="projects-gallery sub-project-gallery" data-project-gallery></div>
     </section>
 
     <section class="sub-statement">

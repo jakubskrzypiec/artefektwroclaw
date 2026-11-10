@@ -187,25 +187,24 @@
     const close = lightbox.querySelector('.lightbox-close');
     const prev = lightbox.querySelector('[data-lightbox-prev]');
     const next = lightbox.querySelector('[data-lightbox-next]');
-    let current;
+    let visibleFrames = [];
     let trigger;
     let index;
 
     const show = step => {
-      const count = current.images.length;
+      const count = visibleFrames.length;
       index = (index + step + count) % count;
-      const frame = current.images[index];
+      const frame = visibleFrames[index];
       image.src = frame.src;
       image.alt = frame.alt;
-      title.textContent = current.title;
+      title.textContent = frame.title;
       number.textContent = `${index + 1} / ${count}`;
       prev.hidden = next.hidden = count < 2;
     };
 
-    const openGallery = (gallery, button) => {
-      current = gallery;
+    const openGallery = (position, button) => {
       trigger = button;
-      index = 0;
+      index = position;
       show(0);
       lightbox.classList.add('is-open');
       lightbox.setAttribute('aria-hidden', 'false');
@@ -213,26 +212,45 @@
       close.focus();
     };
 
-    for (const gallery of window.ARTEFEKT_GALLERIES || []) {
-      const card = document.createElement('button');
-      card.type = 'button';
-      card.className = 'portfolio-card';
-      card.id = gallery.id;
-      const cover = document.createElement('img');
-      cover.src = gallery.cover;
-      cover.alt = '';
-      cover.decoding = 'async';
-      const label = document.createElement('span');
-      label.className = 'portfolio-card-label';
-      const name = document.createElement('strong');
-      name.textContent = gallery.title;
-      const count = document.createElement('small');
-      count.textContent = `Kadry · ${gallery.images.length}`;
-      label.append(name, count);
-      card.append(cover, label);
-      card.addEventListener('click', () => openGallery(gallery, card));
-      galleryHost.append(card);
+    const galleries = window.ARTEFEKT_GALLERIES || [];
+    const filters = [...document.querySelectorAll('[data-project-filters] button')];
+    const renderGallery = filter => {
+      visibleFrames = galleries
+        .filter(gallery => filter === 'all' || gallery.id === filter)
+        .flatMap(gallery => gallery.images.map(frame => ({ ...frame, title: gallery.title })));
+      for (const button of filters) {
+        const active = button.dataset.filter === filter;
+        button.classList.toggle('is-active', active);
+        button.setAttribute('aria-pressed', String(active));
+      }
+      galleryHost.replaceChildren(...visibleFrames.map((frame, position) => {
+        const card = document.createElement('button');
+        card.type = 'button';
+        card.className = 'gallery-card';
+        card.setAttribute('aria-label', `Otwórz zdjęcie ${position + 1}: ${frame.title}`);
+        const image = document.createElement('img');
+        image.src = frame.src;
+        image.alt = frame.alt;
+        image.loading = 'lazy';
+        image.decoding = 'async';
+        const label = document.createElement('span');
+        label.textContent = `${String(position + 1).padStart(2, '0')} · ${frame.title}`;
+        card.append(image, label);
+        card.addEventListener('click', () => openGallery(position, card));
+        return card;
+      }));
+      registerMotion(galleryHost);
+    };
+    for (const button of filters) {
+      button.addEventListener('click', () => renderGallery(button.dataset.filter));
     }
+    const applyFilterFromUrl = () => {
+      const requested = filters.find(button => button.dataset.filter === location.hash.slice(1));
+      renderGallery(requested?.dataset.filter || 'all');
+      if (requested) requested.scrollIntoView({ block: 'center' });
+    };
+    applyFilterFromUrl();
+    window.addEventListener('hashchange', applyFilterFromUrl);
 
     const closeGallery = () => {
       lightbox.classList.remove('is-open');
@@ -259,7 +277,6 @@
         }
       }
     });
-    document.getElementById(location.hash.slice(1))?.scrollIntoView();
   }
 
   const quotes = [...document.querySelectorAll('.quote')];
