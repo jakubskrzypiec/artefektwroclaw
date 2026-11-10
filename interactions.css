@@ -30,6 +30,7 @@
    Slajdy są cały czas kryjące i poruszają się wyłącznie po X.
    =========================================================== */
 .hero-home .hero-slider{
+  z-index:0;
   overflow:hidden;
 }
 .hero-home .hero-slide{
