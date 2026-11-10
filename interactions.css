@@ -116,8 +116,7 @@
 .header-cta span,
 .nb-cta span,
 .offer-item-foot a b,
-.services-index>a b,
-.contact-channel-arrow{
+.services-index>a b{
   transition:transform var(--motion-fast) var(--motion-ease);
 }
 @media (hover:hover){
@@ -125,8 +124,7 @@
   .header-cta:hover span,
   .nb-cta:hover span,
   .offer-item-foot a:hover b,
-  .services-index>a:hover b,
-  .contact-channel:hover .contact-channel-arrow{
+  .services-index>a:hover b{
     transform:translate3d(3px,-3px,0);
   }
 }

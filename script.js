@@ -71,7 +71,7 @@
       '.contact-brief-form-wrap > *','.contact-social-row a','.contact-studio-meta > *','.contact-signoff-inner > *',
       '.footer-grid > *','.footer-bottom > *','.about-origin-grid > *','.about-process-grid > *',
       '.about-team-grid > *','.about-showroom-shell > *','.about-why-grid > *','.nb-card',
-      '.manifesto-image','.manifesto-copy','.sub-statement figure','.contact-portrait'
+      '.manifesto-image','.manifesto-copy','.sub-statement figure'
     ].join(',');
 
     const items = [...root.querySelectorAll(itemSelector)];

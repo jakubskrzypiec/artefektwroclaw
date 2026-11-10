@@ -791,18 +791,7 @@
   border-bottom:1px solid var(--sub-line);
   color:var(--sub-ink);
   overflow:hidden;
-  transition:color var(--motion-fast) var(--motion-ease),background-color var(--motion-fast) var(--motion-ease);
 }
-.sub-contact .contact-channel::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  z-index:0;
-  background:var(--sub-navy);
-  transform:translateY(102%);
-  transition:transform .42s cubic-bezier(.2,.7,.2,1);
-}
-.sub-contact .contact-channel>*{position:relative;z-index:1}
 .sub-contact .contact-channel-no{
   color:#82929a;
   font-size:9px;
@@ -823,13 +812,9 @@
 .sub-contact .contact-channel-arrow{
   justify-self:end;
   font-size:21px;
-  transition:transform .35s ease;
 }
 @media (hover:hover){
-  .sub-contact .contact-channel:hover{color:#fff}
-  .sub-contact .contact-channel:hover::before{transform:translateY(0)}
-  .sub-contact .contact-channel:hover .contact-channel-no{color:rgba(255,255,255,.55)}
-  .sub-contact .contact-channel:hover .contact-channel-arrow{transform:translate(4px,-4px)}
+  .sub-contact a.contact-channel:hover strong{text-decoration:underline;text-underline-offset:.18em;text-decoration-thickness:1px}
 }
 
 .sub-contact .contact-brief-editorial{
@@ -1297,12 +1282,8 @@
   .sub-page .sub-filter-bar button:hover,
   .sub-page .offer-wide-body a:hover,
   .sub-page .sub-contact .contact-social-row a:hover,
-  .sub-page .sub-contact .contact-channel:hover,
   .sub-page .accordion-item button:hover{
     transform:translateY(-1px);
-  }
-  .sub-page .sub-contact .contact-channel:hover{
-    background:rgba(7,26,37,.04);
   }
 }
 
@@ -1362,7 +1343,6 @@
 /* More responsive hover feedback without changing layout */
 @media (hover:hover){
   .sub-page .offer-wide-item:hover h3,
-  .sub-page .contact-channel:hover strong,
   .sub-page .accordion-item:hover button strong{
     transform:translateX(4px);
     transition:transform .32s cubic-bezier(.2,.7,.2,1);
@@ -1669,8 +1649,8 @@
   margin:42px 0 52px;
   color:#fff;
   font-size:var(--sub-main-heading-size) !important;
-  line-height:var(--section-heading-leading) !important;
-  letter-spacing:var(--section-heading-tracking) !important;
+  line-height:1.12 !important;
+  letter-spacing:0 !important;
   quotes:none;
 }
 .sub-projects .sub-statement-copy-text{
@@ -1726,7 +1706,6 @@
   .sub-projects .sub-statement blockquote{
     max-width:100%;
     margin:30px 0 34px;
-    line-height:1.0 !important;
   }
   .sub-projects .sub-statement figure,
   .sub-projects .sub-statement figure img{min-height:430px}
@@ -1759,18 +1738,6 @@
 
 @media(max-width:1100px){.contact-channels{grid-template-columns:1fr 1fr}.about-intro-grid{grid-template-columns:1fr 1fr;gap:50px}.about-photo-placeholder{min-height:480px}}
 @media(max-width:760px){.sub-title-hero-inner{padding-top:106px}.contact-channels{grid-template-columns:1fr}.contact-photo-placeholder{min-height:190px}.about-intro{padding:84px 0}.about-intro-grid{grid-template-columns:1fr;gap:44px}.about-photo-placeholder{min-height:380px}.about-story-grid{grid-template-columns:1fr}.about-story article,.about-story article:nth-child(even){padding:52px 0;border-left:0}.about-story h2{font-size:40px}}
-
-.contact-portrait {
-  margin-block: 36px 0;
-  overflow: hidden;
-}
-.contact-portrait img {
-  display: block;
-  width: 100%;
-  height: clamp(210px, 29vw, 340px);
-  object-fit: cover;
-  object-position: center top;
-}
 
 @media (max-width: 760px) {
   .sub-projects .lightbox { padding: 58px 15px 76px; }
