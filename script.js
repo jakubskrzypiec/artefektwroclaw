@@ -178,93 +178,89 @@
     startAutoplay();
   }
 
-  const projects = window.ARTEFEKT_PROJECTS || [];
-  const featuredHost = document.querySelector('[data-featured-projects]');
-  if (featuredHost && projects.length) {
-    [17, 19, 26, 29, 40, 44].map(index => projects[index]).filter(Boolean).forEach(project => {
-      const card = document.createElement('figure');
-      card.className = 'featured-card';
-      card.innerHTML = `<a href="projekty.html"><img src="${project.img}" alt="${project.title} — projekt Artefekt" loading="lazy" decoding="async"><figcaption><span>${project.title}</span><span>${project.number} ↗</span></figcaption></a>`;
-      featuredHost.appendChild(card);
-    });
-    registerMotion(featuredHost);
-  }
-
   const galleryHost = document.querySelector('[data-project-gallery]');
-  const filterButtons = [...document.querySelectorAll('[data-project-filters] button')];
-  let visibleProjects = [...projects];
-  let lightboxIndex = 0;
+  if (galleryHost) {
+    const lightbox = document.querySelector('[data-lightbox]');
+    const image = lightbox.querySelector('[data-lightbox-image]');
+    const title = lightbox.querySelector('[data-lightbox-title]');
+    const number = lightbox.querySelector('[data-lightbox-number]');
+    const close = lightbox.querySelector('.lightbox-close');
+    const prev = lightbox.querySelector('[data-lightbox-prev]');
+    const next = lightbox.querySelector('[data-lightbox-next]');
+    let current;
+    let trigger;
+    let index;
 
-  const lightbox = document.querySelector('[data-lightbox]');
-  const lightboxImage = document.querySelector('[data-lightbox-image]');
-  const lightboxTitle = document.querySelector('[data-lightbox-title]');
-  const lightboxType = document.querySelector('[data-lightbox-type]');
-  const lightboxNumber = document.querySelector('[data-lightbox-number]');
+    const show = step => {
+      const count = current.images.length;
+      index = (index + step + count) % count;
+      const frame = current.images[index];
+      image.src = frame.src;
+      image.alt = frame.alt;
+      title.textContent = current.title;
+      number.textContent = `${index + 1} / ${count}`;
+      prev.hidden = next.hidden = count < 2;
+    };
 
-  const showLightboxItem = index => {
-    if (!visibleProjects.length || !lightbox) return;
-    lightboxIndex = (index + visibleProjects.length) % visibleProjects.length;
-    const project = visibleProjects[lightboxIndex];
-    lightboxImage.src = project.img;
-    lightboxImage.alt = `${project.title} — projekt Artefekt`;
-    lightboxTitle.textContent = project.title;
-    lightboxType.textContent = 'Artefekt Interior Design';
-    lightboxNumber.textContent = `${String(lightboxIndex + 1).padStart(2, '0')} / ${String(visibleProjects.length).padStart(2, '0')}`;
-  };
+    const openGallery = (gallery, button) => {
+      current = gallery;
+      trigger = button;
+      index = 0;
+      show(0);
+      lightbox.classList.add('is-open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      body.style.overflow = 'hidden';
+      close.focus();
+    };
 
-  const openLightbox = index => {
-    if (!lightbox) return;
-    showLightboxItem(index);
-    lightbox.classList.add('is-open');
-    lightbox.setAttribute('aria-hidden', 'false');
-    body.style.overflow = 'hidden';
-  };
-
-  const closeLightbox = () => {
-    if (!lightbox) return;
-    lightbox.classList.remove('is-open');
-    lightbox.setAttribute('aria-hidden', 'true');
-    body.style.overflow = '';
-  };
-
-  const renderGallery = filter => {
-    if (!galleryHost) return;
-    visibleProjects = filter === 'all' ? [...projects] : projects.filter(project => project.category === filter);
-    galleryHost.innerHTML = '';
-
-    visibleProjects.forEach((project, index) => {
+    for (const gallery of window.ARTEFEKT_GALLERIES || []) {
       const card = document.createElement('button');
       card.type = 'button';
-      card.className = 'gallery-card';
-      card.setAttribute('aria-label', `Otwórz: ${project.title}`);
-      card.innerHTML = `<img src="${project.img}" alt="${project.title} — wizualizacja Artefekt" loading="lazy" decoding="async"><span>${project.number} · ${project.title}</span>`;
-      card.addEventListener('click', () => openLightbox(index));
-      galleryHost.appendChild(card);
+      card.className = 'portfolio-card';
+      card.id = gallery.id;
+      const cover = document.createElement('img');
+      cover.src = gallery.cover;
+      cover.alt = '';
+      cover.decoding = 'async';
+      const label = document.createElement('span');
+      label.className = 'portfolio-card-label';
+      const name = document.createElement('strong');
+      name.textContent = gallery.title;
+      const count = document.createElement('small');
+      count.textContent = `Kadry · ${gallery.images.length} ↗`;
+      label.append(name, count);
+      card.append(cover, label);
+      card.addEventListener('click', () => openGallery(gallery, card));
+      galleryHost.append(card);
+    }
+
+    const closeGallery = () => {
+      lightbox.classList.remove('is-open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      body.style.overflow = '';
+      trigger.focus();
+    };
+    close.addEventListener('click', closeGallery);
+    prev.addEventListener('click', () => show(-1));
+    next.addEventListener('click', () => show(1));
+    lightbox.addEventListener('click', event => {
+      if (event.target === lightbox) closeGallery();
     });
-
-    registerMotion(galleryHost);
-  };
-
-  if (galleryHost) {
-    renderGallery('all');
-    filterButtons.forEach(button => button.addEventListener('click', () => {
-      filterButtons.forEach(item => item.classList.remove('is-active'));
-      button.classList.add('is-active');
-      renderGallery(button.dataset.filter);
-    }));
+    lightbox.addEventListener('keydown', event => {
+      if (event.key === 'Escape') closeGallery();
+      if (event.key === 'ArrowLeft') show(-1);
+      if (event.key === 'ArrowRight') show(1);
+      if (event.key === 'Tab') {
+        const controls = [close, prev, next].filter(button => !button.hidden);
+        const boundary = event.shiftKey ? controls[0] : controls.at(-1);
+        if (document.activeElement === boundary) {
+          event.preventDefault();
+          (event.shiftKey ? controls.at(-1) : controls[0]).focus();
+        }
+      }
+    });
+    document.getElementById(location.hash.slice(1))?.scrollIntoView();
   }
-
-  document.querySelector('.lightbox-close')?.addEventListener('click', closeLightbox);
-  document.querySelector('[data-lightbox-prev]')?.addEventListener('click', () => showLightboxItem(lightboxIndex - 1));
-  document.querySelector('[data-lightbox-next]')?.addEventListener('click', () => showLightboxItem(lightboxIndex + 1));
-  lightbox?.addEventListener('click', event => { if (event.target === lightbox) closeLightbox(); });
-
-  document.addEventListener('keydown', event => {
-    if (!lightbox?.classList.contains('is-open')) return;
-    if (event.key === 'Escape') closeLightbox();
-    if (event.key === 'ArrowLeft') showLightboxItem(lightboxIndex - 1);
-    if (event.key === 'ArrowRight') showLightboxItem(lightboxIndex + 1);
-  });
 
   const quotes = [...document.querySelectorAll('.quote')];
   if (quotes.length) {
