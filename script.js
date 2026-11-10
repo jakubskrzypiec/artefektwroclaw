@@ -227,7 +227,7 @@
       const name = document.createElement('strong');
       name.textContent = gallery.title;
       const count = document.createElement('small');
-      count.textContent = `Kadry · ${gallery.images.length} ↗`;
+      count.textContent = `Kadry · ${gallery.images.length}`;
       label.append(name, count);
       card.append(cover, label);
       card.addEventListener('click', () => openGallery(gallery, card));
