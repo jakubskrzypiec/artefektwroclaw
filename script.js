@@ -16,7 +16,7 @@
       const scrolled = forceSolid || window.scrollY > 22;
       siteHeader.classList.toggle('is-scrolled', scrolled);
       if (brandImage) {
-        const nextLogo = scrolled ? 'logo-primary.png' : 'logo-white.png';
+        const nextLogo = nav?.classList.contains('is-open') ? 'logo-white.png' : scrolled ? 'logo-primary.png' : 'logo-white.png';
         if (!brandImage.src.endsWith(nextLogo)) brandImage.src = nextLogo;
       }
     };
@@ -28,6 +28,7 @@
     };
 
     updateHeaderState();
+    window.addEventListener('artefekt:menu-change', updateHeaderState);
     window.addEventListener('scroll', requestHeaderUpdate, { passive: true });
   }
 
@@ -37,6 +38,8 @@
       menuToggle.classList.remove('is-open');
       menuToggle.setAttribute('aria-expanded', 'false');
       body.classList.remove('menu-open');
+      menuToggle.setAttribute('aria-label', 'Otwórz menu');
+      window.dispatchEvent(new Event('artefekt:menu-change'));
     };
 
     menuToggle.addEventListener('click', () => {
@@ -44,6 +47,23 @@
       menuToggle.classList.toggle('is-open', open);
       menuToggle.setAttribute('aria-expanded', String(open));
       body.classList.toggle('menu-open', open);
+      menuToggle.setAttribute('aria-label', open ? 'Zamknij menu' : 'Otwórz menu');
+      window.dispatchEvent(new Event('artefekt:menu-change'));
+      if (open) nav.querySelector('a')?.focus();
+    });
+
+    document.addEventListener('keydown', event => {
+      if (!nav.classList.contains('is-open')) return;
+      if (event.key === 'Escape') { closeMenu(); menuToggle.focus(); }
+      if (event.key === 'Tab') {
+        const controls = [menuToggle, ...nav.querySelectorAll('a')];
+        const first = controls[0], last = controls.at(-1);
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+        if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+      }
+    });
+    window.addEventListener('resize', () => {
+      if (window.matchMedia('(min-width: 1101px)').matches) closeMenu();
     });
 
     nav.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
@@ -209,17 +229,15 @@
 
     const galleries = window.ARTEFEKT_GALLERIES || [];
     const filters = [...document.querySelectorAll('[data-project-filters] button')];
-    const renderGallery = filter => {
-      visibleFrames = galleries
-        .filter(gallery => filter === 'all' || gallery.id === filter)
-        .flatMap(gallery => gallery.images.map(frame => ({ ...frame, title: gallery.title })));
-      for (const button of filters) {
-        const active = button.dataset.filter === filter;
-        button.classList.toggle('is-active', active);
-        button.setAttribute('aria-pressed', String(active));
-      }
-      galleryHost.querySelectorAll('.motion-item').forEach(card => motionObserver?.unobserve(card));
-      galleryHost.replaceChildren(...visibleFrames.map((frame, position) => {
+    const more = document.querySelector('[data-gallery-more]');
+    const countLabel = document.querySelector('[data-gallery-count]');
+    const pageSize = 12;
+    let renderedCount = 0;
+    const appendFrames = () => {
+      const start = renderedCount;
+      const end = Math.min(start + pageSize, visibleFrames.length);
+      galleryHost.append(...visibleFrames.slice(start, end).map((frame, offset) => {
+        const position = start + offset;
         const card = document.createElement('button');
         card.type = 'button';
         card.className = 'gallery-card';
@@ -235,10 +253,35 @@
         card.addEventListener('click', () => openGallery(position, card));
         return card;
       }));
+      renderedCount = end;
+      if (more) more.hidden = renderedCount >= visibleFrames.length;
+      if (countLabel) countLabel.textContent = `Wyświetlono ${renderedCount} z ${visibleFrames.length} zdjęć`;
       registerMotion(galleryHost);
     };
+    more?.addEventListener('click', () => {
+      const firstNewIndex = renderedCount;
+      appendFrames();
+      galleryHost.children[firstNewIndex]?.focus({ preventScroll: true });
+    });
+    const renderGallery = filter => {
+      visibleFrames = galleries
+        .filter(gallery => filter === 'all' || gallery.id === filter)
+        .flatMap(gallery => gallery.images.map(frame => ({ ...frame, title: gallery.title })));
+      for (const button of filters) {
+        const active = button.dataset.filter === filter;
+        button.classList.toggle('is-active', active);
+        button.setAttribute('aria-pressed', String(active));
+      }
+      galleryHost.querySelectorAll('.motion-item').forEach(card => motionObserver?.unobserve(card));
+      galleryHost.replaceChildren();
+      renderedCount = 0;
+      appendFrames();
+    };
     for (const button of filters) {
-      button.addEventListener('click', () => renderGallery(button.dataset.filter));
+      button.addEventListener('click', () => {
+        renderGallery(button.dataset.filter);
+        history.replaceState(null, '', `#${button.dataset.filter}`);
+      });
     }
     const applyFilterFromUrl = () => {
       const requested = filters.find(button => button.dataset.filter === location.hash.slice(1));
@@ -325,21 +368,4 @@
     });
   }
 
-  const form = document.getElementById('contact-form');
-  form?.addEventListener('submit', event => {
-    event.preventDefault();
-    const data = new FormData(form);
-    const subject = encodeURIComponent(`Zapytanie ze strony Artefekt — ${data.get('name') || ''}`);
-    const message = [
-      `Imię i nazwisko: ${data.get('name') || ''}`,
-      `E-mail: ${data.get('email') || ''}`,
-      `Telefon: ${data.get('phone') || ''}`,
-      `Rodzaj inwestycji: ${data.get('type') || ''}`,
-      `Lokalizacja: ${data.get('location') || ''}`,
-      `Metraż: ${data.get('size') || ''}`,
-      '',
-      data.get('message') || ''
-    ].join('\n');
-    window.location.href = `mailto:studio@artefekt.pl?subject=${subject}&body=${encodeURIComponent(message)}`;
-  });
 })();
