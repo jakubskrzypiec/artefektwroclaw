@@ -6,11 +6,11 @@ Gałąź `poprawki/showroom-pdf` zawiera zmiany z 48-stronicowej notatki oraz ma
 
 - Strona główna: nowa kolejność sekcji, podtytuł hero, cytaty klientów, nazwy kategorii, showroom, widoczne opisy usług, zdjęcie procesu, FAQ przed kontaktem, adres i mapa.
 - Nawigacja: przycięte logo, większe napisy, przycisk „Umów spotkanie”, pełnoekranowe menu mobilne po przewinięciu, kontakt w menu, obsługa klawiatury.
-- O nas i oferta: tekst zespołu, biblioteka próbek, galeria showroomu, zakres i cena konsultacji, poprawki wizualizacji, czas i wycena, zdjęcia 10 i 11.
+- O nas i oferta: tekst zespołu, biblioteka próbek, zakres i cena konsultacji, poprawki wizualizacji, czas i wycena, zdjęcia 10 i 11.
 - Projekty: 39 zdjęć realizacji, nowa kolejność i nazwy kategorii, 12 zdjęć na start oraz „Pokaż więcej”, zdjęcie zespołu w sekcji Podejście. Powiększenie pozwala przeglądać całą aktywną kategorię.
 - Blog: usunięte trzy stare teksty; osiem pełnych artykułów autorek z PDF-ów, ilustracje, zdjęcia kart, autorki, data z materiałów (16 listopada 2026), dane strukturalne i mapa strony.
 - Formularze: FormSubmit AJAX, walidacja, blokada ponownego wysłania w trakcie żądania, komunikaty sukcesu i błędu, zachowanie danych przy błędzie, pole przeciw spamowi, wynajem w typie inwestycji.
-- YouTube ukryty. Link do polityki w stopkach i formularzach. Mapa Google nie łączy się z Google, dopóki odwiedzający nie naciśnie przycisku. Zgodę można wycofać w stopce.
+- YouTube ukryty. Link do polityki w stopkach i formularzach. Zgodnie z późniejszą korektą mapa Google jest widoczna od razu, jako osadzona ramka w obu sekcjach kontaktu.
 
 ## Do uzupełnienia przed publikacją na main
 
@@ -32,4 +32,10 @@ Gałąź `poprawki/showroom-pdf` zawiera zmiany z 48-stronicowej notatki oraz ma
 - Kontrola składni wszystkich plików JavaScript i `git diff --check`.
 - Kontrola wszystkich lokalnych odnośników, obrazów i skryptów, unikalności identyfikatorów HTML, danych strukturalnych, ośmiu nowych wpisów, kolejności kategorii i zgodności FAQ z plikiem źródłowym.
 - Podgląd w przeglądarce przy szerokości 1440, 390 i 320 px: menu po przewinięciu, widoczność początku artykułu, brak poziomego przepełnienia głównych podstron, filtrowanie i dokładanie zdjęć (12 → 24), powiększenie (24/39 → 25/39), ponowne filtrowanie.
-- Sprawdzone ładowanie mapy po zgodzie i usunięcie ramki po wycofaniu zgody.
+- Pierwotnie sprawdzono mechanizm zgody na mapy; późniejsza korekta zastępuje go bezpośrednio widoczną mapą Google.
+
+## Późniejsze korekty użytkownika
+
+- Tytuł Martyny: mgr inż. architekt.
+- Usunięte trzy zdjęcia pod opisem showroomu na stronie O nas.
+- Mapa Google widoczna od razu w obu sekcjach kontaktu, bez przycisku ładowania.
