@@ -337,7 +337,7 @@
 
     button.addEventListener('click', () => {
       const willOpen = !item.classList.contains('is-open');
-      item.parentElement.querySelectorAll('.accordion-item').forEach(entry => {
+      (item.closest('.accordion-list') || item.parentElement).querySelectorAll('.accordion-item').forEach(entry => {
         const active = entry === item && willOpen;
         entry.classList.toggle('is-open', active);
         entry.querySelector('button').setAttribute('aria-expanded', String(active));

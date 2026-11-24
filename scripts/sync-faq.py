@@ -19,8 +19,20 @@ for i, item in enumerate(items, 1):
         f'id="faq-answer-{i}" role="region" aria-labelledby="faq-question-{i}">'
         f'<div class="accordion-answer"><p>{html.escape(item["answer"])}</p></div></div></article>'
     )
-replacement = '<!-- FAQ:START -->\n' + '\n'.join(markup) + '\n<!-- FAQ:END -->'
-for filename in ['index.html', 'kontakt.html']:
+def region(body):
+    return '<!-- FAQ:START -->\n' + body + '\n<!-- FAQ:END -->'
+
+
+# Strona główna: pytania w trzech kolumnach (np. 12 pytań = 3 × 4).
+per_column = -(-len(markup) // 3)
+columns = [markup[i:i + per_column] for i in range(0, len(markup), per_column)]
+regions = {
+    'index.html': region('\n'.join(
+        '<div class="faq-col">\n' + '\n'.join(column) + '\n</div>' for column in columns
+    )),
+    'kontakt.html': region('\n'.join(markup)),
+}
+for filename, replacement in regions.items():
     path = root / filename
     source = path.read_text(encoding='utf-8')
     source, count = re.subn(r'<!-- FAQ:START -->.*?<!-- FAQ:END -->', lambda _: replacement, source, flags=re.S)
